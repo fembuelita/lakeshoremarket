@@ -3,7 +3,7 @@
   <display-name>RESTful LakeshoreMarket Services</display-name>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>WEB-INF/cxf.xml</param-value>
+    <param-value>WEB-INF/lib/cxf.xml</param-value>
   </context-param>
   <listener>
     <listener-class>
