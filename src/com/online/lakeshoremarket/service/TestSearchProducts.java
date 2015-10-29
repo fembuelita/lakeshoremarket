@@ -11,7 +11,7 @@ public class TestSearchProducts {
 	public static void main(String[] args) {
 
 		ArrayList<Product> prodList = new ArrayList<Product>();
-		String prodName = "works";
+		String prodName = "es";
 		ProductDomain prodDomain = new ProductDomain();
 		prodList = prodDomain.searchProductByLikeName(prodName);
 		Iterator<Product> prodListIterator = prodList.iterator();

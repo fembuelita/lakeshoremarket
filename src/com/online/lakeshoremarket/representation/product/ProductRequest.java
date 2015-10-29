@@ -1,20 +1,15 @@
 package com.online.lakeshoremarket.representation.product;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Product")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-public class ProductRepresentation {
+public class ProductRequest {
+	
 	
 	private boolean isActive;
+	private float cost;
 	private float price;
 	private int partnerID;
-	private int productID;
 	private int taxonomyID;
+	private int qoh;
 	private String productName;
 	private String description;
 	
@@ -23,6 +18,12 @@ public class ProductRepresentation {
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+	public float getCost() {
+		return cost;
+	}
+	public void setCost(float cost) {
+		this.cost = cost;
 	}
 	public float getPrice() {
 		return price;
@@ -36,17 +37,17 @@ public class ProductRepresentation {
 	public void setPartnerID(int partnerID) {
 		this.partnerID = partnerID;
 	}
-	public int getProductID() {
-		return productID;
-	}
-	public void setProductID(int productID) {
-		this.productID = productID;
-	}
 	public int getTaxonomyID() {
 		return taxonomyID;
 	}
 	public void setTaxonomyID(int taxonomyID) {
 		this.taxonomyID = taxonomyID;
+	}
+	public int getQoh() {
+		return qoh;
+	}
+	public void setQoh(int qoh) {
+		this.qoh = qoh;
 	}
 	public String getProductName() {
 		return productName;
@@ -60,6 +61,6 @@ public class ProductRepresentation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	
 }

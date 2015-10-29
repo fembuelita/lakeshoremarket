@@ -113,5 +113,17 @@ public class OrderDomain {
 		method would notify the Shipment Delivery Partner of cancellation of the order
 		and refund of the products that are in due for shipment*/
 	}
+	
+	/**
+	 * gets all order details
+	 * @param orderID 		the order ID to lookup
+	 * @return				null on failure, else order details
+	 */
+	public OrderImpl getOrderDetails(int orderID) {
+		OrderImpl custOrder = null;
+		orderDao = new OrderDAO();
+		custOrder = (OrderImpl) orderDao.getOrderDetails(orderID);
+		return custOrder;
+	}
 
 }

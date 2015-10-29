@@ -24,9 +24,20 @@
 
 		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.product.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.product.ProductRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.order.OrderRepresentation</jaxrs:schemaLocation>
+			
+<!-- 			Maggie's Schema Additions -->
+
+
+
+<!-- 			Elliot's Schema Additions -->
+
+
+
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="lakeshoreMarketServiceRest" class="com.online.lakeshoremarket.service" />
+  	<bean id="lakeshoreMarketServiceRest" class="com.online.lakeshoremarket.service.LakeshoreMarketResource" />
   
 </beans>

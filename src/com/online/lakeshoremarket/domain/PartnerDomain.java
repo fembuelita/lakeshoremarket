@@ -1,7 +1,6 @@
 package com.online.lakeshoremarket.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.online.lakeshoremarket.dao.PartnerDAO;
 import com.online.lakeshoremarket.model.customer.Address;
