@@ -15,7 +15,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
       	
-  <jaxrs:server name="LakeshoreMarketResource" address="/services">
+  <jaxrs:server name="LakeshoreMarketResource" address="/">
 		<jaxrs:serviceBeans>
 			<ref bean="lakeshoreMarketServiceRest" />
 		</jaxrs:serviceBeans>
