@@ -5,7 +5,7 @@
       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
       xsi:schemaLocation="http://www.springframework.org/schema/beans
 							http://www.springframework.org/schema/beans/spring-beans.xsd
-							http://cxf.apache.org/jaxws
+							ttp://cxf.apache.org/jaxws
  							http://cxf.apache.org/schemas/jaxws.xsd
  							http://cxf.apache.org/jaxrs
  							http://cxf.apache.org/schemas/jaxrs.xsd">
@@ -16,7 +16,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
       	
-  <jaxrs:server name="LakeshoreMarketResource" address="https://lakeshoremarket-webrunner.herokuapp.com">
+  <jaxrs:server name="LakeshoreMarketResource" address="/services">
 		<jaxrs:serviceBeans>
 			<ref bean="lakeshoreMarketServiceRest" />
 		</jaxrs:serviceBeans>
