@@ -16,7 +16,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
       	
-  <jaxrs:server name="LakeshoreMarketResource" address="http://104.131.74.11:8080">
+  <jaxrs:server name="LakeshoreMarketResource" address="https://lakeshoremarket-webrunner.herokuapp.com">
 		<jaxrs:serviceBeans>
 			<ref bean="lakeshoreMarketServiceRest" />
 		</jaxrs:serviceBeans>
