@@ -120,6 +120,13 @@ public class LakeshoreMarketActivity {
 		return orderRepresentation;
 	}
 	
+	public boolean shipOrder(String orderIDString, String trackingNumb) {
+		boolean isOrderStatusUpdated = false;
+		OrderDomain orderDomain = new OrderDomain();
+		isOrderStatusUpdated = orderDomain.shipOrder(Integer.parseInt(orderIDString),trackingNumb);
+		return isOrderStatusUpdated;
+	}
+	
 	
 	
 	
