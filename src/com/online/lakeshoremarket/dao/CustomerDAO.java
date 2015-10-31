@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.dao;
 
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

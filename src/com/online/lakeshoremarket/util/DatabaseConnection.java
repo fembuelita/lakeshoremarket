@@ -47,9 +47,6 @@ public class DatabaseConnection {
 		} catch( SQLException e ) {
 			System.err.println( "SQL Exception: " + e.getMessage() );
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.println("SQLException" + e.getMessage() + "   " +  e.getLocalizedMessage());
-			e.printStackTrace();
 		}
 		
 		return null;
