@@ -18,7 +18,7 @@ import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 
 
-@Path("/Lakeshore_Market/")
+@Path("/services/")
 public class LakeshoreMarketResource {
 
 	
