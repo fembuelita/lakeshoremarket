@@ -1,5 +1,6 @@
 package com.online.lakeshoremarket.dao;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class CustomerDAO {
 	 */
 	public int addCustomer(Customer cust){
 		conn = DatabaseConnection.getSqlConnection();
+		
 		int rowsUpdated = 0;
 		try{
 			String insertStmt = "INSERT INTO customer "
