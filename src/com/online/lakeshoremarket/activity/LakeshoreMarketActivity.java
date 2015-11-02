@@ -8,11 +8,17 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.domain.OrderDomain;
 import com.online.lakeshoremarket.domain.ProductDomain;
+import com.online.lakeshoremarket.model.customer.Address;
+import com.online.lakeshoremarket.model.customer.AddressImpl;
+import com.online.lakeshoremarket.model.customer.Customer;
+import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
+import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
@@ -132,6 +138,48 @@ public class LakeshoreMarketActivity {
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderStatusUpdated = orderDomain.fulfillOrder(Integer.parseInt(orderIDString));
 		return isOrderStatusUpdated;
+	}
+	
+	public boolean createCustomer(CustomerRequest custRequest) {
+		boolean isCustomerCreated = false;
+		int numbOfRowsUpdated = 0;
+		
+		Address billingAddress = new AddressImpl();
+		Address shippingAddress = new AddressImpl();
+		Customer cust = new CustomerImpl();
+		
+		billingAddress.setLine1(custRequest.getBillingAddressLine1());
+		billingAddress.setLine2(custRequest.getBillingAddressLine2());
+		billingAddress.setLine3(custRequest.getBillingAddressLine3());
+		billingAddress.setCity(custRequest.getBillingAddressCity());
+		billingAddress.setState(custRequest.getBillingAddressState());
+		billingAddress.setCountry(custRequest.getBillingAddressCountry());
+		billingAddress.setZip(custRequest.getBillingAddressZip());
+		
+		shippingAddress.setLine1(custRequest.getShippingAddressLine1());
+		shippingAddress.setLine2(custRequest.getShippingAddressLine2());
+		shippingAddress.setLine3(custRequest.getShippingAddressLine3());
+		shippingAddress.setCity(custRequest.getShippingAddressCity());
+		shippingAddress.setState(custRequest.getShippingAddressState());
+		shippingAddress.setCountry(custRequest.getShippingAddressCountry());
+		shippingAddress.setZip(custRequest.getShippingAddressZip());
+		
+		cust.setPhone(custRequest.getPhone());
+		cust.setEmail(custRequest.getEmail());
+		cust.setFirstName(custRequest.getFirstName());
+		cust.setLastName(custRequest.getLastName());
+		cust.setTitle(custRequest.getTitle());
+		cust.setPassword(custRequest.getPassword());
+		cust.setPaypalCustID(custRequest.getPaypalCustID());
+		
+		
+		CustomerDomain custDomain = new CustomerDomain();
+		numbOfRowsUpdated = custDomain.addCustomer(cust, billingAddress, shippingAddress);
+		
+		if(1 == numbOfRowsUpdated){
+			isCustomerCreated = true;
+		}
+		return isCustomerCreated;
 	}
 	
 	

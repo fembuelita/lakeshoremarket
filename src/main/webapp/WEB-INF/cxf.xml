@@ -27,6 +27,7 @@
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.product.ProductRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.product.ProductRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.order.OrderRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.customer.CustomerRequest</jaxrs:schemaLocation>
 			
 <!-- 			Maggie's Schema Additions -->
 

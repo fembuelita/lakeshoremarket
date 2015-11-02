@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
+import com.online.lakeshoremarket.representation.customer.CustomerRequest;
+import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
@@ -105,6 +107,27 @@ public class LakeshoreMarketResource {
 		}else{
 			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
 		}
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/customer")
+	public GenericResponse createCustomer(CustomerRequest custRequest) {
+		System.out.println("PUT METHOD Request for Creating a new customer .............");
+		GenericResponse genericResponse = new GenericResponse();
+		boolean isCustomerCreated = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isCustomerCreated = marketActivity.createCustomer(custRequest);
+		if(isCustomerCreated){
+			genericResponse.setMessage("Customer is created");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Customer is not created");
+			genericResponse.setSuccess(false);
+		}
+		
+		return genericResponse;	
 	}
 	
 	
