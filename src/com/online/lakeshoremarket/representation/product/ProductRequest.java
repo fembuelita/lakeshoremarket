@@ -1,7 +1,15 @@
 package com.online.lakeshoremarket.representation.product;
 
 
-public class ProductRequest {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "Product")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
+public class ProductRequest{
 	
 	
 	private boolean isActive;
