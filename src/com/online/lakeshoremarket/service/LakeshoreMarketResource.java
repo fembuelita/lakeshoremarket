@@ -3,6 +3,7 @@ package com.online.lakeshoremarket.service;
 import java.util.ArrayList;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -76,13 +77,28 @@ public class LakeshoreMarketResource {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/ship/{orderIDString}/{trackingNumb}")
-	public Response shipOrder(@PathParam("orderIDString") String orderIDString, @PathParam("trackingNumb") String trackingNumb){
+	@Path("/order/ship")
+	public Response shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumb") String trackingNumb){
 		System.out.println("POST METHOD to ship order.............");
 		boolean isOrderShipped = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isOrderShipped = marketActivity.shipOrder(orderIDString,trackingNumb);
 		if(isOrderShipped){
+			return Response.status(Response.Status.OK).build();
+		}else{
+			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+		}
+	}
+	
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/fulfill")
+	public Response fulfillOrder(@FormParam("orderIDString") String orderIDString){
+		System.out.println("POST METHOD to ship order.............");
+		boolean isOrderFulfilled = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isOrderFulfilled = marketActivity.fulfillOrder(orderIDString);
+		if(isOrderFulfilled){
 			return Response.status(Response.Status.OK).build();
 		}else{
 			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();

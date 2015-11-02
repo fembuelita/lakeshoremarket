@@ -127,6 +127,13 @@ public class LakeshoreMarketActivity {
 		return isOrderStatusUpdated;
 	}
 	
+	public boolean fulfillOrder(String orderIDString) {
+		boolean isOrderStatusUpdated = false;
+		OrderDomain orderDomain = new OrderDomain();
+		isOrderStatusUpdated = orderDomain.fulfillOrder(Integer.parseInt(orderIDString));
+		return isOrderStatusUpdated;
+	}
+	
 	
 	
 	
