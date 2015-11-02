@@ -18,6 +18,7 @@ import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 
@@ -124,6 +125,27 @@ public class LakeshoreMarketResource {
 			genericResponse.setSuccess(true);
 		}else{
 			genericResponse.setMessage("Customer is not created");
+			genericResponse.setSuccess(false);
+		}
+		
+		return genericResponse;	
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/partner")
+	public GenericResponse createPartner(PartnerRequest partnerRequest) {
+		System.out.println("PUT METHOD Request for Creating a new partner .............");
+		GenericResponse genericResponse = new GenericResponse();
+		boolean isPartnerCreated = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isPartnerCreated = marketActivity.createPartner(partnerRequest);
+		if(isPartnerCreated){
+			genericResponse.setMessage("Partner is created");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Partner is not created");
 			genericResponse.setSuccess(false);
 		}
 		

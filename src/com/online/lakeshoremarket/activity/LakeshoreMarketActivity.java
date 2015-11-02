@@ -10,16 +10,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.domain.OrderDomain;
+import com.online.lakeshoremarket.domain.PartnerDomain;
 import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.AddressImpl;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.model.order.OrderImpl;
+import com.online.lakeshoremarket.model.partner.Partner;
+import com.online.lakeshoremarket.model.partner.PartnerImpl;
 import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 
@@ -180,6 +184,37 @@ public class LakeshoreMarketActivity {
 			isCustomerCreated = true;
 		}
 		return isCustomerCreated;
+	}
+	
+	public boolean createPartner(PartnerRequest partnerRequest) {
+		boolean isPartnerCreated = false;
+		int rowsUpdated = 0;
+		PartnerDomain partnerDomain = new PartnerDomain();
+		Partner partner = new PartnerImpl();
+		Address partnerAddress = new AddressImpl();
+		
+		partnerAddress.setLine1(partnerRequest.getLine1());
+		partnerAddress.setLine2(partnerRequest.getLine2());
+		partnerAddress.setLine3(partnerRequest.getLine3());
+		partnerAddress.setCity(partnerRequest.getCity());
+		partnerAddress.setState(partnerRequest.getState());
+		partnerAddress.setCountry(partnerRequest.getCountry());
+		partnerAddress.setZip(partnerRequest.getZip());
+		
+		partner.setActive(partnerRequest.isActive());
+		partner.setContactName(partnerRequest.getContactName());
+		partner.setEmail(partnerRequest.getEmail());
+		partner.setPartnerName(partnerRequest.getPartnerName());
+		partner.setPassword(partnerRequest.getPassword());
+		partner.setPhone(partnerRequest.getPhone());
+		
+		rowsUpdated = partnerDomain.addPartner(partner, partnerAddress);
+		
+		if(rowsUpdated != 0){
+			isPartnerCreated = true;
+		}
+		
+		return isPartnerCreated;
 	}
 	
 	
