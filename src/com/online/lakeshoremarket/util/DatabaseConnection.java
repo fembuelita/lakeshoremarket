@@ -32,19 +32,25 @@ public class DatabaseConnection {
 	}
 	
 	public static Connection getSqlConnection() {
+
 		try {
-		    URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
+//			#Jaws DB 
+//		    URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
 	
-		    String username = jdbUri.getUserInfo().split(":")[0];
-		    String password = jdbUri.getUserInfo().split(":")[1];
-		    String port = String.valueOf(jdbUri.getPort());
-		    String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
-	
-		    return DriverManager.getConnection(jdbUrl, username, password);
-		} catch( URISyntaxException e ) {
-			System.err.println( "Failed to connect to SQL remotely" + e.getMessage() );
-			e.printStackTrace();
-		} catch( SQLException e ) {
+//		    String username = jdbUri.getUserInfo().split(":")[0];
+//		    String password = jdbUri.getUserInfo().split(":")[1];
+//		    String port = String.valueOf(jdbUri.getPort());
+//		    String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
+			
+//			#Digital Ocean MySQL 
+		    return DriverManager.getConnection("jdbc:mysql://159.203.100.120/:3306/" + Constant.REMOTE_DBNAME + "?" + "user="+Constant.REMOTE_USERNAME+"&password="+Constant.REMOTE_PASSWORD);
+		} 
+		// #jaws db only
+		//catch( URISyntaxException e ) {
+			//System.err.println( "Failed to connect to SQL remotely" + e.getMessage() );
+			//e.printStackTrace();
+		//} 
+		catch( SQLException e ) {
 			System.err.println( "SQL Exception: " + e.getMessage() );
 			e.printStackTrace();
 		}

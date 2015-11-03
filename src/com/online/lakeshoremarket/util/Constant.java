@@ -60,5 +60,19 @@ public final class Constant {
 	 */
 	public static String PASSWORD = "root";
 	
+	/**
+	 * This is the username for the database connection.
+	 */
+	public static String REMOTE_DBNAME = "comp453";	//actually should be comp433, oops
+	/**
+	 * This is the username for the database connection.
+	 */
+	public static String REMOTE_USERNAME = "2a3b5833ba93";
+	/**
+	 * This is the password for the database connection.
+	 */
+	public static String REMOTE_PASSWORD = "1580560991be19cd";
+	
+	
 	
 }
