@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.order.Order;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.util.Constant;
@@ -58,12 +61,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.createOrder: Threw a SQLException inserting a new order in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException inserting a new order in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.createOrder: Threw an Exception inserting a new order in table.");
+				throw new GenericLSMException("Threw an Exception inserting a new order in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return orderID;
@@ -88,12 +95,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.shipOrder: Threw a SQLException updating tracking number and status in the order table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException updating tracking number and status in the order table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.shipOrder: Threw an Exception updating tracking number and status in the order table.");
+				throw new GenericLSMException("Threw an Exception updating tracking number and status in the order table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return (rowsUpdated == 0)? false : true;
@@ -116,12 +127,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.fulfillOrder: Threw a SQLException updating status to 'DELIVERED' in the order table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException updating status to 'DELIVERED' in the order table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.fulfillOrder: Threw an Exception updating status to 'DELIVERED' in the order table.");
+				throw new GenericLSMException("Threw an Exception updating status to 'DELIVERED' in the order table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return (rowsUpdated == 0)? false : true;
@@ -146,12 +161,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.getOrderStatus: Threw a SQLException while getting order status ID for the orderID = "+orderID);
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting order status ID		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.getOrderStatus: Threw an Exception while getting order status ID for the orderID = "+orderID);
+				throw new GenericLSMException("Threw an Exception while getting order status ID		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return orderStatus;
@@ -186,12 +205,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.getOrderDetails: Threw a SQLException while getting order details for the orderID = "+orderID);
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting order details		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.getOrderDetails: Threw an Exception while getting order details for the orderID = "+orderID);
+				throw new GenericLSMException("Threw an Exception while getting order details		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return custOrder;
@@ -215,12 +238,16 @@ public class OrderDAO {
 		}catch(SQLException sqe){
 			System.err.println("OrderDAO.updateOrderStatusForRefund: Threw a SQLException updating order status and date refunded in the order table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException updating order status and date refunded in the order table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("OrderDAO.updateOrderStatusForRefund: Threw an Exception updating order status and date refunded in the order table.");
+				throw new GenericLSMException("Threw an Exception updating order status and date refunded in the order table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 	}
