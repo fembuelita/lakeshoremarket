@@ -33,6 +33,18 @@ public class DatabaseConnection {
 	
 	public static Connection getSqlConnection() {
 
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://159.203.100.120:3306/" + Constant.REMOTE_DBNAME + "?" + "user="+Constant.REMOTE_USERNAME+"&password="+Constant.REMOTE_PASSWORD);
+		} catch (SQLException e) {
+			System.out.println("SQLException");
+		} catch (ClassNotFoundException e) {
+			System.out.println("SQLException" + e.getMessage() + "   " +  e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return conn;		
+		/*
 		try {
 //			#Jaws DB 
 //		    URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
@@ -43,7 +55,8 @@ public class DatabaseConnection {
 //		    String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
 			
 //			#Digital Ocean MySQL 
-		    return DriverManager.getConnection("jdbc:mysql://159.203.100.120/:3306/" + Constant.REMOTE_DBNAME + "?" + "user="+Constant.REMOTE_USERNAME+"&password="+Constant.REMOTE_PASSWORD);
+			Class.forName("com.mysql.jdbc.Driver");
+		    return 
 		} 
 		// #jaws db only
 		//catch( URISyntaxException e ) {
@@ -55,6 +68,6 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return null;*/
 	}	
 }

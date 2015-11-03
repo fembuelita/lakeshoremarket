@@ -52,7 +52,8 @@ public class ProductDAO {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("ProductDAO.getProductByName: Threw an Exception while searching for a product in table.");
+				System.err.println("ProductDAO.getProductByName (2): Threw an Exception while searching for a product in table.");
+				System.err.println(e.getMessage());
 			}
 		}
 		return prod;
