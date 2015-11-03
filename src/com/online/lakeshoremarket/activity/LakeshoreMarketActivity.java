@@ -11,6 +11,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.domain.OrderDomain;
 import com.online.lakeshoremarket.domain.PartnerDomain;
+import com.online.lakeshoremarket.domain.PaymentDomain;
 import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.domain.ReviewDomain;
 import com.online.lakeshoremarket.model.customer.Address;
@@ -26,11 +27,13 @@ import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.order.OrderRequest;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
 import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
+import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 
 public class LakeshoreMarketActivity {
 
@@ -235,6 +238,29 @@ public class LakeshoreMarketActivity {
 		isPartnerReviewCreated = reviewDomain.addPartnerReview(review);
 		
 		return isPartnerReviewCreated;
+	}
+	
+	public boolean createProductReview(ProductReviewRequest productReviewRequest) {
+		boolean isProductReviewCreated = false;
+		ReviewDomain reviewDomain = new ReviewDomain();
+		Review review = new ReviewImpl();
+		
+		review.setCustomerID(productReviewRequest.getCustomerID());
+		review.setProductID(productReviewRequest.getProductID());
+		review.setRating(productReviewRequest.getRating());
+		review.setReview(productReviewRequest.getReview());
+		
+		isProductReviewCreated = reviewDomain.addProductReview(review);
+		
+		return isProductReviewCreated;
+	}
+	
+	public int buyProduct(OrderRequest orderRequest) {
+		PaymentDomain paymentDomain = new PaymentDomain();
+		int orderID = 0;
+		orderID = paymentDomain.buyProduct(orderRequest.getProductID(), orderRequest.getQuantity(), orderRequest.getCustomerID());
+		
+		return orderID;
 	}
 	
 	

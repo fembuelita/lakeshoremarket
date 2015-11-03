@@ -29,6 +29,9 @@
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.order.OrderRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.customer.CustomerRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.partner.PartnerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.review.PartnerReviewRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.review.ProductReviewRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.order.OrderRequest</jaxrs:schemaLocation>
 			
 <!-- 			Maggie's Schema Additions -->
 
