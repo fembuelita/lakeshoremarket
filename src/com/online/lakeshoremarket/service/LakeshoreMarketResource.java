@@ -15,10 +15,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
+import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
+import com.online.lakeshoremarket.representation.partner.PartnerRepresentation;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
@@ -230,14 +232,96 @@ public class LakeshoreMarketResource {
 	
 	
 	
+	
+	
+	//----GET PRODUCT----
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/product/{productID}")
-	public ProductRepresentation getProduct(@PathParam("productID") int productID) {
-		System.out.println("GET METHOD Request for individual product ............" + productID);
+	public ProductRepresentation getProduct(@PathParam("productName") String prodName) {
+		System.out.println("GET METHOD Request for individual product ............" + prodName);
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getProduct(productID);
+		return marketActivity.getProduct(prodName); 
 	}
+	
+	//----CHECK PRODUCT AVAILABILITY----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/product/{productID}")
+	public Response checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
+			System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
+			boolean isProductAvailable = false;
+			LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+			isProductAvailable = marketActivity.checkProductAvailability(prodName);
+			if(isProductAvailable){
+				return Response.status(Response.Status.OK).build();
+			}else{
+				return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+			}
+			
+		
+	}
+	
+	//----GET CUSTOMER DETAILS----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/customer/{customerID}")
+	public CustomerRepresentation getCustomerDetails(@PathParam("customerIDString") String customerIDString){ 
+		System.out.println("GET METHOD Request for Customer details............." + customerIDString);
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
+		customerRepresentation = marketActivity.getCustomerDetails(customerIDString);
+		return customerRepresentation;
+	}
+	
+	//----DELETE CUSTOMER----
+	
+	@DELETE
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customer/{customerIDString}")
+	public Response deleteCustomer(@PathParam("customerIDString") String customerIDString){
+		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
+		boolean isCustomerDeleted = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isCustomerDeleted = marketActivity.deleteCustomer(customerIDString);
+		if(isCustomerDeleted){
+			return Response.status(Response.Status.OK).build();
+		}else{
+			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+		}
+		
+	}
+	
+	//----GET PARTNER DETAILS----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/partner/{partnerID}")
+	public PartnerRepresentation getPartnerDetails(@PathParam("partnerID") String partnerIDString){
+		System.out.println("GET METHOD Request for Partner details............." + partnerIDString);
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
+		partnerRepresentation = marketActivity.getPartnerDetails(partnerIDString);
+		return partnerRepresentation;
+	}
+	
+	//----DELETE PARTNER----
+	
+	@DELETE
+	@Produces({"application/xml" , "application/json"})
+	@Path("/partner/{partnerIDString}")
+	public Response deletePartner(@PathParam("partnerIDString") String partnerIDString){
+		System.out.println("DELETE METHOD Request for Deleting a Partner ............." + partnerIDString);
+		boolean isPartnerDeleted = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isPartnerDeleted = marketActivity.deletePartner(partnerIDString);
+		if(isPartnerDeleted){
+			return Response.status(Response.Status.OK).build();
+		}else{
+			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+		}
+		
+	}
+	
 	
 	
 	

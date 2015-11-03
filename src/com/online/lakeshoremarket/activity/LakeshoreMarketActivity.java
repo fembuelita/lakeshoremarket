@@ -26,9 +26,11 @@ import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
+import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
+import com.online.lakeshoremarket.representation.partner.PartnerRepresentation;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
@@ -274,25 +276,88 @@ public class LakeshoreMarketActivity {
 	 * 
 	 * */
 	
-	public ProductRepresentation getProduct(int productID){
+	//----GET PRODUCT----
+	//public ProductRepresentation getProduct(String ProductIDString){
+	public ProductRepresentation getProduct(String prodName){
 		ProductDomain prodDomain = new ProductDomain();
 		Product product = new ProdImpl();
-		//TODO implement this method
-//		product = prodDomain.getProductByID(productID);
-		
+		//product = prodDomain.getProductByID(Integer.parseInt(ProductIDString));
+		product = prodDomain.searchProductByName(prodName);
 		ProductRepresentation productRepresentation = new ProductRepresentation();
 		productRepresentation.setProductName(product.getProductName());
-		
-		
-		
-		
+		productRepresentation.setDescription(product.getDescription());
+		productRepresentation.setActive(product.isActive()); //is this correct?
+		productRepresentation.setPartnerID(product.getPartnerID());
+		productRepresentation.setPrice(product.getPrice());
+		productRepresentation.setProductID(product.getProductID());
+		productRepresentation.setTaxonomyID(product.getTaxonomyID());
 		
 		return productRepresentation;
 	}
 	
 	
+	//----CHECK PRODUCT AVAILABILITY----
+	public boolean checkProductAvailability(String productIDString) { 
+		boolean IsProductAvailable = false;
+		ProductDomain prodDomain = new ProductDomain();
+		IsProductAvailable = prodDomain.checkProductAvailabilityByID(Integer.parseInt(productIDString));
+		
+		return IsProductAvailable;
+	}
 	
+	//----DELETE CUSTOMER----
+	public boolean deleteCustomer(String customerIDString) {
+		boolean isCustomerDeleted = false;
+		CustomerDomain custDomain = new CustomerDomain();
+		isCustomerDeleted = custDomain.deleteCustomer(Integer.parseInt(customerIDString));
+		
+		return isCustomerDeleted;
+	}
 	
+	//----GET CUSTOMER DETAILS----	
+	public CustomerRepresentation getCustomerDetails(String customerIDString){
+		CustomerDomain custDomain = new CustomerDomain();
+		Customer customer = new CustomerImpl();
+		customer = custDomain.getCustomerByID(Integer.parseInt(customerIDString));
+		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
+		customerRepresentation.setActive(customer.isActive()); //is this correct
+		customerRepresentation.setBillingAddress(customer.getBillingAddress());
+		customerRepresentation.setCustomerId(customer.getCustomerId());
+		customerRepresentation.setEmail(customer.getEmail());
+		customerRepresentation.setFirstName(customer.getFirstName());
+		customerRepresentation.setLastName(customer.getLastName()); 
+		customerRepresentation.setPhone(customer.getPhone());
+		customerRepresentation.setShippingAddress(customer.getShippingAddress());
+		customerRepresentation.setTitle(customer.getTitle());
+		
+		return customerRepresentation;
+	}
+	
+	//----DELETE PARTNER----
+	public boolean deletePartner(String partnerIDString) {
+		boolean isPartnerDeleted = false;
+		PartnerDomain partnerDomain = new PartnerDomain();
+		isPartnerDeleted = partnerDomain.deletePartner(Integer.parseInt(partnerIDString));
+		
+		return isPartnerDeleted;
+	}
+	
+	//----GET PARTNER DETAILS----	
+	public PartnerRepresentation getPartnerDetails(String partnerIDString){
+		PartnerDomain partnerDomain = new PartnerDomain();
+		Partner partner = new PartnerImpl();
+		partner = partnerDomain.getPartnerByID(Integer.parseInt(partnerIDString)); 
+		PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
+		partnerRepresentation.setActive(partner.isActive()); //is this correct?
+		partnerRepresentation.setPartnerName(partner.getPartnerName());
+		partnerRepresentation.setContactName(partner.getContactName());
+		partnerRepresentation.setAddressID(partner.getAddressID());
+		partnerRepresentation.setPartnerID(partner.getPartnerID());
+		partnerRepresentation.setEmail(partner.getEmail());
+		partnerRepresentation.setPhone(partner.getPhone());
+		
+		return partnerRepresentation;
+	}
 	
 	/*Start Elliott Activity
 	 * 
