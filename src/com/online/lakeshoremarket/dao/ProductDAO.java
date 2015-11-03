@@ -50,6 +50,8 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.getProductByName: Threw a SQLException while searching for a product in table.");
   	      	System.err.println(sqe.getMessage());
+  	      throw new GenericLSMException("Threw a SQLException while searching for a product in table.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
@@ -57,6 +59,8 @@ public class ProductDAO {
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductByName (2): Threw an Exception while searching for a product in table.");
 				System.err.println(e.getMessage());
+				throw new GenericLSMException("Threw a SQLException while searching for a product in table.		"
+						, Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return prod;
@@ -101,7 +105,7 @@ public class ProductDAO {
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductByLikeName: Threw an Exception while searching for a product in table.");
 				throw new GenericLSMException("Threw an SQLException while searching for a product in table.		"
-												, Response.Status.INTERNAL_SERVER_ERROR );
+											+ e.getMessage()	, Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return prodList;
@@ -133,12 +137,17 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.createProduct: Threw a SQLException inserting a new product in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException inserting a new product in table.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+  	      	
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("ProductDAO.createProduct: Threw an Exception inserting a new product in table.");
+				System.err.println("ProductDAO.createProduct: Threw an Exception inserting a new product in table.    ");
+				throw new GenericLSMException("Threw a SQLException inserting a new product in table.		"
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		
@@ -166,12 +175,16 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.getProductAvailability: Threw a SQLException while checking product availability.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while checking product availability.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductAvailability: Threw an Exception while checking product availability.");
+				throw new GenericLSMException("Threw a SQLException while checking product availability.		"
+						+e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return isProductAvailable;
@@ -198,6 +211,8 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.getProductAvailabilityByID: Threw a SQLException while checking product availability.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while checking product availability.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
@@ -205,6 +220,8 @@ public class ProductDAO {
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductAvailabilityByID: Threw an Exception while checking product availability.");
 				System.err.println(e.getMessage());
+				throw new GenericLSMException("Threw a SQLException while checking product availability.		"
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return isProductAvailable;
@@ -229,12 +246,16 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.getProductPrice: Threw a SQLException while getting product price.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting product price.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductPrice: Threw an Exception while getting product price.");
+				throw new GenericLSMException("Threw a SQLException while getting product price.		"
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return price;
@@ -256,12 +277,16 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.decreaseQoh: Threw a SQLException while decreasing product quantity on hand.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while decreasing product quantity on hand.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("ProductDAO.decreaseQoh: Threw an Exception while decreasing product quantity on hand.");
+				throw new GenericLSMException("Threw a SQLException while decreasing product quantity on hand.		"
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 	}
@@ -284,12 +309,16 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.increaseQoh: Threw a SQLException while increasing product quantity on hand.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while increasing product quantity on hand.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("ProductDAO.increaseQoh: Threw an Exception while increasing product quantity on hand.");
+				throw new GenericLSMException("Threw a SQLException while increasing product quantity on hand.		"
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return (rowsUpdated == 1) ? true : false;
