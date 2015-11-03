@@ -2,9 +2,12 @@ package com.online.lakeshoremarket.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.online.lakeshoremarket.model.review.Review;
+import com.online.lakeshoremarket.model.review.ReviewImpl;
 import com.online.lakeshoremarket.util.DatabaseConnection;
 
 /**
@@ -83,5 +86,83 @@ public class ReviewDAO {
 		}
 		return (rowsUpdated == 0) ? false : true ;
 	}
+	
+	/**
+	 * gets a partner review
+	 * @param reviewID
+	 * @return
+	 */
+	public Review getPartnerReviewByID( int reviewID ) {
+		conn = DatabaseConnection.getSqlConnection();
+		Review rev = new ReviewImpl();
+		try{
+			String insertStmt = "SELECT FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
+			pstmt = conn.prepareStatement(insertStmt);
+			pstmt.setInt( 1, reviewID );
+			
+			//iterate over the results
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()){
+				rev.setCustomerID( resultSet.getInt( "customer_id" ) );
+				rev.setPartnerID( resultSet.getInt( "partner_id" ) );
+				rev.setPartnerReviewID( resultSet.getInt( "partner_review_id" ) );
+				rev.setRating( resultSet.getInt( "rating" ) );
+				rev.setReview( resultSet.getString( "review" ) );
+				rev.setReviewDate( resultSet.getTimestamp( "review_date" ) );
+			}
+			
+		}catch(SQLException sqe){
+			System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+  	      	System.err.println(sqe.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+			}
+		}
+		
+		return rev;
+	}
 
+	
+	/**
+	 * gets a product review 
+	 * @param reviewID
+	 * @return
+	 */
+	public Review getProductReviewByID( int reviewID ) {
+		conn = DatabaseConnection.getSqlConnection();
+		Review rev = new ReviewImpl();
+		try{
+			String insertStmt = "SELECT FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
+			pstmt = conn.prepareStatement(insertStmt);
+			pstmt.setInt( 1, reviewID );
+			
+			//iterate over the results
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()){
+				rev.setCustomerID( resultSet.getInt( "customer_id" ) );
+				rev.setProductID( resultSet.getInt( "product_id" ) );
+				rev.setProductReviewID( resultSet.getInt( "product_review_id" ) );
+				rev.setRating( resultSet.getInt( "rating" ) );
+				rev.setReview( resultSet.getString( "review" ) );
+				rev.setReviewDate( resultSet.getTimestamp( "review_date" ) );
+			}
+			
+		}catch(SQLException sqe){
+			System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+  	      	System.err.println(sqe.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+			}
+		}
+		
+		return rev;
+	}
 }

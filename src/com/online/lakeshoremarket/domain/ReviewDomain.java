@@ -43,5 +43,25 @@ public class ReviewDomain {
 		isProductReviewAdded = reviewDAO.addProductReview(review);
 		return isProductReviewAdded;
 	}
+	
+	/**
+	 * Gets a partner review by the review ID
+	 * @param partnerReviewID
+	 * @return Review
+	 */
+	public Review getPartnerReviewByID( int partnerReviewID ) {
+		ReviewDAO reviewDao = new ReviewDAO();
+		return reviewDAO.getPartnerReviewByID( partnerReviewID );
+	}
+	
+	/**
+	 * Gets a product review by the review ID
+	 * @param productReviewID
+	 * @return Review
+	 */
+	public Review getProductReviewByID( int productReviewID ) {
+		ReviewDAO reviewDao = new ReviewDAO();
+		return reviewDAO.getProductReviewByID( productReviewID );
+	}
 
 }

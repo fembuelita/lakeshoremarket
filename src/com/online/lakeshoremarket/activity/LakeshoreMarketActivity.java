@@ -30,6 +30,7 @@ import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
+import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
 
 public class LakeshoreMarketActivity {
 
@@ -269,5 +270,38 @@ public class LakeshoreMarketActivity {
 	 * 
 	 * 
 	 * */
-	 
+	
+	/**
+	 * Builds a review representation
+	 * @param type 		partner or product (lowercase)
+	 * @param reviewID 	the partner ID or product ID, depending on type
+	 * @return ReviewRepresentation
+	 */
+	public ReviewRepresentation getReview( String type, int reviewID ) {
+		ReviewDomain revDomain = new ReviewDomain();
+		Review review;
+		ReviewRepresentation revRep = new ReviewRepresentation();
+		
+		if( type == "partner" ) {
+			review = revDomain.getPartnerReviewByID( reviewID );
+			revRep.setPartnerReviewID( reviewID );
+			revRep.setPartnerID( review.getPartnerID() );
+			
+		} else if( type == "product" ) {
+			review = revDomain.getProductReviewByID( reviewID );
+			revRep.setProductReviewID( reviewID );
+			revRep.setProductID( review.getProductID() );
+		} else {
+			throw new IllegalArgumentException( "Invalid review type (supplied " + type + ")" );
+		}
+		
+		revRep.setCustomerID( review.getCustomerID() );
+		revRep.setRating( review.getRating() );
+		revRep.setReview( review.getReview() );
+		revRep.setReviewDate( review.getReviewDate() );
+		
+		return revRep;
+	}
+	
+	
 }

@@ -8,7 +8,10 @@
   <version>v</version>
   <packaging>war</packaging>
   <name>lakeshoremarket</name>
-  <description>project3</description>
+  <description>COMP433 Project 3, Fall 2015
+Elliott Post
+Rayyan Jaweed
+Maggie Augst</description>
   <properties>
     <cxf.version>3.1.3</cxf.version>
   </properties>
@@ -109,5 +112,5 @@
       </plugin>
     </plugins>
   </build>
-  <url>http://lakeshoremarket.herokuapp.com</url>
+  <url>https://lsm1.herokuapp.com/</url>
 </project>
