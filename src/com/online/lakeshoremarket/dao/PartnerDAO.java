@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.partner.Partner;
+import com.online.lakeshoremarket.model.partner.PartnerImpl;
 import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
 import com.online.lakeshoremarket.model.partnerReport.PartnerReportImpl;
 import com.online.lakeshoremarket.util.DatabaseConnection;
@@ -207,6 +208,39 @@ public class PartnerDAO {
 			}
 		}
 		return paReports;
+	}
+	
+	public Partner getPartnerByID(int partnerID){
+		Partner partner = null;
+		conn = DatabaseConnection.getSqlConnection();
+		try{
+			partner = new PartnerImpl();
+			String searchQuery = "SELECT * FROM `partner` WHERE partner_id = ?";
+			pstmt = conn.prepareStatement(searchQuery);
+			pstmt.setInt(1, partnerID);
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()){
+				partner.setPartnerName(resultSet.getString("name"));
+				partner.setContactName(resultSet.getString("contact_name"));
+				partner.setActive(resultSet.getByte("active") == 1 ? true : false);
+				partner.setAddressID(resultSet.getInt("address_id"));
+				partner.setEmail(resultSet.getString("email"));
+				partner.setPhone(resultSet.getString("tel"));
+			}
+		}catch(SQLException sqe){
+			System.err.println("PartnerDAO.getPartnerByID: Threw a SQLException while getting Partner information.");
+  	      	System.err.println(sqe.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("PartnerDAO.getPartnerByID: Threw an Exception while getting Partner information.");
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return partner;
 	}
 
 }

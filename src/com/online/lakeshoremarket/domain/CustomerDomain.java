@@ -113,5 +113,11 @@ public class CustomerDomain {
 		isCustomerActive = custDao.getStatus(custID);
 		return isCustomerActive;
 	}
+	
+	public Customer getCustomerByID(int custID){
+		custDao = new CustomerDAO();
+		return custDao.getCustomerByID(custID);
+		
+	}
 
 }

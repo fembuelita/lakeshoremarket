@@ -95,4 +95,10 @@ public class PartnerDomain {
 		return partnerReport;
 		
 	}
+	
+	public Partner getPartnerByID(int partnerID){
+		partnerDao = new PartnerDAO();
+		return partnerDao.getPartnerByID(partnerID);
+		
+	}
 }

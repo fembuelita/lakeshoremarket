@@ -34,7 +34,8 @@
 			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.order.OrderRequest</jaxrs:schemaLocation>
 			
 <!-- 			Maggie's Schema Additions -->
-
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.customer.CustomerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.partner.PartnerRepresentation</jaxrs:schemaLocation>
 
 
 <!-- 			Elliot's Schema Additions -->

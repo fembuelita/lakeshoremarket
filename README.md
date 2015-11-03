@@ -20,18 +20,14 @@ The Domain component comprises of the Business Logic. This is where all the mani
 
 The Database Access Object Layer or the DAO layer is responsible for connection to the Lakeshore Market database. This layer uses the JDBC for interacting with the database.  
 
-Service layer contains classes that are required to test the major functionalties of the Lakeshore Market.  
+Service layer contains the services for the API as well as several test classes for testing primary site features.
 
 ## External Apps
-We are currently building the app out on two different apps to see which launch is easier.  
+Our app is powered by Heroku, and we are also paying a small sum for a Digital Ocean VPS setup to use MySQL without the limitations imposed by Heroku. We may eventually migrate to PostGRES, but not at this point.  
 
-  1. [Heroku](lakeshoremarket.herokuapp.com)  
-  2. [Digital Ocean](http://104.131.74.11:8080/lakeshoremarket/)  
+  1. [Heroku](http://lsm1.herokuapp.com/services/lsm)  
+  2. [Digital Ocean](http://159.203.100.120/) *You can connect to PHPMyAdmin on this server using the credentials found in the project source code if you'd like to examine the database visually*    
 
-Although neither app yet is fully functional, that will be the case when we implement the REST API.
 
-## Steps to run on LocalHost
-  1. For project 2, please import the sql-init.sql file found in docs/db for testing.  
-  2. Once you import this file, open the project in Eclipse.  
-  3. Navigate to the directory with the unit tests.  
-  4. Run the unit tests.  
+## How to use the API
+The API contains many services available to clients and partners of Lakeshore Market. We are currently developing full documentation; however, in the mean time you may find code samples, endpoints, and sample data in our data and URI mapping spreadsheet. The latest stable version can be found on [Google Docs](https://docs.google.com/spreadsheets/d/1KBOr2eQydpayd_6rlP5mEk_oogGoUVmisSFxV7XJE3w/edit?usp=sharing)  

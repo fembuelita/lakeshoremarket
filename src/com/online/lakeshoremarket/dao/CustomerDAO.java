@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.Customer;
+import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.util.DatabaseConnection;
 
 /**
@@ -247,5 +248,41 @@ public class CustomerDAO {
 			}
 		}
 		return isCustomerActive;
+	}
+	
+	public Customer getCustomerByID(int custID){
+		Customer cust = null;
+		conn = DatabaseConnection.getSqlConnection();
+		try{
+			cust = new CustomerImpl();
+			String searchQuery = "SELECT * FROM `customer` WHERE customer_id = ? LIMIT 1";
+			pstmt = conn.prepareStatement(searchQuery);
+			pstmt.setInt(1, custID);
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()){
+				cust.setTitle(resultSet.getString("title"));
+				cust.setFirstName(resultSet.getString("first_name"));
+				cust.setLastName(resultSet.getString("last_name"));
+				cust.setActive(resultSet.getByte("active") == 1 ? true : false);
+				cust.setBillingAddress(resultSet.getInt("bill_address_id"));
+				cust.setShippingAddress(resultSet.getInt("ship_address_id"));
+				cust.setEmail(resultSet.getString("email"));
+				cust.setPhone(resultSet.getString("tel"));
+			}
+			
+		}catch(SQLException sqe){
+			System.err.println("CustomerDAO.getCustomerByID: Threw a SQLException while getting Customer.");
+  	      	System.err.println(sqe.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("CustomerDAO.getCustomerByID: Threw an Exception while getting Customer");
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return cust;
 	}
 }

@@ -15,10 +15,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
+import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
+import com.online.lakeshoremarket.representation.partner.PartnerRepresentation;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
@@ -230,14 +232,106 @@ public class LakeshoreMarketResource {
 	
 	
 	
+	
+	
+	//----GET PRODUCT----
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/product/{productID}")
-	public ProductRepresentation getProduct(@PathParam("productID") int productID) {
-		System.out.println("GET METHOD Request for individual product ............" + productID);
+	@Path("/product/{productName}")
+	public ProductRepresentation getProduct(@PathParam("productName") String prodName) {
+		System.out.println("GET METHOD Request for individual product ............" + prodName);
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getProduct(productID);
+		return marketActivity.getProduct(prodName); 
 	}
+	
+	//----CHECK PRODUCT AVAILABILITY----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/available/{productID}")
+	public GenericResponse checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
+		System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
+		boolean isProductAvailable = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isProductAvailable = marketActivity.checkProductAvailability(prodName);
+		GenericResponse genericResponse = new GenericResponse();
+		if(isProductAvailable){
+			genericResponse.setMessage("Product is available");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Product is not available");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
+	}
+	
+	//----GET CUSTOMER DETAILS----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/customer/{customerID}")
+	public CustomerRepresentation getCustomerDetails(@PathParam("customerID") String customerIDString){ 
+		System.out.println("GET METHOD Request for Customer details............." + customerIDString);
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
+		customerRepresentation = marketActivity.getCustomerDetails(customerIDString);
+		return customerRepresentation;
+	}
+	
+	//----DELETE CUSTOMER----
+	
+	@DELETE
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customer/{customerID}")
+	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString){
+		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
+		boolean isCustomerDeleted = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isCustomerDeleted = marketActivity.deleteCustomer(customerIDString);
+		GenericResponse genericResponse = new GenericResponse();
+		if(isCustomerDeleted){
+			genericResponse.setMessage("Customer has been deleted");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Customer was not deleted");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
+		
+	}
+	
+	//----GET PARTNER DETAILS----
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/partner/{partnerID}")
+	public PartnerRepresentation getPartnerDetails(@PathParam("partnerID") String partnerIDString){
+		System.out.println("GET METHOD Request for Partner details............." + partnerIDString);
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
+		partnerRepresentation = marketActivity.getPartnerDetails(partnerIDString);
+		return partnerRepresentation;
+	}
+	
+	//----DELETE PARTNER----
+	
+	@DELETE
+	@Produces({"application/xml" , "application/json"})
+	@Path("/partner/{partnerIDString}")
+	public GenericResponse deletePartner(@PathParam("partnerIDString") String partnerIDString){
+		System.out.println("DELETE METHOD Request for Deleting a Partner ............." + partnerIDString);
+		boolean isPartnerDeleted = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isPartnerDeleted = marketActivity.deletePartner(partnerIDString);
+		GenericResponse genericResponse = new GenericResponse();
+		if(isPartnerDeleted){
+			genericResponse.setMessage("Partner has been deleted");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Partner was not deleted");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
+		
+	}
+	
 	
 	
 	
