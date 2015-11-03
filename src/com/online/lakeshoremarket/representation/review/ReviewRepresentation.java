@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * represents a review
@@ -23,7 +24,7 @@ public class ReviewRepresentation {
 	private int productReviewID;
 	private int rating;
 	private String review;
-	private long reviewDate;
+	private XMLGregorianCalendar reviewDate;
 	
 
 	public int getCustomerID() {
@@ -68,10 +69,10 @@ public class ReviewRepresentation {
 	public void setReview(String review) {
 		this.review = review;
 	}
-	public long getReviewDate() {
+	public XMLGregorianCalendar getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(long reviewDate) {
+	public void setReviewDate(XMLGregorianCalendar reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	

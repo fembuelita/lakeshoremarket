@@ -391,7 +391,19 @@ public class LakeshoreMarketActivity {
 		revRep.setCustomerID( review.getCustomerID() );
 		revRep.setRating( review.getRating() );
 		revRep.setReview( review.getReview() );
-		revRep.setReviewDate( review.getReviewDate().getTime() );
+		if(null != review.getReviewDate()){
+			GregorianCalendar gregCalReviewDate = new GregorianCalendar();
+			long longReviewDate = review.getReviewDate().getTime();
+			Date utilReviewDate = new Date(longReviewDate);
+			gregCalReviewDate.setTime(utilReviewDate);
+			XMLGregorianCalendar xmlReviewDate;
+			try {
+				xmlReviewDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregCalReviewDate);
+				revRep.setReviewDate(xmlReviewDate);
+			} catch (DatatypeConfigurationException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return revRep;
 	}
