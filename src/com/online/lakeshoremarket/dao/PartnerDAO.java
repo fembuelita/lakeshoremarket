@@ -219,12 +219,14 @@ public class PartnerDAO {
 			pstmt = conn.prepareStatement(searchQuery);
 			pstmt.setInt(1, partnerID);
 			ResultSet resultSet = pstmt.executeQuery();
-			partner.setPartnerName(resultSet.getString("name"));
-			partner.setContactName(resultSet.getString("contact_name"));
-			partner.setActive(resultSet.getByte("active") == 1 ? true : false);
-			partner.setAddressID(resultSet.getInt("address_id"));
-			partner.setEmail(resultSet.getString("email"));
-			partner.setPhone(resultSet.getString("tel"));
+			while(resultSet.next()){
+				partner.setPartnerName(resultSet.getString("name"));
+				partner.setContactName(resultSet.getString("contact_name"));
+				partner.setActive(resultSet.getByte("active") == 1 ? true : false);
+				partner.setAddressID(resultSet.getInt("address_id"));
+				partner.setEmail(resultSet.getString("email"));
+				partner.setPhone(resultSet.getString("tel"));
+			}
 		}catch(SQLException sqe){
 			System.err.println("PartnerDAO.getPartnerByID: Threw a SQLException while getting Partner information.");
   	      	System.err.println(sqe.getMessage());

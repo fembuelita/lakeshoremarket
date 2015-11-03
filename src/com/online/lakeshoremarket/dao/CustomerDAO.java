@@ -255,18 +255,21 @@ public class CustomerDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
 			cust = new CustomerImpl();
-			String searchQuery = "SELECT * FROM `customer` WHERE customer_id = ?";
+			String searchQuery = "SELECT * FROM `customer` WHERE customer_id = ? LIMIT 1";
 			pstmt = conn.prepareStatement(searchQuery);
 			pstmt.setInt(1, custID);
 			ResultSet resultSet = pstmt.executeQuery();
-			cust.setTitle(resultSet.getString("title"));
-			cust.setFirstName(resultSet.getString("first_name"));
-			cust.setLastName(resultSet.getString("last_name"));
-			cust.setActive(resultSet.getByte("active") == 1 ? true : false);
-			cust.setBillingAddress(resultSet.getInt("bill_address_id"));
-			cust.setShippingAddress(resultSet.getInt("ship_address_id"));
-			cust.setEmail(resultSet.getString("email"));
-			cust.setPhone(resultSet.getString("tel"));
+			while(resultSet.next()){
+				cust.setTitle(resultSet.getString("title"));
+				cust.setFirstName(resultSet.getString("first_name"));
+				cust.setLastName(resultSet.getString("last_name"));
+				cust.setActive(resultSet.getByte("active") == 1 ? true : false);
+				cust.setBillingAddress(resultSet.getInt("bill_address_id"));
+				cust.setShippingAddress(resultSet.getInt("ship_address_id"));
+				cust.setEmail(resultSet.getString("email"));
+				cust.setPhone(resultSet.getString("tel"));
+			}
+			
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.getCustomerByID: Threw a SQLException while getting Customer.");
   	      	System.err.println(sqe.getMessage());
