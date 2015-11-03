@@ -48,31 +48,40 @@ public class LakeshoreMarketResource {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/product")
-	public Response createProduct(ProductRequest prodRequest) {
+	public GenericResponse createProduct(ProductRequest prodRequest) {
 		System.out.println("PUT METHOD Request for Creating a new product .............");
+		GenericResponse genericResponse = new GenericResponse();
 		boolean isProductCreated = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isProductCreated = marketActivity.createProduct(prodRequest);
 		if(isProductCreated){
-			return Response.status(Response.Status.CREATED).build();
+			genericResponse.setMessage("Product is created");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Product is not created");
+			genericResponse.setSuccess(false);
 		}
 		
-		return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();	
+		return genericResponse;	
 	}
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
-	public Response cancelOrder(@PathParam("orderIDString") String orderIDString){
+	public GenericResponse cancelOrder(@PathParam("orderIDString") String orderIDString){
 		System.out.println("DELETE METHOD Request for Canceling an order .............");
+		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderRefunded = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isOrderRefunded = marketActivity.cancelOrder(orderIDString);
 		if(isOrderRefunded){
-			return Response.status(Response.Status.OK).build();
+			genericResponse.setMessage("Order is cancelled");
+			genericResponse.setSuccess(true);
 		}else{
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+			genericResponse.setMessage("Order is not cancelled");
+			genericResponse.setSuccess(false);
 		}
+		return genericResponse;
 		
 	}
 	
@@ -90,31 +99,39 @@ public class LakeshoreMarketResource {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/ship")
-	public Response shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumb") String trackingNumb){
+	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumb") String trackingNumb){
 		System.out.println("POST METHOD to ship order.............");
+		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderShipped = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isOrderShipped = marketActivity.shipOrder(orderIDString,trackingNumb);
 		if(isOrderShipped){
-			return Response.status(Response.Status.OK).build();
+			genericResponse.setMessage("Order is shipped");
+			genericResponse.setSuccess(true);
 		}else{
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+			genericResponse.setMessage("Order is not shipped");
+			genericResponse.setSuccess(false);
 		}
+		return genericResponse;
 	}
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/fulfill")
-	public Response fulfillOrder(@FormParam("orderIDString") String orderIDString){
+	public GenericResponse fulfillOrder(@FormParam("orderIDString") String orderIDString){
 		System.out.println("POST METHOD to ship order.............");
+		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderFulfilled = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isOrderFulfilled = marketActivity.fulfillOrder(orderIDString);
 		if(isOrderFulfilled){
-			return Response.status(Response.Status.OK).build();
+			genericResponse.setMessage("Order is fulfilled");
+			genericResponse.setSuccess(true);
 		}else{
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+			genericResponse.setMessage("Order is not fulfilled");
+			genericResponse.setSuccess(false);
 		}
+		return genericResponse;
 	}
 	
 	@PUT
