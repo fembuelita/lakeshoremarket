@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.util.DatabaseConnection;
@@ -87,14 +90,18 @@ public class ProductDAO {
 				prodList.add(prod);
 			}
 		}catch(SQLException sqe){
-			System.err.println("ProductDAO.getProductByLikeName: Threw a SQLException while searching for a product in table.");
+			System.err.println("ProductDAO.getProductByLikeName: Threw an SQLException while searching for a product in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while searching for a product in table.		" 
+  	      									+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("ProductDAO.getProductByLikeName: Threw an Exception while searching for a product in table.");
+				throw new GenericLSMException("Threw an SQLException while searching for a product in table.		"
+												, Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return prodList;
