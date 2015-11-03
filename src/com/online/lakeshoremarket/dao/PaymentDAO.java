@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.payment.Payment;
 import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.DatabaseConnection;
@@ -50,14 +53,18 @@ public class PaymentDAO {
 				paymentID = resultSet.getInt(1);
 			}
 		}catch(SQLException sqe){
-			System.err.println("PaymentDAO.createPayment: Threw a SQLException inserting a new payment in table.");
+			System.err.println("PaymentDAO.createPayment: Threw an SQLException inserting a new payment in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException inserting a new payment in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("PaymentDAO.createPayment: Threw an Exception inserting a new payment in table.");
+				throw new GenericLSMException("Threw an Exception inserting a new payment in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return paymentID;
@@ -78,14 +85,18 @@ public class PaymentDAO {
 			pstmt.setInt(3, paymentStatusID);
 			pstmt.executeUpdate();
 		}catch(SQLException sqe){
-			System.err.println("PaymentDAO.updatePaymentStatusForRefund: Threw a SQLException updating payment status and date refunded in the payment table.");
+			System.err.println("PaymentDAO.updatePaymentStatusForRefund: Threw an SQLException updating payment status and date refunded in the payment table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException updating payment status and date refunded in the payment table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("PaymentDAO.updatePaymentStatusForRefund: Threw an Exception updating payment status and date refunded in the payment table.");
+				throw new GenericLSMException("Threw an Exception updating payment status and date refunded in the payment table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 	}
