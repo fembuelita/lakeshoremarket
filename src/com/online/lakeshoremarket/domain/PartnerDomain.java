@@ -74,11 +74,11 @@ public class PartnerDomain {
 		return true;
 	}
 
-	public void generatePartnerReport(int partnerID) {
+	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
 		ArrayList<PartnerReport> partnerReport = new ArrayList<PartnerReport>();
 		partnerDao = new PartnerDAO();
 		partnerReport = partnerDao.generatePartnerReport(partnerID);
-		System.out.println("product_id		qty		cost		price		total_cost		total_price		total_profit		Grand Total");
+		/*System.out.println("product_id		qty		cost		price		total_cost		total_price		total_profit		Grand Total");
 		
 		
 		
@@ -90,7 +90,9 @@ public class PartnerDomain {
 					+temp.getTotalCost()+"			"
 					+temp.getTotalPrice()+"			"
 					+temp.getTotalProfit()+"		");
-		}
+		}*/
+		
+		return partnerReport;
 		
 	}
 }

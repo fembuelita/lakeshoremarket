@@ -38,7 +38,8 @@
 
 
 <!-- 			Elliot's Schema Additions -->
-
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.online.lakeshoremarket.representation.review.ReviewRepresentation</jaxrs:schemaLocation>
 
 
 		</jaxrs:schemaLocations>

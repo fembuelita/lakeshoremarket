@@ -21,6 +21,7 @@ import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.model.partner.Partner;
 import com.online.lakeshoremarket.model.partner.PartnerImpl;
+import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
 import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.model.review.Review;
@@ -29,6 +30,7 @@ import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
+import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
@@ -327,6 +329,34 @@ public class LakeshoreMarketActivity {
 		revRep.setReviewDate( review.getReviewDate().getTime() );
 		
 		return revRep;
+	}
+	
+	/**
+	 * gets a report representation for a specific partner
+	 * @param partnerID
+	 * @return
+	 */
+	public ArrayList<PartnerReportRepresentation> getPartnerReport( int partnerID ) {
+		PartnerDomain partnerDomain = new PartnerDomain();
+		ArrayList<PartnerReport> report = partnerDomain.generatePartnerReport( partnerID );
+		ArrayList<PartnerReportRepresentation> reports = new ArrayList<PartnerReportRepresentation>();
+		
+		int size = report.size();
+		for(int i=0; i< size; i++){
+			PartnerReportRepresentation partnerReport = new PartnerReportRepresentation();
+			partnerReport.setProductId( report.get(i).getProductId() );
+			partnerReport.setQuantity( report.get(i).getQuantity() );
+			partnerReport.setCost( report.get(i).getCost() );
+			partnerReport.setPrice( report.get(i).getPrice() );
+			partnerReport.setTotalCost( report.get(i).getTotalCost() );
+			partnerReport.setTotalPrice( report.get(i).getTotalPrice() );
+			partnerReport.setTotalProfit( report.get(i).getTotalProfit() );
+			
+			reports.add(partnerReport);
+		}		
+		
+
+		return reports;
 	}
 	
 	

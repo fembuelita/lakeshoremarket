@@ -20,6 +20,7 @@ import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
+import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
@@ -263,5 +264,13 @@ public class LakeshoreMarketResource {
 		return marketActivity.getReview( "product", productID );
 	}
 	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/report/{partnerID}")
+	public ArrayList<PartnerReportRepresentation> getPartnerReport(@PathParam("partnerID") int partnerID) {
+		System.out.println("GET METHOD Request for partner report............" + partnerID);
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		return marketActivity.getPartnerReport( partnerID );
+	}
 	
 }
