@@ -247,7 +247,7 @@ public class LakeshoreMarketResource {
 	//----CHECK PRODUCT AVAILABILITY----
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/product/{productID}")
+	@Path("/available/{productID}")
 	public Response checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
 			System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
 			boolean isProductAvailable = false;
@@ -266,7 +266,7 @@ public class LakeshoreMarketResource {
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/customer/{customerID}")
-	public CustomerRepresentation getCustomerDetails(@PathParam("customerIDString") String customerIDString){ 
+	public CustomerRepresentation getCustomerDetails(@PathParam("customerID") String customerIDString){ 
 		System.out.println("GET METHOD Request for Customer details............." + customerIDString);
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
@@ -278,8 +278,8 @@ public class LakeshoreMarketResource {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerIDString}")
-	public Response deleteCustomer(@PathParam("customerIDString") String customerIDString){
+	@Path("/customer/{customerID}")
+	public Response deleteCustomer(@PathParam("customerID") String customerIDString){
 		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
 		boolean isCustomerDeleted = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
