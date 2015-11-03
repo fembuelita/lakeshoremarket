@@ -22,6 +22,7 @@ import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
+import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 
 
 @Path("/")
@@ -168,6 +169,27 @@ public class LakeshoreMarketResource {
 			genericResponse.setSuccess(true);
 		}else{
 			genericResponse.setMessage("Partner review is not created");
+			genericResponse.setSuccess(false);
+		}
+		
+		return genericResponse;	
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/review/product")
+	public GenericResponse createProductReview(ProductReviewRequest productReviewRequest) {
+		System.out.println("PUT METHOD Request for Creating a new product review.............");
+		GenericResponse genericResponse = new GenericResponse();
+		boolean isProductReviewCreated = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isProductReviewCreated = marketActivity.createProductReview(productReviewRequest);
+		if(isProductReviewCreated){
+			genericResponse.setMessage("Product review is created");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Product review is not created");
 			genericResponse.setSuccess(false);
 		}
 		

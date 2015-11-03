@@ -30,6 +30,7 @@ import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
+import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 
 public class LakeshoreMarketActivity {
 
@@ -234,6 +235,21 @@ public class LakeshoreMarketActivity {
 		isPartnerReviewCreated = reviewDomain.addPartnerReview(review);
 		
 		return isPartnerReviewCreated;
+	}
+	
+	public boolean createProductReview(ProductReviewRequest productReviewRequest) {
+		boolean isProductReviewCreated = false;
+		ReviewDomain reviewDomain = new ReviewDomain();
+		Review review = new ReviewImpl();
+		
+		review.setCustomerID(productReviewRequest.getCustomerID());
+		review.setProductID(productReviewRequest.getProductID());
+		review.setRating(productReviewRequest.getRating());
+		review.setReview(productReviewRequest.getReview());
+		
+		isProductReviewCreated = reviewDomain.addProductReview(review);
+		
+		return isProductReviewCreated;
 	}
 	
 	
