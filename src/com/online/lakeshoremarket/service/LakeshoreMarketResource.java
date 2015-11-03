@@ -248,18 +248,20 @@ public class LakeshoreMarketResource {
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/available/{productID}")
-	public Response checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
-			System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
-			boolean isProductAvailable = false;
-			LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-			isProductAvailable = marketActivity.checkProductAvailability(prodName);
-			if(isProductAvailable){
-				return Response.status(Response.Status.OK).build();
-			}else{
-				return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
-			}
-			
-		
+	public GenericResponse checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
+		System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
+		boolean isProductAvailable = false;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		isProductAvailable = marketActivity.checkProductAvailability(prodName);
+		GenericResponse genericResponse = new GenericResponse();
+		if(isProductAvailable){
+			genericResponse.setMessage("Product is available");
+			genericResponse.setSuccess(true);
+		}else{
+			genericResponse.setMessage("Product is not available");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
 	}
 	
 	//----GET CUSTOMER DETAILS----
