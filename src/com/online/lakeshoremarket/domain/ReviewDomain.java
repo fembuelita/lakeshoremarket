@@ -50,6 +50,7 @@ public class ReviewDomain {
 	 * @return Review
 	 */
 	public Review getPartnerReviewByID( int partnerReviewID ) {
+		reviewDAO = new ReviewDAO();
 		return reviewDAO.getPartnerReviewByID( partnerReviewID );
 	}
 	
@@ -59,6 +60,7 @@ public class ReviewDomain {
 	 * @return Review
 	 */
 	public Review getProductReviewByID( int productReviewID ) {
+		reviewDAO = new ReviewDAO();
 		return reviewDAO.getProductReviewByID( productReviewID );
 	}
 

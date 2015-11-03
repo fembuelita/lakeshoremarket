@@ -256,7 +256,7 @@ public class LakeshoreMarketResource {
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/review/partner/{productID}")
+	@Path("/review/product/{productID}")
 	public ReviewRepresentation getProductReview(@PathParam("productID") int productID) {
 		System.out.println("GET METHOD Request for product review............" + productID);
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();

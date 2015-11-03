@@ -1,12 +1,18 @@
 package com.online.lakeshoremarket.representation.review;
 
 
-import java.sql.Timestamp;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * represents a review
  *
  */
+@XmlRootElement(name = "Review")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
 public class ReviewRepresentation {
 
 
@@ -17,7 +23,7 @@ public class ReviewRepresentation {
 	private int productReviewID;
 	private int rating;
 	private String review;
-	private Timestamp reviewDate;
+	private long reviewDate;
 	
 	
 	
@@ -129,10 +135,10 @@ public class ReviewRepresentation {
 	public void setReview(String review) {
 		this.review = review;
 	}
-	public Timestamp getReviewDate() {
+	public long getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Timestamp reviewDate) {
+	public void setReviewDate(long reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	

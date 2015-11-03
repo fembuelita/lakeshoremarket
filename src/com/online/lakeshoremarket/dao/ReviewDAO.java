@@ -95,7 +95,7 @@ public class ReviewDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
+			String insertStmt = "SELECT * FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt( 1, reviewID );
 			
@@ -135,7 +135,7 @@ public class ReviewDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
+			String insertStmt = "SELECT *FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt( 1, reviewID );
 			
@@ -151,14 +151,14 @@ public class ReviewDAO {
 			}
 			
 		}catch(SQLException sqe){
-			System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+			System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting product review from table.");
   	      	System.err.println(sqe.getMessage());
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting partner review from table.");
+				System.err.println("ReviewDAO.getPartnerReviewByID: Threw a SQLException getting product review from table.");
 			}
 		}
 		

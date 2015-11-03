@@ -324,7 +324,7 @@ public class LakeshoreMarketActivity {
 		revRep.setCustomerID( review.getCustomerID() );
 		revRep.setRating( review.getRating() );
 		revRep.setReview( review.getReview() );
-		revRep.setReviewDate( review.getReviewDate() );
+		revRep.setReviewDate( review.getReviewDate().getTime() );
 		
 		return revRep;
 	}
