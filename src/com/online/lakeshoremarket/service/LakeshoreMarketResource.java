@@ -18,6 +18,7 @@ import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.order.OrderRequest;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
@@ -190,6 +191,28 @@ public class LakeshoreMarketResource {
 			genericResponse.setSuccess(true);
 		}else{
 			genericResponse.setMessage("Product review is not created");
+			genericResponse.setSuccess(false);
+		}
+		
+		return genericResponse;	
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/order")
+	public GenericResponse buyProduct(OrderRequest orderRequest) {
+		System.out.println("PUT METHOD Request for placing an order.............");
+		GenericResponse genericResponse = new GenericResponse();
+		int orderID = 0;
+		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		orderID = marketActivity.buyProduct(orderRequest);
+		if(0 != orderID){
+			genericResponse.setMessage("Order is created");
+			genericResponse.setSuccess(true);
+			genericResponse.setGenericReturnValue(orderID+"");
+		}else{
+			genericResponse.setMessage("Order is not created");
 			genericResponse.setSuccess(false);
 		}
 		

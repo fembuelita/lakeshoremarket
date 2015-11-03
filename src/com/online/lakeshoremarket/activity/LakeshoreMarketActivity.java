@@ -11,6 +11,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.domain.OrderDomain;
 import com.online.lakeshoremarket.domain.PartnerDomain;
+import com.online.lakeshoremarket.domain.PaymentDomain;
 import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.domain.ReviewDomain;
 import com.online.lakeshoremarket.model.customer.Address;
@@ -26,6 +27,7 @@ import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.order.OrderRequest;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
@@ -250,6 +252,14 @@ public class LakeshoreMarketActivity {
 		isProductReviewCreated = reviewDomain.addProductReview(review);
 		
 		return isProductReviewCreated;
+	}
+	
+	public int buyProduct(OrderRequest orderRequest) {
+		PaymentDomain paymentDomain = new PaymentDomain();
+		int orderID = 0;
+		orderID = paymentDomain.buyProduct(orderRequest.getProductID(), orderRequest.getQuantity(), orderRequest.getCustomerID());
+		
+		return orderID;
 	}
 	
 	

@@ -12,6 +12,7 @@ public class GenericResponse {
 	
 	private boolean isSuccess;
 	private String message;
+	private String genericReturnValue;
 	
 	public boolean isSuccess() {
 		return isSuccess;
@@ -24,6 +25,12 @@ public class GenericResponse {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getGenericReturnValue() {
+		return genericReturnValue;
+	}
+	public void setGenericReturnValue(String genericReturnValue) {
+		this.genericReturnValue = genericReturnValue;
 	}
 	
 
