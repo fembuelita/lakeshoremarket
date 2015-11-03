@@ -281,16 +281,20 @@ public class LakeshoreMarketResource {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerID}")
-	public Response deleteCustomer(@PathParam("customerID") String customerIDString){
+	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString){
 		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
 		boolean isCustomerDeleted = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isCustomerDeleted = marketActivity.deleteCustomer(customerIDString);
+		GenericResponse genericResponse = new GenericResponse();
 		if(isCustomerDeleted){
-			return Response.status(Response.Status.OK).build();
+			genericResponse.setMessage("Customer has been deleted");
+			genericResponse.setSuccess(true);
 		}else{
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
-		}
+			genericResponse.setMessage("Customer was not deleted");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
 		
 	}
 	
@@ -311,16 +315,20 @@ public class LakeshoreMarketResource {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partner/{partnerIDString}")
-	public Response deletePartner(@PathParam("partnerIDString") String partnerIDString){
+	public GenericResponse deletePartner(@PathParam("partnerIDString") String partnerIDString){
 		System.out.println("DELETE METHOD Request for Deleting a Partner ............." + partnerIDString);
 		boolean isPartnerDeleted = false;
 		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
 		isPartnerDeleted = marketActivity.deletePartner(partnerIDString);
+		GenericResponse genericResponse = new GenericResponse();
 		if(isPartnerDeleted){
-			return Response.status(Response.Status.OK).build();
+			genericResponse.setMessage("Partner has been deleted");
+			genericResponse.setSuccess(true);
 		}else{
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
-		}
+			genericResponse.setMessage("Partner was not deleted");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
 		
 	}
 	
