@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
