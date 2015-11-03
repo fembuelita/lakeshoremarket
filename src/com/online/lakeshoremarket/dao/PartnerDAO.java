@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.partner.Partner;
 import com.online.lakeshoremarket.model.partner.PartnerImpl;
@@ -45,14 +48,18 @@ public class PartnerDAO {
 			pstmt.setBoolean(7, partner.isActive());
 			rowsUpdated = pstmt.executeUpdate();
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.addPartner: Threw a SQLException inserting a new partner in table.");
+			System.err.println("PartnerDAO.addPartner: Threw an SQLException inserting a new partner in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException inserting a new partner in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("PartnerDAO.addPartner: Threw an Exception inserting a new partner in table.");
+				throw new GenericLSMException("Threw an Exception inserting a new partner in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return rowsUpdated;
@@ -90,14 +97,18 @@ public class PartnerDAO {
 				}
 			}
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.addAddress: Threw a SQLException inserting a new address in table.");
+			System.err.println("PartnerDAO.addAddress: Threw an SQLException inserting a new address in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException inserting a new address in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("PartnerDAO.addAddress: Threw an Exception inserting a new address in table.");
+				throw new GenericLSMException("Threw an Exception inserting a new address in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return addressID;
@@ -121,14 +132,18 @@ public class PartnerDAO {
 				isPartnerDeleted = true;
 			}
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.deletePartner: Threw a SQLException deleting partner from the table.");
+			System.err.println("PartnerDAO.deletePartner: Threw an SQLException deleting partner from the table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException deleting partner from the table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("PartnerDAO.deletePartner: Threw an Exception deleting partner from the table.");
+				throw new GenericLSMException("Threw an Exception deleting partner from the table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return isPartnerDeleted;
@@ -151,14 +166,18 @@ public class PartnerDAO {
 				isPartnerActive = resultSet.getBoolean("active");
 			}
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.getStatus: Threw a SQLException while getting partner active status.");
+			System.err.println("PartnerDAO.getStatus: Threw an SQLException while getting partner active status.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while getting partner active status.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("PartnerDAO.getStatus: Threw a Exception while getting partner active status.");
+				System.err.println("PartnerDAO.getStatus: Threw an Exception while getting partner active status.");
+				throw new GenericLSMException("Threw an Exception while getting partner active status.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return isPartnerActive;
@@ -197,14 +216,18 @@ public class PartnerDAO {
 				paReports.add(partnerReport);
 			}
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.generatePartnerReport: Threw a SQLException while generating partner sales report.");
+			System.err.println("PartnerDAO.generatePartnerReport: Threw an SQLException while generating partner sales report.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while generating partner sales report.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("PartnerDAO.generatePartnerReport: Threw a Exception while generating partner sales report.");
+				System.err.println("PartnerDAO.generatePartnerReport: Threw an Exception while generating partner sales report.");
+				throw new GenericLSMException("Threw an Exception while generating partner sales report.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return paReports;
@@ -228,8 +251,10 @@ public class PartnerDAO {
 				partner.setPhone(resultSet.getString("tel"));
 			}
 		}catch(SQLException sqe){
-			System.err.println("PartnerDAO.getPartnerByID: Threw a SQLException while getting Partner information.");
+			System.err.println("PartnerDAO.getPartnerByID: Threw an SQLException while getting Partner information.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while getting Partner information.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
@@ -237,6 +262,8 @@ public class PartnerDAO {
 			} catch (Exception e) {
 				System.err.println("PartnerDAO.getPartnerByID: Threw an Exception while getting Partner information.");
 				System.err.println(e.getMessage());
+				throw new GenericLSMException("Threw an Exception while getting Partner information.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		
