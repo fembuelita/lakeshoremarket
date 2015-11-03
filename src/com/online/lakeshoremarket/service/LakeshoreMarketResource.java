@@ -155,10 +155,8 @@ public class LakeshoreMarketResource {
 	}
 	
 	@PUT
-//	@Consumes({"application/xml" , "application/json"})
-	@Produces({"application/xml" , "application/json"})
-//	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/review/partner")
 	public GenericResponse createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
 		System.out.println("PUT METHOD Request for Creating a new partner review.............");
