@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
@@ -46,12 +49,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.addCustomer: Threw a SQLException inserting a new customer in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException inserting a new customer in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.addCustomer: Threw an Exception inserting a new customer in table.");
+				throw new GenericLSMException("Threw a SQLException inserting a new customer in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return rowsUpdated;
@@ -90,12 +97,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.addAddress: Threw a SQLException inserting a new address in table.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException inserting a new address in table.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.addAddress: Threw an Exception inserting a new address in table.");
+				throw new GenericLSMException("Threw a SQLException inserting a new address in table.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return addressID;
@@ -122,12 +133,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.deleteCustomer: Threw a SQLException while deleteing the customer with customerID = " + custID);
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while deleteing the customer		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.deleteCustomer: Threw an Exception while deleteing the customer with customerID = " + custID);
+				throw new GenericLSMException("Threw a SQLException while deleteing the customer		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return (rowsUpdated == 1) ? true : false;
@@ -149,12 +164,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.deleteCustomerAddress: Threw a SQLException while deleting customer address where addressID = "+addressID);
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while deleting customer address		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.deleteCustomerAddress: Threw an Exception while deleting customer address where addressID = "+addressID);
+				throw new GenericLSMException("Threw a SQLException while deleting customer address		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return rowsUpdated;
@@ -179,12 +198,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.getCustomerBillingAddress: Threw a SQLException while getting customer billing address.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting customer billing address.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.getCustomerBillingAddress: Threw a Exception while getting customer billing address.");
+				throw new GenericLSMException("Threw a SQLException while getting customer billing address.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return billingAddressID;
@@ -209,12 +232,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.getCustomerShippingAddress: Threw a SQLException while getting customer shipping address.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting customer shipping address.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.getCustomerShippingAddress: Threw a Exception while getting customer shipping address.");
+				throw new GenericLSMException("Threw a SQLException while getting customer shipping address.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return shippingAddressID;
@@ -239,12 +266,16 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.getStatus: Threw a SQLException while getting customer active status.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting customer active status.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.getStatus: Threw a Exception while getting customer active status.");
+				throw new GenericLSMException("Threw a SQLException while getting customer active status.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		return isCustomerActive;
@@ -273,6 +304,8 @@ public class CustomerDAO {
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.getCustomerByID: Threw a SQLException while getting Customer.");
   	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw a SQLException while getting Customer.		" 
+					+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
 				pstmt.close();
@@ -280,6 +313,8 @@ public class CustomerDAO {
 			} catch (Exception e) {
 				System.err.println("CustomerDAO.getCustomerByID: Threw an Exception while getting Customer");
 				System.err.println(e.getMessage());
+				throw new GenericLSMException("Threw a SQLException while getting Customer.		" 
+						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
 		

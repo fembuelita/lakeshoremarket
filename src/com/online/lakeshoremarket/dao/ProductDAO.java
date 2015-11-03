@@ -50,7 +50,7 @@ public class ProductDAO {
 		}catch(SQLException sqe){
 			System.err.println("ProductDAO.getProductByName: Threw a SQLException while searching for a product in table.");
   	      	System.err.println(sqe.getMessage());
-  	      throw new GenericLSMException("Threw a SQLException while searching for a product in table.		" 
+  	      	throw new GenericLSMException("Threw a SQLException while searching for a product in table.		" 
 						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 		} finally {
 			try {
