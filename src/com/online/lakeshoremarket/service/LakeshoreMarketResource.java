@@ -17,6 +17,7 @@ import com.online.lakeshoremarket.activity.CustomerActivity;
 import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
 import com.online.lakeshoremarket.activity.OrderActivity;
 import com.online.lakeshoremarket.activity.PartnerActivity;
+import com.online.lakeshoremarket.activity.PaymentActivity;
 import com.online.lakeshoremarket.activity.ProductActivity;
 import com.online.lakeshoremarket.activity.ReviewActivity;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
@@ -38,7 +39,7 @@ import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 public class LakeshoreMarketResource {
 
 	
-	@GET
+	/*@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products/{searchString}")
 	public ArrayList<ProductRepresentation> getProducts(@PathParam("searchString") String prodName) {
@@ -46,9 +47,9 @@ public class LakeshoreMarketResource {
 		ProductActivity productActivity = new ProductActivity();
 		ArrayList<ProductRepresentation> prodRepresentationSet = productActivity.getProducts(prodName);
 		return prodRepresentationSet;
-	}
+	}*/
 	
-	@PUT
+	/*@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/product")
@@ -67,9 +68,9 @@ public class LakeshoreMarketResource {
 		}
 		
 		return genericResponse;	
-	}
+	}*/
 	
-	@DELETE
+	/*@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
 	public GenericResponse cancelOrder(@PathParam("orderIDString") String orderIDString){
@@ -87,9 +88,9 @@ public class LakeshoreMarketResource {
 		}
 		return genericResponse;
 		
-	}
+	}*/
 	
-	@GET
+	/*@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
 	public OrderRepresentation getOrderDetails(@PathParam("orderIDString") String orderIDString){
@@ -136,9 +137,9 @@ public class LakeshoreMarketResource {
 			genericResponse.setSuccess(false);
 		}
 		return genericResponse;
-	}
+	}*/
 	
-	@PUT
+	/*@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/customer")
@@ -157,9 +158,9 @@ public class LakeshoreMarketResource {
 		}
 		
 		return genericResponse;	
-	}
+	}*/
 	
-	@PUT
+	/*@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/partner")
@@ -178,9 +179,9 @@ public class LakeshoreMarketResource {
 		}
 		
 		return genericResponse;	
-	}
+	}*/
 	
-	@PUT
+	/*@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/review/partner")
@@ -220,9 +221,9 @@ public class LakeshoreMarketResource {
 		}
 		
 		return genericResponse;	
-	}
+	}*/
 	
-	@PUT
+	/*@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/order")
@@ -230,8 +231,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for placing an order.............");
 		GenericResponse genericResponse = new GenericResponse();
 		int orderID = 0;
-		OrderActivity orderActivity = new OrderActivity();
-		orderID = orderActivity.buyProduct(orderRequest);
+		PaymentActivity paymentActivity = new PaymentActivity();
+		orderID = paymentActivity.buyProduct(orderRequest);
 		if(0 != orderID){
 			genericResponse.setMessage("Order is created");
 			genericResponse.setSuccess(true);
@@ -242,7 +243,7 @@ public class LakeshoreMarketResource {
 		}
 		
 		return genericResponse;	
-	}
+	}*/
 	
 	
 	
@@ -256,17 +257,17 @@ public class LakeshoreMarketResource {
 	
 	
 	//----GET PRODUCT----
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/product/{productName}")
 	public ProductRepresentation getProduct(@PathParam("productName") String prodName) {
 		System.out.println("GET METHOD Request for individual product ............" + prodName);
 		ProductActivity productActivity = new ProductActivity();
 		return productActivity.getProduct(prodName); 
-	}
+	}*/
 	
 	//----CHECK PRODUCT AVAILABILITY----
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/available/{productID}")
 	public GenericResponse checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
@@ -283,10 +284,10 @@ public class LakeshoreMarketResource {
 			genericResponse.setSuccess(false);
 		}		
 		return genericResponse;
-	}
+	}*/
 	
 	//----GET CUSTOMER DETAILS----
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/customer/{customerID}")
 	public CustomerRepresentation getCustomerDetails(@PathParam("customerID") String customerIDString){ 
@@ -295,11 +296,11 @@ public class LakeshoreMarketResource {
 		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
 		customerRepresentation = customerActivity.getCustomerDetails(customerIDString);
 		return customerRepresentation;
-	}
+	}*/
 	
 	//----DELETE CUSTOMER----
 	
-	@DELETE
+	/*@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerID}")
 	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString){
@@ -317,10 +318,10 @@ public class LakeshoreMarketResource {
 		}		
 		return genericResponse;
 		
-	}
+	}*/
 	
 	//----GET PARTNER DETAILS----
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/partner/{partnerID}")
 	public PartnerRepresentation getPartnerDetails(@PathParam("partnerID") String partnerIDString){
@@ -351,7 +352,7 @@ public class LakeshoreMarketResource {
 		}		
 		return genericResponse;
 		
-	}
+	}*/
 	
 	
 	
@@ -361,7 +362,7 @@ public class LakeshoreMarketResource {
 	 * 
 	 * */
 	
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/review/partner/{partnerID}")
 	public ReviewRepresentation getPartnerReview(@PathParam("partnerID") int partnerID) {
@@ -377,15 +378,15 @@ public class LakeshoreMarketResource {
 		System.out.println("GET METHOD Request for product review............" + productID);
 		ReviewActivity reviewActivity = new ReviewActivity();
 		return reviewActivity.getReview( "product", productID );
-	}
+	}*/
 	
-	@GET
+	/*@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/report/{partnerID}")
 	public ArrayList<PartnerReportRepresentation> getPartnerReport(@PathParam("partnerID") int partnerID) {
 		System.out.println("GET METHOD Request for partner report............" + partnerID);
 		PartnerActivity partnerActivity = new PartnerActivity();
 		return partnerActivity.getPartnerReport( partnerID );
-	}
+	}*/
 	
 }

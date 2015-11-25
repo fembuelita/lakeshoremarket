@@ -8,10 +8,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.online.lakeshoremarket.domain.OrderDomain;
-import com.online.lakeshoremarket.domain.PaymentDomain;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
-import com.online.lakeshoremarket.representation.order.OrderRequest;
 
 public class OrderActivity {
 
@@ -81,11 +79,4 @@ public class OrderActivity {
 		return isOrderStatusUpdated;
 	}
 	
-	public int buyProduct(OrderRequest orderRequest) {
-		PaymentDomain paymentDomain = new PaymentDomain();
-		int orderID = 0;
-		orderID = paymentDomain.buyProduct(orderRequest.getProductID(), orderRequest.getQuantity(), orderRequest.getCustomerID());
-		
-		return orderID;
-	}
 }

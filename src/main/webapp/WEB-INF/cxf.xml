@@ -17,7 +17,13 @@
       	
   <jaxrs:server name="LakeshoreMarketResource" address="/lsm">
 		<jaxrs:serviceBeans>
-			<ref bean="lakeshoreMarketServiceRest" />
+<!-- 			<ref bean="lakeshoreMarketServiceRest" /> -->
+			<ref bean="productResource" />
+			<ref bean="orderResource" />
+			<ref bean="customerResource" />
+			<ref bean="partnerResource" />
+			<ref bean="paymentResource" />
+			<ref bean="reviewResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -46,6 +52,13 @@
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="lakeshoreMarketServiceRest" class="com.online.lakeshoremarket.service.LakeshoreMarketResource" />
+<!--   	<bean id="lakeshoreMarketServiceRest" class="com.online.lakeshoremarket.service.LakeshoreMarketResource" /> -->
+  	<bean id="productResource" class="com.online.lakeshoremarket.resource.ProductResource" />
+  	<bean id="orderResource" class="com.online.lakeshoremarket.resource.OrderResource" />
+  	<bean id="customerResource" class="com.online.lakeshoremarket.resource.CustomerResource" />
+  	<bean id="partnerResource" class="com.online.lakeshoremarket.resource.PartnerResource" />
+  	<bean id="paymentResource" class="com.online.lakeshoremarket.resource.PaymentResource" />
+  	<bean id="reviewResource" class="com.online.lakeshoremarket.resource.ReviewResource" />
+  	
   
 </beans>
