@@ -41,8 +41,8 @@ import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 
 public class LakeshoreMarketActivity {
 
-	
-	public ArrayList<ProductRepresentation> getProducts(String prodName){
+	//Not required anymore
+	/*public ArrayList<ProductRepresentation> getProducts(String prodName){
 		
 		ArrayList<Product> prodList = new ArrayList<Product>();
 		ArrayList<ProductRepresentation> prodRepresentationList = new ArrayList<ProductRepresentation>();
@@ -62,9 +62,10 @@ public class LakeshoreMarketActivity {
 		}
 		
 		return prodRepresentationList;
-	}
+	}*/
 	
-	public boolean createProduct(ProductRequest prodRequest){
+	//Not required anymore
+	/*public boolean createProduct(ProductRequest prodRequest){
 		boolean isProductCreated = false;
 		
 		Product prodNew  = new ProdImpl();
@@ -88,16 +89,18 @@ public class LakeshoreMarketActivity {
 		}
 		
 		return isProductCreated;
-	}
+	}*/
 	
-	public boolean cancelOrder(String orderIDString) {
+	//Not required anymore
+	/*public boolean cancelOrder(String orderIDString) {
 		boolean isOrderRefunded = false;
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderRefunded = orderDomain.cancelAndRefundOrder(Integer.parseInt(orderIDString));
 		return isOrderRefunded;
-	}
+	}*/
 	
-	public OrderRepresentation getOrderDetails(String orderIDString) {
+	//Not required anymore
+	/*public OrderRepresentation getOrderDetails(String orderIDString) {
 		OrderRepresentation orderRepresentation = new OrderRepresentation();
 		OrderDomain orderDomain = new OrderDomain();
 		OrderImpl custOrder = new OrderImpl();
@@ -140,9 +143,9 @@ public class LakeshoreMarketActivity {
 		}
 		
 		return orderRepresentation;
-	}
+	}*/
 	
-	public boolean shipOrder(String orderIDString, String trackingNumb) {
+	/*public boolean shipOrder(String orderIDString, String trackingNumb) {
 		boolean isOrderStatusUpdated = false;
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderStatusUpdated = orderDomain.shipOrder(Integer.parseInt(orderIDString),trackingNumb);
@@ -154,9 +157,9 @@ public class LakeshoreMarketActivity {
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderStatusUpdated = orderDomain.fulfillOrder(Integer.parseInt(orderIDString));
 		return isOrderStatusUpdated;
-	}
+	}*/
 	
-	public boolean createCustomer(CustomerRequest custRequest) {
+	/*public boolean createCustomer(CustomerRequest custRequest) {
 		boolean isCustomerCreated = false;
 		int numbOfRowsUpdated = 0;
 		
@@ -196,9 +199,9 @@ public class LakeshoreMarketActivity {
 			isCustomerCreated = true;
 		}
 		return isCustomerCreated;
-	}
+	}*/
 	
-	public boolean createPartner(PartnerRequest partnerRequest) {
+	/*public boolean createPartner(PartnerRequest partnerRequest) {
 		boolean isPartnerCreated = false;
 		int rowsUpdated = 0;
 		PartnerDomain partnerDomain = new PartnerDomain();
@@ -227,9 +230,9 @@ public class LakeshoreMarketActivity {
 		}
 		
 		return isPartnerCreated;
-	}
+	}*/
 	
-	public boolean createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
+	/*public boolean createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
 		boolean isPartnerReviewCreated = false;
 		ReviewDomain reviewDomain = new ReviewDomain();
 		Review review = new ReviewImpl();
@@ -257,15 +260,15 @@ public class LakeshoreMarketActivity {
 		isProductReviewCreated = reviewDomain.addProductReview(review);
 		
 		return isProductReviewCreated;
-	}
+	}*/
 	
-	public int buyProduct(OrderRequest orderRequest) {
+	/*public int buyProduct(OrderRequest orderRequest) {
 		PaymentDomain paymentDomain = new PaymentDomain();
 		int orderID = 0;
 		orderID = paymentDomain.buyProduct(orderRequest.getProductID(), orderRequest.getQuantity(), orderRequest.getCustomerID());
 		
 		return orderID;
-	}
+	}*/
 	
 	
 	
@@ -278,7 +281,7 @@ public class LakeshoreMarketActivity {
 	
 	//----GET PRODUCT----
 	//public ProductRepresentation getProduct(String ProductIDString){
-	public ProductRepresentation getProduct(String prodName){
+	/*public ProductRepresentation getProduct(String prodName){
 		ProductDomain prodDomain = new ProductDomain();
 		Product product = new ProdImpl();
 		//product = prodDomain.getProductByID(Integer.parseInt(ProductIDString));
@@ -293,29 +296,29 @@ public class LakeshoreMarketActivity {
 		productRepresentation.setTaxonomyID(product.getTaxonomyID());
 		
 		return productRepresentation;
-	}
+	}*/
 	
 	
 	//----CHECK PRODUCT AVAILABILITY----
-	public boolean checkProductAvailability(String productIDString) { 
+	/*public boolean checkProductAvailability(String productIDString) { 
 		boolean IsProductAvailable = false;
 		ProductDomain prodDomain = new ProductDomain();
 		IsProductAvailable = prodDomain.checkProductAvailabilityByID(Integer.parseInt(productIDString));
 		
 		return IsProductAvailable;
-	}
+	}*/
 	
 	//----DELETE CUSTOMER----
-	public boolean deleteCustomer(String customerIDString) {
+	/*public boolean deleteCustomer(String customerIDString) {
 		boolean isCustomerDeleted = false;
 		CustomerDomain custDomain = new CustomerDomain();
 		isCustomerDeleted = custDomain.deleteCustomer(Integer.parseInt(customerIDString));
 		
 		return isCustomerDeleted;
-	}
+	}*/
 	
 	//----GET CUSTOMER DETAILS----	
-	public CustomerRepresentation getCustomerDetails(String customerIDString){
+	/*public CustomerRepresentation getCustomerDetails(String customerIDString){
 		CustomerDomain custDomain = new CustomerDomain();
 		Customer customer = new CustomerImpl();
 		customer = custDomain.getCustomerByID(Integer.parseInt(customerIDString));
@@ -331,19 +334,19 @@ public class LakeshoreMarketActivity {
 		customerRepresentation.setTitle(customer.getTitle());
 		
 		return customerRepresentation;
-	}
+	}*/
 	
 	//----DELETE PARTNER----
-	public boolean deletePartner(String partnerIDString) {
+	/*public boolean deletePartner(String partnerIDString) {
 		boolean isPartnerDeleted = false;
 		PartnerDomain partnerDomain = new PartnerDomain();
 		isPartnerDeleted = partnerDomain.deletePartner(Integer.parseInt(partnerIDString));
 		
 		return isPartnerDeleted;
-	}
+	}*/
 	
 	//----GET PARTNER DETAILS----	
-	public PartnerRepresentation getPartnerDetails(String partnerIDString){
+	/*public PartnerRepresentation getPartnerDetails(String partnerIDString){
 		PartnerDomain partnerDomain = new PartnerDomain();
 		Partner partner = new PartnerImpl();
 		partner = partnerDomain.getPartnerByID(Integer.parseInt(partnerIDString)); 
@@ -357,7 +360,7 @@ public class LakeshoreMarketActivity {
 		partnerRepresentation.setPhone(partner.getPhone());
 		
 		return partnerRepresentation;
-	}
+	}*/
 	
 	/*Start Elliott Activity
 	 * 
@@ -369,7 +372,7 @@ public class LakeshoreMarketActivity {
 	 * @param type 		partner or product (lowercase)
 	 * @param reviewID 	the partner ID or product ID, depending on type
 	 * @return ReviewRepresentation
-	 */
+	 *//*
 	public ReviewRepresentation getReview( String type, int reviewID ) {
 		ReviewDomain revDomain = new ReviewDomain();
 		Review review;
@@ -406,13 +409,13 @@ public class LakeshoreMarketActivity {
 		}
 		
 		return revRep;
-	}
+	}*/
 	
 	/**
 	 * gets a report representation for a specific partner
 	 * @param partnerID
 	 * @return
-	 */
+	 *//*
 	public ArrayList<PartnerReportRepresentation> getPartnerReport( int partnerID ) {
 		PartnerDomain partnerDomain = new PartnerDomain();
 		ArrayList<PartnerReport> report = partnerDomain.generatePartnerReport( partnerID );
@@ -434,7 +437,7 @@ public class LakeshoreMarketActivity {
 		
 
 		return reports;
-	}
+	}*/
 	
 	
 }

@@ -13,7 +13,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.online.lakeshoremarket.activity.CustomerActivity;
 import com.online.lakeshoremarket.activity.LakeshoreMarketActivity;
+import com.online.lakeshoremarket.activity.OrderActivity;
+import com.online.lakeshoremarket.activity.PartnerActivity;
+import com.online.lakeshoremarket.activity.ProductActivity;
+import com.online.lakeshoremarket.activity.ReviewActivity;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
@@ -38,8 +43,8 @@ public class LakeshoreMarketResource {
 	@Path("/products/{searchString}")
 	public ArrayList<ProductRepresentation> getProducts(@PathParam("searchString") String prodName) {
 		System.out.println("GET METHOD Request for all products.............");
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		ArrayList<ProductRepresentation> prodRepresentationSet = marketActivity.getProducts(prodName); 
+		ProductActivity productActivity = new ProductActivity();
+		ArrayList<ProductRepresentation> prodRepresentationSet = productActivity.getProducts(prodName);
 		return prodRepresentationSet;
 	}
 	
@@ -51,8 +56,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for Creating a new product .............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isProductCreated = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isProductCreated = marketActivity.createProduct(prodRequest);
+		ProductActivity productActivity = new ProductActivity();
+		isProductCreated = productActivity.createProduct(prodRequest);
 		if(isProductCreated){
 			genericResponse.setMessage("Product is created");
 			genericResponse.setSuccess(true);
@@ -71,8 +76,8 @@ public class LakeshoreMarketResource {
 		System.out.println("DELETE METHOD Request for Canceling an order .............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderRefunded = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isOrderRefunded = marketActivity.cancelOrder(orderIDString);
+		OrderActivity orderActivity = new OrderActivity();
+		isOrderRefunded = orderActivity.cancelOrder(orderIDString);
 		if(isOrderRefunded){
 			genericResponse.setMessage("Order is cancelled");
 			genericResponse.setSuccess(true);
@@ -89,9 +94,9 @@ public class LakeshoreMarketResource {
 	@Path("/order/{orderIDString}")
 	public OrderRepresentation getOrderDetails(@PathParam("orderIDString") String orderIDString){
 		System.out.println("GET METHOD Request for Order details.............");
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		OrderActivity orderActivity = new OrderActivity();
 		OrderRepresentation orderRepresentation = new OrderRepresentation();
-		orderRepresentation = marketActivity.getOrderDetails(orderIDString);
+		orderRepresentation = orderActivity.getOrderDetails(orderIDString);
 		return orderRepresentation;
 	}
 	
@@ -102,8 +107,8 @@ public class LakeshoreMarketResource {
 		System.out.println("POST METHOD to ship order.............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderShipped = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isOrderShipped = marketActivity.shipOrder(orderIDString,trackingNumb);
+		OrderActivity orderActivity = new OrderActivity();
+		isOrderShipped = orderActivity.shipOrder(orderIDString,trackingNumb);
 		if(isOrderShipped){
 			genericResponse.setMessage("Order is shipped");
 			genericResponse.setSuccess(true);
@@ -121,8 +126,8 @@ public class LakeshoreMarketResource {
 		System.out.println("POST METHOD to ship order.............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isOrderFulfilled = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isOrderFulfilled = marketActivity.fulfillOrder(orderIDString);
+		OrderActivity orderActivity = new OrderActivity();
+		isOrderFulfilled = orderActivity.fulfillOrder(orderIDString);
 		if(isOrderFulfilled){
 			genericResponse.setMessage("Order is fulfilled");
 			genericResponse.setSuccess(true);
@@ -141,8 +146,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for Creating a new customer .............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isCustomerCreated = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isCustomerCreated = marketActivity.createCustomer(custRequest);
+		CustomerActivity customerActivity = new CustomerActivity();
+		isCustomerCreated = customerActivity.createCustomer(custRequest);
 		if(isCustomerCreated){
 			genericResponse.setMessage("Customer is created");
 			genericResponse.setSuccess(true);
@@ -162,8 +167,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for Creating a new partner .............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isPartnerCreated = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isPartnerCreated = marketActivity.createPartner(partnerRequest);
+		PartnerActivity partnerActivity = new PartnerActivity();
+		isPartnerCreated = partnerActivity.createPartner(partnerRequest);
 		if(isPartnerCreated){
 			genericResponse.setMessage("Partner is created");
 			genericResponse.setSuccess(true);
@@ -183,8 +188,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for Creating a new partner review.............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isPartnerReviewCreated = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isPartnerReviewCreated = marketActivity.createPartnerReview(partnerReviewRequest);
+		ReviewActivity reviewActivity = new ReviewActivity();
+		isPartnerReviewCreated = reviewActivity.createPartnerReview(partnerReviewRequest);
 		if(isPartnerReviewCreated){
 			genericResponse.setMessage("Partner review is created");
 			genericResponse.setSuccess(true);
@@ -204,8 +209,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for Creating a new product review.............");
 		GenericResponse genericResponse = new GenericResponse();
 		boolean isProductReviewCreated = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isProductReviewCreated = marketActivity.createProductReview(productReviewRequest);
+		ReviewActivity reviewActivity = new ReviewActivity();
+		isProductReviewCreated = reviewActivity.createProductReview(productReviewRequest);
 		if(isProductReviewCreated){
 			genericResponse.setMessage("Product review is created");
 			genericResponse.setSuccess(true);
@@ -225,8 +230,8 @@ public class LakeshoreMarketResource {
 		System.out.println("PUT METHOD Request for placing an order.............");
 		GenericResponse genericResponse = new GenericResponse();
 		int orderID = 0;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		orderID = marketActivity.buyProduct(orderRequest);
+		OrderActivity orderActivity = new OrderActivity();
+		orderID = orderActivity.buyProduct(orderRequest);
 		if(0 != orderID){
 			genericResponse.setMessage("Order is created");
 			genericResponse.setSuccess(true);
@@ -256,8 +261,8 @@ public class LakeshoreMarketResource {
 	@Path("/product/{productName}")
 	public ProductRepresentation getProduct(@PathParam("productName") String prodName) {
 		System.out.println("GET METHOD Request for individual product ............" + prodName);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getProduct(prodName); 
+		ProductActivity productActivity = new ProductActivity();
+		return productActivity.getProduct(prodName); 
 	}
 	
 	//----CHECK PRODUCT AVAILABILITY----
@@ -267,8 +272,8 @@ public class LakeshoreMarketResource {
 	public GenericResponse checkProductAvailability(@PathParam("productID") String prodName){ //should the path param always be ID? //is this okay? (not Product ID because there is no ID search)
 		System.out.println("GET METHOD Request for Availability of Product ............" + prodName);
 		boolean isProductAvailable = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isProductAvailable = marketActivity.checkProductAvailability(prodName);
+		ProductActivity productActivity = new ProductActivity();
+		isProductAvailable = productActivity.checkProductAvailability(prodName);
 		GenericResponse genericResponse = new GenericResponse();
 		if(isProductAvailable){
 			genericResponse.setMessage("Product is available");
@@ -286,9 +291,9 @@ public class LakeshoreMarketResource {
 	@Path("/customer/{customerID}")
 	public CustomerRepresentation getCustomerDetails(@PathParam("customerID") String customerIDString){ 
 		System.out.println("GET METHOD Request for Customer details............." + customerIDString);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		CustomerActivity customerActivity = new CustomerActivity();
 		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
-		customerRepresentation = marketActivity.getCustomerDetails(customerIDString);
+		customerRepresentation = customerActivity.getCustomerDetails(customerIDString);
 		return customerRepresentation;
 	}
 	
@@ -300,8 +305,8 @@ public class LakeshoreMarketResource {
 	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString){
 		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
 		boolean isCustomerDeleted = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isCustomerDeleted = marketActivity.deleteCustomer(customerIDString);
+		CustomerActivity customerActivity = new CustomerActivity();
+		isCustomerDeleted = customerActivity.deleteCustomer(customerIDString);
 		GenericResponse genericResponse = new GenericResponse();
 		if(isCustomerDeleted){
 			genericResponse.setMessage("Customer has been deleted");
@@ -320,9 +325,9 @@ public class LakeshoreMarketResource {
 	@Path("/partner/{partnerID}")
 	public PartnerRepresentation getPartnerDetails(@PathParam("partnerID") String partnerIDString){
 		System.out.println("GET METHOD Request for Partner details............." + partnerIDString);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
+		PartnerActivity partnerActivity = new PartnerActivity();
 		PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
-		partnerRepresentation = marketActivity.getPartnerDetails(partnerIDString);
+		partnerRepresentation = partnerActivity.getPartnerDetails(partnerIDString);
 		return partnerRepresentation;
 	}
 	
@@ -334,8 +339,8 @@ public class LakeshoreMarketResource {
 	public GenericResponse deletePartner(@PathParam("partnerIDString") String partnerIDString){
 		System.out.println("DELETE METHOD Request for Deleting a Partner ............." + partnerIDString);
 		boolean isPartnerDeleted = false;
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		isPartnerDeleted = marketActivity.deletePartner(partnerIDString);
+		PartnerActivity partnerActivity = new PartnerActivity();
+		isPartnerDeleted = partnerActivity.deletePartner(partnerIDString);
 		GenericResponse genericResponse = new GenericResponse();
 		if(isPartnerDeleted){
 			genericResponse.setMessage("Partner has been deleted");
@@ -361,8 +366,8 @@ public class LakeshoreMarketResource {
 	@Path("/review/partner/{partnerID}")
 	public ReviewRepresentation getPartnerReview(@PathParam("partnerID") int partnerID) {
 		System.out.println("GET METHOD Request for partner review............" + partnerID);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getReview( "partner", partnerID );
+		ReviewActivity reviewActivity = new ReviewActivity();
+		return reviewActivity.getReview( "partner", partnerID );
 	}
 	
 	@GET
@@ -370,8 +375,8 @@ public class LakeshoreMarketResource {
 	@Path("/review/product/{productID}")
 	public ReviewRepresentation getProductReview(@PathParam("productID") int productID) {
 		System.out.println("GET METHOD Request for product review............" + productID);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getReview( "product", productID );
+		ReviewActivity reviewActivity = new ReviewActivity();
+		return reviewActivity.getReview( "product", productID );
 	}
 	
 	@GET
@@ -379,8 +384,8 @@ public class LakeshoreMarketResource {
 	@Path("/report/{partnerID}")
 	public ArrayList<PartnerReportRepresentation> getPartnerReport(@PathParam("partnerID") int partnerID) {
 		System.out.println("GET METHOD Request for partner report............" + partnerID);
-		LakeshoreMarketActivity marketActivity = new LakeshoreMarketActivity();
-		return marketActivity.getPartnerReport( partnerID );
+		PartnerActivity partnerActivity = new PartnerActivity();
+		return partnerActivity.getPartnerReport( partnerID );
 	}
 	
 }
