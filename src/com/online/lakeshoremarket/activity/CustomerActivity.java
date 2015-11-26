@@ -74,6 +74,7 @@ public class CustomerActivity {
 		customerRepresentation.setPhone(customer.getPhone());
 		customerRepresentation.setShippingAddress(customer.getShippingAddress());
 		customerRepresentation.setTitle(customer.getTitle());
+		customerRepresentation.setCustomerId(customer.getCustomerId());
 		
 		return customerRepresentation;
 	}

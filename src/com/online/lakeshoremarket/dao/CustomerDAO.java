@@ -299,6 +299,7 @@ public class CustomerDAO {
 				cust.setShippingAddress(resultSet.getInt("ship_address_id"));
 				cust.setEmail(resultSet.getString("email"));
 				cust.setPhone(resultSet.getString("tel"));
+				cust.setCustomerId(resultSet.getInt("customer_id"));
 			}
 			
 		}catch(SQLException sqe){
