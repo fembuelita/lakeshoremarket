@@ -24,12 +24,24 @@ public class LSMAuthenticator {
 				pstmt.setString(1, email);
 				pstmt.setString(2, password);
 				ResultSet resultSet = pstmt.executeQuery();
-				System.out.println("test");
 				while(resultSet.next()){
 					int custId = resultSet.getInt("customer_id");
-					System.out.println("cust id = " + custId);
 					if(custId >= 0){
 						isUserAuthentic = true;
+					}
+				}
+				if(!isUserAuthentic){
+					searchQuery = "SELECT * FROM `partner` WHERE email = ? AND password = ? AND active = 1 LIMIT 1";
+					pstmt.close();
+					pstmt = conn.prepareStatement(searchQuery);
+					pstmt.setString(1, email);
+					pstmt.setString(2, password);
+					resultSet = pstmt.executeQuery();
+					while(resultSet.next()){
+						int partnerID = resultSet.getInt("partner_id");
+						if(partnerID >= 0){
+							isUserAuthentic = true;
+						}
 					}
 				}
 				
