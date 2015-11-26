@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.ws.rs.core.Response;
+
+import com.online.lakeshoremarket.exception.GenericLSMException;
+
 
 public class LSMAuthenticator {
 
@@ -41,6 +45,8 @@ public class LSMAuthenticator {
 					System.err.println(e.getMessage());
 				}
 			}
+		}else{
+			throw new GenericLSMException("Failed to establish connection with the DB", Response.Status.INTERNAL_SERVER_ERROR);
 		}
 		
 		return isUserAuthentic;

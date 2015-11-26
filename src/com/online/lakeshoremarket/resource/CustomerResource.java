@@ -25,21 +25,27 @@ public class CustomerResource {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/customer")
-	public GenericResponse createCustomer(CustomerRequest custRequest) {
+	public GenericResponse createCustomer(CustomerRequest custRequest, @HeaderParam("email") String email, @HeaderParam("password") String password) {
 		System.out.println("PUT METHOD Request for Creating a new customer .............");
-		GenericResponse genericResponse = new GenericResponse();
-		boolean isCustomerCreated = false;
-		CustomerActivity customerActivity = new CustomerActivity();
-		isCustomerCreated = customerActivity.createCustomer(custRequest);
-		if(isCustomerCreated){
-			genericResponse.setMessage("Customer is created");
-			genericResponse.setSuccess(true);
+		boolean isUserAuthentic = false;
+		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
+		if(isUserAuthentic){
+			GenericResponse genericResponse = new GenericResponse();
+			boolean isCustomerCreated = false;
+			CustomerActivity customerActivity = new CustomerActivity();
+			isCustomerCreated = customerActivity.createCustomer(custRequest);
+			if(isCustomerCreated){
+				genericResponse.setMessage("Customer is created");
+				genericResponse.setSuccess(true);
+			}else{
+				genericResponse.setMessage("Customer is not created");
+				genericResponse.setSuccess(false);
+			}
+			
+			return genericResponse;
 		}else{
-			genericResponse.setMessage("Customer is not created");
-			genericResponse.setSuccess(false);
+			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
-		
-		return genericResponse;	
 	}
 	
 	@GET
@@ -66,20 +72,25 @@ public class CustomerResource {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerID}")
-	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString){
+	public GenericResponse deleteCustomer(@PathParam("customerID") String customerIDString, @HeaderParam("email") String email, @HeaderParam("password") String password){
 		System.out.println("DELETE METHOD Request for Deleting a Customer ............." + customerIDString);
-		boolean isCustomerDeleted = false;
-		CustomerActivity customerActivity = new CustomerActivity();
-		isCustomerDeleted = customerActivity.deleteCustomer(customerIDString);
-		GenericResponse genericResponse = new GenericResponse();
-		if(isCustomerDeleted){
-			genericResponse.setMessage("Customer has been deleted");
-			genericResponse.setSuccess(true);
+		boolean isUserAuthentic = false;
+		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
+		if(isUserAuthentic){
+			boolean isCustomerDeleted = false;
+			CustomerActivity customerActivity = new CustomerActivity();
+			isCustomerDeleted = customerActivity.deleteCustomer(customerIDString);
+			GenericResponse genericResponse = new GenericResponse();
+			if(isCustomerDeleted){
+				genericResponse.setMessage("Customer has been deleted");
+				genericResponse.setSuccess(true);
+			}else{
+				genericResponse.setMessage("Customer was not deleted");
+				genericResponse.setSuccess(false);
+			}		
+			return genericResponse;
 		}else{
-			genericResponse.setMessage("Customer was not deleted");
-			genericResponse.setSuccess(false);
-		}		
-		return genericResponse;
-		
+			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
+		}
 	}
 }
