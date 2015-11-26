@@ -36,7 +36,7 @@ public class DatabaseConnection {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://159.203.100.120:3306/" + Constant.REMOTE_DBNAME + "?" + "user="+Constant.REMOTE_USERNAME+"&password="+Constant.REMOTE_PASSWORD);
+			conn = DriverManager.getConnection("jdbc:mysql://162.243.94.35:3306/" + Constant.REMOTE_DBNAME + "?" + "user="+Constant.REMOTE_USERNAME+"&password="+Constant.REMOTE_PASSWORD);
 		} catch (SQLException e) {
 			System.out.println("SQLException");
 		} catch (ClassNotFoundException e) {
@@ -44,30 +44,5 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 		return conn;		
-		/*
-		try {
-//			#Jaws DB 
-//		    URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
-	
-//		    String username = jdbUri.getUserInfo().split(":")[0];
-//		    String password = jdbUri.getUserInfo().split(":")[1];
-//		    String port = String.valueOf(jdbUri.getPort());
-//		    String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
-			
-//			#Digital Ocean MySQL 
-			Class.forName("com.mysql.jdbc.Driver");
-		    return 
-		} 
-		// #jaws db only
-		//catch( URISyntaxException e ) {
-			//System.err.println( "Failed to connect to SQL remotely" + e.getMessage() );
-			//e.printStackTrace();
-		//} 
-		catch( SQLException e ) {
-			System.err.println( "SQL Exception: " + e.getMessage() );
-			e.printStackTrace();
-		}
-		
-		return null;*/
 	}	
 }
