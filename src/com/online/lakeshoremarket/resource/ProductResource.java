@@ -26,7 +26,7 @@ public class ProductResource {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products/{searchString}")
 	public ArrayList<ProductRepresentation> getProducts(@PathParam("searchString") String prodName, @HeaderParam("email") String email, @HeaderParam("password") String password) {
-		System.out.println("GET METHOD Request for all products.............");
+		System.out.println("GET METHOD Request for all products (Search products).............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
@@ -88,17 +88,10 @@ public class ProductResource {
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
-			boolean isProductAvailable = false;
-			ProductActivity productActivity = new ProductActivity();
-			isProductAvailable = productActivity.checkProductAvailability(prodID);
 			GenericResponse genericResponse = new GenericResponse();
-			if(isProductAvailable){
-				genericResponse.setMessage("Product is available");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Product is not available");
-				genericResponse.setSuccess(false);
-			}		
+			ProductActivity productActivity = new ProductActivity();
+			genericResponse = productActivity.checkProductAvailability(prodID);
+			
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

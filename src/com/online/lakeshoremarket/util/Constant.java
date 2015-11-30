@@ -73,6 +73,12 @@ public final class Constant {
 	 */
 	public static String REMOTE_PASSWORD = "tiger";
 	
+	public static String LSM_COMMON_URL = "http://lsm1.herokuapp.com/services/lsm";
+	
+	public static String LSM_COMMON_URL_HEROKU = "http://lsm1.herokuapp.com/services/lsm";
+	
+	public static String LSM_COMMON_URL_LOCAL = "http://localhost:8081/lsm/services/lsm";
+	
 	
 	
 }

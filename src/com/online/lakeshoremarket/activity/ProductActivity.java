@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.model.product.ProdImpl;
 import com.online.lakeshoremarket.model.product.Product;
+import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
+import com.online.lakeshoremarket.util.Constant;
 
 public class ProductActivity {
 
@@ -75,11 +78,21 @@ public class ProductActivity {
 		return productRepresentation;
 	}
 	
-	public boolean checkProductAvailability(String productIDString) { 
-		boolean IsProductAvailable = false;
+	public GenericResponse checkProductAvailability(String productIDString) { 
+		boolean isProductAvailable = false;
 		ProductDomain prodDomain = new ProductDomain();
-		IsProductAvailable = prodDomain.checkProductAvailabilityByID(Integer.parseInt(productIDString));
+		isProductAvailable = prodDomain.checkProductAvailabilityByID(Integer.parseInt(productIDString));
 		
-		return IsProductAvailable;
+		GenericResponse genericResponse = new GenericResponse();
+		if(isProductAvailable){
+			genericResponse.setMessage("Product is available");
+			genericResponse.setSuccess(true);
+			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order");
+			genericResponse.setLinks(buy);
+		}else{
+			genericResponse.setMessage("Product is not available");
+			genericResponse.setSuccess(false);
+		}		
+		return genericResponse;
 	}
 }

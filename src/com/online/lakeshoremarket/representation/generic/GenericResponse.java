@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "GenericResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class GenericResponse {
+public class GenericResponse extends AbstractRepresentation{
 	
 	private boolean isSuccess;
 	private String message;
