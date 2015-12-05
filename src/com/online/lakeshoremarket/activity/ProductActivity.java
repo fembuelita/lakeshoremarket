@@ -35,9 +35,8 @@ public class ProductActivity {
 		return prodRepresentationList;
 	}
 	
-	public boolean createProduct(ProductRequest prodRequest){
-		boolean isProductCreated = false;
-		
+	public GenericResponse createProduct(ProductRequest prodRequest){
+		GenericResponse genericResponse = new GenericResponse();
 		Product prodNew  = new ProdImpl();
 		prodNew.setPartnerID(prodRequest.getPartnerID());
 		prodNew.setTaxonomyID(prodRequest.getTaxonomyID());
@@ -50,26 +49,30 @@ public class ProductActivity {
 		
 		ProductDomain prodDomain = new ProductDomain();
 		
-		int rowsUpdated = prodDomain.addProduct(prodNew);
+		int productID = 0;
+		productID = prodDomain.addProduct(prodNew);
 		
-		if(0 == rowsUpdated){
-			isProductCreated = false;
+		if(0 != productID){
+			genericResponse.setMessage("Product is created");
+			genericResponse.setSuccess(true);
+			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product-by-id/" + productID, "application/xml");
+			genericResponse.setLinks(get);
 		}else{
-			isProductCreated = true;
+			genericResponse.setMessage("Product is not created");
+			genericResponse.setSuccess(false);
 		}
 		
-		return isProductCreated;
+		return genericResponse;
 	}
 	
 	public ProductRepresentation getProduct(String prodName){
 		ProductDomain prodDomain = new ProductDomain();
 		Product product = new ProdImpl();
-		//product = prodDomain.getProductByID(Integer.parseInt(ProductIDString));
 		product = prodDomain.searchProductByName(prodName);
 		ProductRepresentation productRepresentation = new ProductRepresentation();
 		productRepresentation.setProductName(product.getProductName());
 		productRepresentation.setDescription(product.getDescription());
-		productRepresentation.setActive(product.isActive()); //is this correct?
+		productRepresentation.setActive(product.isActive());
 		productRepresentation.setPartnerID(product.getPartnerID());
 		productRepresentation.setPrice(product.getPrice());
 		productRepresentation.setProductID(product.getProductID());
@@ -94,5 +97,25 @@ public class ProductActivity {
 			genericResponse.setSuccess(false);
 		}		
 		return genericResponse;
+	}
+	
+	public ProductRepresentation getProductByID(String ProductIDString){
+		ProductDomain prodDomain = new ProductDomain();
+		Product product = new ProdImpl();
+		product = prodDomain.getProductByID(Integer.parseInt(ProductIDString));
+		if(product == null){
+			return null;
+		}else{
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation.setProductName(product.getProductName());
+			productRepresentation.setDescription(product.getDescription());
+			productRepresentation.setActive(product.isActive());
+			productRepresentation.setPartnerID(product.getPartnerID());
+			productRepresentation.setPrice(product.getPrice());
+			productRepresentation.setProductID(product.getProductID());
+			productRepresentation.setTaxonomyID(product.getTaxonomyID());
+			
+			return productRepresentation;
+		}
 	}
 }

@@ -48,16 +48,8 @@ public class ProductResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
-			boolean isProductCreated = false;
 			ProductActivity productActivity = new ProductActivity();
-			isProductCreated = productActivity.createProduct(prodRequest);
-			if(isProductCreated){
-				genericResponse.setMessage("Product is created");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Product is not created");
-				genericResponse.setSuccess(false);
-			}
+			genericResponse = productActivity.createProduct(prodRequest);
 			
 			return genericResponse;
 		}else{
@@ -93,6 +85,27 @@ public class ProductResource {
 			genericResponse = productActivity.checkProductAvailability(prodID);
 			
 			return genericResponse;
+		}else{
+			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
+		}
+	}
+	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/product-by-id/{productID}")
+	public ProductRepresentation getProductByID(@PathParam("productID") String ProductIDString, @HeaderParam("email") String email, @HeaderParam("password") String password) {
+		System.out.println("GET METHOD Request for individual product using product id............");
+		boolean isUserAuthentic = false;
+		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
+		if(isUserAuthentic){
+			ProductActivity productActivity = new ProductActivity();
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation =  productActivity.getProductByID(ProductIDString);
+			if(productRepresentation == null){
+				throw new GenericLSMException("Product is not found", Response.Status.NOT_FOUND);
+			}else{
+				return productRepresentation;
+			}
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}

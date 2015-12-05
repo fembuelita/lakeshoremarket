@@ -57,7 +57,7 @@ public class ProductDAO {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.err.println("ProductDAO.getProductByName (2): Threw an Exception while searching for a product in table.");
+				System.err.println("ProductDAO.getProductByName: Threw an Exception while searching for a product in table.");
 				System.err.println(e.getMessage());
 				throw new GenericLSMException("Threw an Exception while searching for a product in table.		"
 						, Response.Status.INTERNAL_SERVER_ERROR );
@@ -114,11 +114,12 @@ public class ProductDAO {
 	/**
 	 * Creates a product
 	 * @param prod 		the product object to create in the DB
-	 * @return			number of rows updated
+	 * @return			product id
 	 */
 	public int createProduct(Product prod){
 		conn = DatabaseConnection.getSqlConnection();
 		int rowsUpdated = 0;
+		int productID = 0;
 		try{
 			String insertStmt = "INSERT INTO product "
 											+ "(partner_id,taxonomy_id,cost,price,name,description,qoh,active) "
@@ -151,7 +152,33 @@ public class ProductDAO {
 			}
 		}
 		
-		return rowsUpdated;
+		if(rowsUpdated != 0){
+			conn = DatabaseConnection.getSqlConnection();
+			try{
+				String searchQuery = "Select max(product_id) from product; ";
+				pstmt = conn.prepareStatement(searchQuery);
+				ResultSet resultSet = pstmt.executeQuery();
+				while(resultSet.next()){
+					productID = resultSet.getInt("max(product_id)");
+				}
+			}catch(SQLException sqe){
+				System.err.println("ProductDAO.createProduct: Threw an SQLException while getting product id after inserting a new product in table.");
+	  	      	System.err.println(sqe.getMessage());
+	  	      	throw new GenericLSMException("Threw an SQLException while getting product id after inserting a new product in table.		" 
+							+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+			} finally {
+				try {
+					pstmt.close();
+					conn.close();
+				} catch (Exception e) {
+					System.err.println("ProductDAO.createProduct: Threw an Exception while getting product id after inserting a new product in table.    ");
+					throw new GenericLSMException("Threw an Exception while getting product id after inserting a new product in table.		"
+							+e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+				}
+			}
+		}
+		
+		return productID;
 	}
 
 	/**
@@ -322,5 +349,49 @@ public class ProductDAO {
 			}
 		}
 		return (rowsUpdated == 1) ? true : false;
+	}
+	
+	/**
+	 * Gets a product by ID
+	 * @param prodID 		the product ID
+	 * @return 				the product object or null if not found
+	 */
+	public Product getProductByID(int prodID){
+		Product prod = null;
+		conn = DatabaseConnection.getSqlConnection();
+		try{
+			String searchQuery = "SELECT * FROM product WHERE product_id = ? AND active = 1 ";
+			pstmt = conn.prepareStatement(searchQuery);
+			pstmt.setInt(1, prodID);
+			ResultSet resultSet = pstmt.executeQuery();
+			prod = new ProdImpl();
+			while(resultSet.next()){
+				prod.setProductID(resultSet.getInt("product_id"));
+				prod.setPartnerID(resultSet.getInt("partner_id"));
+				prod.setTaxonomyID(resultSet.getInt("taxonomy_id"));
+				prod.setCost(resultSet.getFloat("cost"));
+				prod.setPrice(resultSet.getFloat("price"));
+				prod.setProductName(resultSet.getString("name"));
+				prod.setDescription(resultSet.getString("description"));
+				prod.setQoh(resultSet.getInt("qoh"));
+				prod.setActive(resultSet.getByte("active") == 1 ? true : false);
+			}
+		}catch(SQLException sqe){
+			System.err.println("ProductDAO.getProductByID: Threw an SQLException while searching for a product in table using product ID.");
+  	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while searching for a product in table using product ID.		" 
+						+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("ProductDAO.getProductByID: Threw an Exception while searching for a product in table using ID.");
+				System.err.println(e.getMessage());
+				throw new GenericLSMException("Threw an Exception while searching for a product in table using ID.		"
+						, Response.Status.INTERNAL_SERVER_ERROR );
+			}
+		}
+		return prod;
 	}
 }

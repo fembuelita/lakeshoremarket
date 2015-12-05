@@ -40,13 +40,13 @@ public class ProductDomain {
 	/**
 	 * adds a new product
 	 * @param prod 	the product to add
-	 * @return		number of rows inserted
+	 * @return		productID
 	 */
 	public int addProduct(Product prod){
-		int rowsUpdated = 0;
+		int productID = 0;
 		pDao = new ProductDAO();
-		rowsUpdated = pDao.createProduct(prod);
-		return rowsUpdated;
+		productID = pDao.createProduct(prod);
+		return productID;
 	}
 
 	/**
@@ -105,6 +105,22 @@ public class ProductDomain {
 		pDao = new ProductDAO();
 		isQuantityIncreased = pDao.increaseQoh(prodID, quantity);
 		return isQuantityIncreased;
+	}
+	
+	/**
+	 * returns a product using product ID
+	 * @param prodID		the product ID of the product to search for
+	 * @return				product or null if no result
+	 */
+	public Product getProductByID(int prodID){
+		pDao = new ProductDAO();
+		Product prod = null;
+		prod = pDao.getProductByID(prodID);
+		if(prod.getProductID() == 0){
+			return null;
+		}else{
+			return prod;
+		}
 	}
 
 	
