@@ -1,30 +1,44 @@
 package com.online.lakeshoremarket.representation.generic;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Link")
 public class Link {
-	private String action;
-	private String url;
+	
+	private String rel;
+	private String href;
+	private String type;
 	
 	public Link() {}
 	
-	public Link(String action, String url) {
-		this.action = action;
-		this.url = url;
+	public Link(String rel, String href, String type) {
+		this.rel = rel;
+		this.href = href;
+		this.type = type;
 	}
-	
+	@XmlAttribute
 	public String getAction() {
-		return action;
+		return rel;
 	}
 	public void setAction(String action) {
-		this.action = action;
+		this.rel = action;
 	}
+	@XmlAttribute
 	public String getUrl() {
-		return url;
+		return href;
 	}
 	public void setUrl(String url) {
-		this.url = url;
+		this.href = url;
+	}
+	@XmlAttribute
+	public String getMediaType() {
+		return type;
+	}
+
+	public void setMediaType(String mediaType) {
+		this.type = mediaType;
 	}
 	
 }
