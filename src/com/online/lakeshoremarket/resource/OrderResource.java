@@ -99,6 +99,9 @@ public class OrderResource {
 			if(isOrderShipped){
 				genericResponse.setMessage("Order is shipped");
 				genericResponse.setSuccess(true);
+				Link fulfill = new Link("Fulfill order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderIDString , "application/xml");
+				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+				genericResponse.setLinks(fulfill,get);
 			}else{
 				genericResponse.setMessage("Order is not shipped");
 				genericResponse.setSuccess(false);
