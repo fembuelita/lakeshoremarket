@@ -18,7 +18,6 @@ import com.online.lakeshoremarket.util.Constant;
 public class PartnerActivity {
 
 	public GenericResponse createPartner(PartnerRequest partnerRequest) {
-		boolean isPartnerCreated = false;
 		int partnerID = 0;
 		GenericResponse genericResponse = new GenericResponse();
 		PartnerDomain partnerDomain = new PartnerDomain();

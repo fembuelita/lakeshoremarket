@@ -24,10 +24,11 @@ public class ReviewDAO {
 	/**
 	 * adds a review of a partner by a customer
 	 * @param review		the review to insert
-	 * @return				true if inserted OK, false else
+	 * @return				partner review id of newly added review
 	 */
-	public boolean addPartnerReview(Review review) {
+	public int addPartnerReview(Review review) {
 		conn = DatabaseConnection.getSqlConnection();
+		int partnerReviewID = 0;
 		int rowsUpdated = 0;
 		try{
 			String insertStmt = "INSERT INTO partner_review "
@@ -41,6 +42,14 @@ public class ReviewDAO {
 			pstmt.setString(4, review.getReview());
 			pstmt.setTimestamp(5, review.getReviewDate());
 			rowsUpdated = pstmt.executeUpdate();
+			if(0 != rowsUpdated){
+				String selectQuery = "SELECT MAX(partner_review_id) FROM partner_review";
+				pstmt = conn.prepareStatement(selectQuery);
+				ResultSet resultSet = pstmt.executeQuery();
+				if(resultSet.next()){
+					partnerReviewID = resultSet.getInt(1);
+				}
+			}
 		}catch(SQLException sqe){
 			System.err.println("ReviewDAO.addPartnerReview: Threw an SQLException inserting a new partner review in table.");
   	      	System.err.println(sqe.getMessage());
@@ -56,16 +65,17 @@ public class ReviewDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-		return (rowsUpdated == 0) ? false : true ;
+		return partnerReviewID;
 	}
 
 	/**
 	 * inserts a review of a product by a customer
 	 * @param review 		the review to insert
-	 * @return				true for inserted OK, false else
+	 * @return				product review id of newly added review
 	 */
-	public boolean addProductReview(Review review) {
+	public int addProductReview(Review review) {
 		conn = DatabaseConnection.getSqlConnection();
+		int productReviewID = 0;
 		int rowsUpdated = 0;
 		try{
 			String insertStmt = "INSERT INTO product_review "
@@ -79,6 +89,14 @@ public class ReviewDAO {
 			pstmt.setString(4, review.getReview());
 			pstmt.setTimestamp(5, review.getReviewDate());
 			rowsUpdated = pstmt.executeUpdate();
+			if(0 != rowsUpdated){
+				String selectQuery = "SELECT MAX(product_review_id) FROM product_review";
+				pstmt = conn.prepareStatement(selectQuery);
+				ResultSet resultSet = pstmt.executeQuery();
+				if(resultSet.next()){
+					productReviewID = resultSet.getInt(1);
+				}
+			}
 		}catch(SQLException sqe){
 			System.err.println("ReviewDAO.addProductReview: Threw an SQLException inserting a new product review in table.");
   	      	System.err.println(sqe.getMessage());
@@ -94,7 +112,7 @@ public class ReviewDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-		return (rowsUpdated == 0) ? false : true ;
+		return productReviewID;
 	}
 	
 	/**

@@ -16,10 +16,10 @@ public class TestPartnerReview {
 				+ " and I must say all of them are upto the highest standards. The best part is that no other seller can beat their "
 				+ " discounted pricing. AWESOME!!!!!!!");
 		
-		boolean isPartnerReviewAdded = false;
+		int partnerReviewID = 0;
 		ReviewDomain reviewDomain = new ReviewDomain();
-		isPartnerReviewAdded = reviewDomain.addPartnerReview(review);
-		if(isPartnerReviewAdded){
+		partnerReviewID = reviewDomain.addPartnerReview(review);
+		if(0 != partnerReviewID){
 			System.out.println("Partner Review is successfully added into the system.");
 		}else{
 			System.out.println("Partner Review is NOT added into the system");

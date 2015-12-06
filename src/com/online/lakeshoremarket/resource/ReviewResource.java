@@ -31,17 +31,8 @@ public class ReviewResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
-			boolean isPartnerReviewCreated = false;
 			ReviewActivity reviewActivity = new ReviewActivity();
-			isPartnerReviewCreated = reviewActivity.createPartnerReview(partnerReviewRequest);
-			if(isPartnerReviewCreated){
-				genericResponse.setMessage("Partner review is created");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Partner review is not created");
-				genericResponse.setSuccess(false);
-			}
-			
+			genericResponse = reviewActivity.createPartnerReview(partnerReviewRequest);
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
@@ -58,17 +49,8 @@ public class ReviewResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
-			boolean isProductReviewCreated = false;
 			ReviewActivity reviewActivity = new ReviewActivity();
-			isProductReviewCreated = reviewActivity.createProductReview(productReviewRequest);
-			if(isProductReviewCreated){
-				genericResponse.setMessage("Product review is created");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Product review is not created");
-				genericResponse.setSuccess(false);
-			}
-			
+			genericResponse = reviewActivity.createProductReview(productReviewRequest);
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

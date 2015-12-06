@@ -10,14 +10,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.online.lakeshoremarket.domain.ReviewDomain;
 import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
+import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.review.PartnerReviewRequest;
 import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
+import com.online.lakeshoremarket.util.Constant;
 
 public class ReviewActivity {
 
-	public boolean createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
-		boolean isPartnerReviewCreated = false;
+	public GenericResponse createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
+		int partnerReviewID = 0;
+		GenericResponse genericResponse = new GenericResponse();
 		ReviewDomain reviewDomain = new ReviewDomain();
 		Review review = new ReviewImpl();
 		
@@ -26,13 +30,23 @@ public class ReviewActivity {
 		review.setRating(partnerReviewRequest.getRating());
 		review.setReview(partnerReviewRequest.getReview());
 		
-		isPartnerReviewCreated = reviewDomain.addPartnerReview(review);
+		partnerReviewID = reviewDomain.addPartnerReview(review);
+		if(0 != partnerReviewID){
+			genericResponse.setMessage("Partner review is created");
+			genericResponse.setSuccess(true);
+			Link get = new Link("Get Partner Review Detail", Constant.LSM_COMMON_URL + "/review/partner/" + partnerReviewID, "application/xml");
+			genericResponse.setLinks(get);
+		}else{
+			genericResponse.setMessage("Partner review is not created");
+			genericResponse.setSuccess(false);
+		}
 		
-		return isPartnerReviewCreated;
+		return genericResponse;
 	}
 	
-	public boolean createProductReview(ProductReviewRequest productReviewRequest) {
-		boolean isProductReviewCreated = false;
+	public GenericResponse createProductReview(ProductReviewRequest productReviewRequest) {
+		int productReviewID = 0;
+		GenericResponse genericResponse = new GenericResponse();
 		ReviewDomain reviewDomain = new ReviewDomain();
 		Review review = new ReviewImpl();
 		
@@ -41,9 +55,18 @@ public class ReviewActivity {
 		review.setRating(productReviewRequest.getRating());
 		review.setReview(productReviewRequest.getReview());
 		
-		isProductReviewCreated = reviewDomain.addProductReview(review);
+		productReviewID = reviewDomain.addProductReview(review);
+		if(0 != productReviewID){
+			genericResponse.setMessage("Product review is created");
+			genericResponse.setSuccess(true);
+			Link get = new Link("Get Product Review Detail", Constant.LSM_COMMON_URL + "/review/product/" + productReviewID, "application/xml");
+			genericResponse.setLinks(get);
+		}else{
+			genericResponse.setMessage("Product review is not created");
+			genericResponse.setSuccess(false);
+		}
 		
-		return isProductReviewCreated;
+		return genericResponse;
 	}
 	
 	/**
@@ -61,11 +84,16 @@ public class ReviewActivity {
 			review = revDomain.getPartnerReviewByID( reviewID );
 			revRep.setPartnerReviewID( reviewID );
 			revRep.setPartnerID( review.getPartnerID() );
+			Link get = new Link("Get Partner Detail", Constant.LSM_COMMON_URL + "/partner/" + review.getPartnerID(), "application/xml");
+			revRep.setLinks(get);
 			
 		} else if( type == "product" ) {
 			review = revDomain.getProductReviewByID( reviewID );
 			revRep.setProductReviewID( reviewID );
 			revRep.setProductID( review.getProductID() );
+			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product/" + review.getProductID(), "application/xml");
+			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			revRep.setLinks(get,buy);
 		} else {
 			throw new IllegalArgumentException( "Invalid review type (supplied " + type + ")" );
 		}

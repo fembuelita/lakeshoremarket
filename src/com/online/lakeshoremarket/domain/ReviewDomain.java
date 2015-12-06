@@ -17,31 +17,31 @@ public class ReviewDomain {
 	/**
 	 * Adds a review by a customer of a partner
 	 * @param review 	the review to add
-	 * @return			true if success, false else
+	 * @return			partner review id of newly added review
 	 */
-	public boolean addPartnerReview(Review review) {
-		boolean isPartnerReviewAdded = false;
+	public int addPartnerReview(Review review) {
+		int partnerReviewID = 0;
 		reviewDAO = new ReviewDAO();
 		Date systemDate = new Date();
 		Timestamp date = new Timestamp(systemDate.getTime());
 		review.setReviewDate(date);
-		isPartnerReviewAdded = reviewDAO.addPartnerReview(review);
-		return isPartnerReviewAdded;
+		partnerReviewID = reviewDAO.addPartnerReview(review);
+		return partnerReviewID;
 	}
 
 	/**
 	 * adds a review by a customer of a product
 	 * @param review	the review to add
-	 * @return			true if success, false else
+	 * @return			product review id of newly added review
 	 */
-	public boolean addProductReview(Review review) {
-		boolean isProductReviewAdded = false;
+	public int addProductReview(Review review) {
+		int productReviewID = 0;
 		reviewDAO = new ReviewDAO();
 		Date systemDate = new Date();
 		Timestamp date = new Timestamp(systemDate.getTime());
 		review.setReviewDate(date);
-		isProductReviewAdded = reviewDAO.addProductReview(review);
-		return isProductReviewAdded;
+		productReviewID = reviewDAO.addProductReview(review);
+		return productReviewID;
 	}
 	
 	/**

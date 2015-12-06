@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
+
 /**
  * represents a review
  *
@@ -14,7 +16,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "Review")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class ReviewRepresentation {
+public class ReviewRepresentation extends AbstractRepresentation{
 
 
 	private int customerID;

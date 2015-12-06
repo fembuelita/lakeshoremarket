@@ -14,10 +14,10 @@ public class TestProductReview {
 		review.setProductID(1);
 		review.setReview("This is the Best Book of my LIFE!! Seriously.. ");
 		
-		boolean isProductReviewAdded = false;
+		int productReviewID = 0;
 		ReviewDomain reviewDomain = new ReviewDomain();
-		isProductReviewAdded = reviewDomain.addProductReview(review);
-		if(isProductReviewAdded){
+		productReviewID = reviewDomain.addProductReview(review);
+		if(0 != productReviewID){
 			System.out.println("Product Review is successfully added into the system.");
 		}else{
 			System.out.println("Product Review is NOT added into the system");
