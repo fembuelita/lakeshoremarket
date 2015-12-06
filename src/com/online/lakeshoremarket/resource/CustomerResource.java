@@ -31,17 +31,8 @@ public class CustomerResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
-			boolean isCustomerCreated = false;
 			CustomerActivity customerActivity = new CustomerActivity();
-			isCustomerCreated = customerActivity.createCustomer(custRequest);
-			if(isCustomerCreated){
-				genericResponse.setMessage("Customer is created");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Customer is not created");
-				genericResponse.setSuccess(false);
-			}
-			
+			genericResponse = customerActivity.createCustomer(custRequest);
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

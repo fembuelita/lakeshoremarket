@@ -7,13 +7,15 @@ import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
+import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
+import com.online.lakeshoremarket.util.Constant;
 
 public class CustomerActivity {
 
-	public boolean createCustomer(CustomerRequest custRequest) {
-		boolean isCustomerCreated = false;
-		int numbOfRowsUpdated = 0;
-		
+	public GenericResponse createCustomer(CustomerRequest custRequest) {
+		int customerID = 0;
+		GenericResponse genericResponse = new GenericResponse();
 		Address billingAddress = new AddressImpl();
 		Address shippingAddress = new AddressImpl();
 		Customer cust = new CustomerImpl();
@@ -44,12 +46,18 @@ public class CustomerActivity {
 		
 		
 		CustomerDomain custDomain = new CustomerDomain();
-		numbOfRowsUpdated = custDomain.addCustomer(cust, billingAddress, shippingAddress);
-		
-		if(1 == numbOfRowsUpdated){
-			isCustomerCreated = true;
+		customerID = custDomain.addCustomer(cust, billingAddress, shippingAddress);
+		if(0 != customerID){
+			genericResponse.setMessage("Customer is created");
+			genericResponse.setSuccess(true);
+			Link get = new Link("Get Customer Detail", Constant.LSM_COMMON_URL + "/customer/" + customerID, "application/xml");
+			genericResponse.setLinks(get);
+		}else{
+			genericResponse.setMessage("Customer is not created");
+			genericResponse.setSuccess(false);
 		}
-		return isCustomerCreated;
+		
+		return genericResponse;
 	}
 	
 	public boolean deleteCustomer(String customerIDString) {

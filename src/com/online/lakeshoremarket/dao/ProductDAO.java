@@ -159,7 +159,7 @@ public class ProductDAO {
 				pstmt = conn.prepareStatement(searchQuery);
 				ResultSet resultSet = pstmt.executeQuery();
 				while(resultSet.next()){
-					productID = resultSet.getInt("max(product_id)");
+					productID = resultSet.getInt(1);
 				}
 			}catch(SQLException sqe){
 				System.err.println("ProductDAO.createProduct: Threw an SQLException while getting product id after inserting a new product in table.");

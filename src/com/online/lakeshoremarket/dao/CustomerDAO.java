@@ -24,11 +24,11 @@ public class CustomerDAO {
 	
 	/**
 	 * @param cust 	the customer object to add
-	 * @return 		number of rows updated
+	 * @return 		customer id of the newly added customer
 	 */
 	public int addCustomer(Customer cust){
 		conn = DatabaseConnection.getSqlConnection();
-		
+		int customerID = 0;
 		int rowsUpdated = 0;
 		try{
 			String insertStmt = "INSERT INTO customer "
@@ -46,6 +46,14 @@ public class CustomerDAO {
 			pstmt.setString(8, cust.getPassword());
 			pstmt.setString(9, cust.getPaypalCustID());
 			rowsUpdated = pstmt.executeUpdate();
+			if(0 != rowsUpdated){
+				String selectQuery = "SELECT MAX(customer_id) FROM customer";
+				pstmt = conn.prepareStatement(selectQuery);
+				ResultSet resultSet = pstmt.executeQuery();
+				if(resultSet.next()){
+					customerID = resultSet.getInt(1);
+				}
+			}
 		}catch(SQLException sqe){
 			System.err.println("CustomerDAO.addCustomer: Threw an SQLException inserting a new customer in table.");
   	      	System.err.println(sqe.getMessage());
@@ -61,7 +69,7 @@ public class CustomerDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-		return rowsUpdated;
+		return customerID;
 	}
 
 	/**

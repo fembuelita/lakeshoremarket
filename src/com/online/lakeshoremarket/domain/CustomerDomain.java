@@ -18,20 +18,20 @@ public class CustomerDomain {
 	 * @param cust				the customer to insert
 	 * @param billingAddress	the address for the customer's billing
 	 * @param shippingAddress 	the address for the customer's shipping
-	 * @return					number of rows updated
+	 * @return					cutomer id of newly added customer
 	 */
 	public int addCustomer(Customer cust, Address billingAddress, Address shippingAddress) {
-		int rowsUpdated = 0;
+		int customerID = 0;
 		int billingAddressID = addAddress(billingAddress);
 		int shippingAddressID = addAddress(shippingAddress);
 		if(0 != billingAddressID && 0 != shippingAddressID){
 			cust.setBillingAddress(billingAddressID);
 			cust.setShippingAddress(shippingAddressID);
 			custDao = new CustomerDAO();
-			rowsUpdated = custDao.addCustomer(cust);
+			customerID = custDao.addCustomer(cust);
 			
 		}
-		return rowsUpdated;
+		return customerID;
 	}
 	
 	/**
