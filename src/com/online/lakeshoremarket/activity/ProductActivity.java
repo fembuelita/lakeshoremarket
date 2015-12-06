@@ -28,11 +28,15 @@ public class ProductActivity {
 			productRepresentation.setProductID(prodList.get(i).getProductID());
 			productRepresentation.setProductName(prodList.get(i).getProductName());
 			productRepresentation.setTaxonomyID(prodList.get(i).getTaxonomyID());
-			
+			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product-by-id/" + prodList.get(i).getProductID(), "application/xml");
+			productRepresentation.setLinks(get);
 			prodRepresentationList.add(productRepresentation);
 		}
-		
-		return prodRepresentationList;
+		if(prodRepresentationList != null && prodRepresentationList.size() != 0){
+			return prodRepresentationList;
+		}else{
+			return null;
+		}
 	}
 	
 	public GenericResponse createProduct(ProductRequest prodRequest){
