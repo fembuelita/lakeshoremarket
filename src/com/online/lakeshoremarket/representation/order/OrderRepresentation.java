@@ -6,10 +6,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
+
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRepresentation {
+public class OrderRepresentation extends AbstractRepresentation{
 
 	private XMLGregorianCalendar datePurchased;
 	private XMLGregorianCalendar dateRefunded;

@@ -60,6 +60,24 @@ public class OrderResource {
 			OrderActivity orderActivity = new OrderActivity();
 			OrderRepresentation orderRepresentation = new OrderRepresentation();
 			orderRepresentation = orderActivity.getOrderDetails(orderIDString);
+			
+			//If order is in progress, we can further proceed for shipping the order 
+			if(orderRepresentation.getOrderStatusCode() == 1){
+				Link ship = new Link("Ship order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
+				orderRepresentation.setLinks(ship);
+			}
+			
+			//If order is shipped, we can further proceed for fulfilling the order
+			if(orderRepresentation.getOrderStatusCode() == 2){
+				Link fulfill = new Link("Fulfill order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderRepresentation.getOrderID() , "application/xml");
+				orderRepresentation.setLinks(fulfill);
+			}
+			
+			//If order is not yet fulfilled, we can further proceed for canceling the order
+			if(orderRepresentation.getOrderStatusCode() == 1 || orderRepresentation.getOrderStatusCode() == 2){
+				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderRepresentation.getOrderID(), "application/xml");
+				orderRepresentation.setLinks(cancel);
+			}
 			return orderRepresentation;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
