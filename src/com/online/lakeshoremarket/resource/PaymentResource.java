@@ -11,7 +11,9 @@ import javax.ws.rs.core.Response;
 import com.online.lakeshoremarket.activity.PaymentActivity;
 import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.order.OrderRequest;
+import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
@@ -34,6 +36,11 @@ public class PaymentResource {
 				genericResponse.setMessage("Order is created");
 				genericResponse.setSuccess(true);
 				genericResponse.setGenericReturnValue(orderID+"");
+				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderID, "application/xml");
+				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderID, "application/xml");
+				Link ship = new Link("Ship order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
+				genericResponse.setLinks(get,cancel,ship);
+				
 			}else{
 				genericResponse.setMessage("Order is not created");
 				genericResponse.setSuccess(false);
