@@ -13,7 +13,9 @@ import javax.ws.rs.core.Response;
 import com.online.lakeshoremarket.activity.OrderActivity;
 import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
@@ -34,6 +36,8 @@ public class OrderResource {
 			if(isOrderRefunded){
 				genericResponse.setMessage("Order is cancelled");
 				genericResponse.setSuccess(true);
+				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+				genericResponse.setLinks(get);
 			}else{
 				genericResponse.setMessage("Order is not cancelled");
 				genericResponse.setSuccess(false);
