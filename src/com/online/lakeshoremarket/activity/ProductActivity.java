@@ -69,16 +69,25 @@ public class ProductActivity {
 		ProductDomain prodDomain = new ProductDomain();
 		Product product = new ProdImpl();
 		product = prodDomain.searchProductByName(prodName);
-		ProductRepresentation productRepresentation = new ProductRepresentation();
-		productRepresentation.setProductName(product.getProductName());
-		productRepresentation.setDescription(product.getDescription());
-		productRepresentation.setActive(product.isActive());
-		productRepresentation.setPartnerID(product.getPartnerID());
-		productRepresentation.setPrice(product.getPrice());
-		productRepresentation.setProductID(product.getProductID());
-		productRepresentation.setTaxonomyID(product.getTaxonomyID());
+		if(product != null && product.getProductID() != 0){
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation.setProductName(product.getProductName());
+			productRepresentation.setDescription(product.getDescription());
+			productRepresentation.setActive(product.isActive());
+			productRepresentation.setPartnerID(product.getPartnerID());
+			productRepresentation.setPrice(product.getPrice());
+			productRepresentation.setProductID(product.getProductID());
+			productRepresentation.setTaxonomyID(product.getTaxonomyID());
+			Link check = new Link("Check Product Availability", Constant.LSM_COMMON_URL + "/available/"+product.getProductID(), "application/xml");
+			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
+			Link getReview = new Link("Get Product Review", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
+			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			productRepresentation.setLinks(check,review,getReview,buy);
+			return productRepresentation;
+		}else{
+			return null;
+		}
 		
-		return productRepresentation;
 	}
 	
 	public GenericResponse checkProductAvailability(String productIDString) { 
@@ -114,6 +123,11 @@ public class ProductActivity {
 			productRepresentation.setPrice(product.getPrice());
 			productRepresentation.setProductID(product.getProductID());
 			productRepresentation.setTaxonomyID(product.getTaxonomyID());
+			Link check = new Link("Check Product Availability", Constant.LSM_COMMON_URL + "/available/"+product.getProductID(), "application/xml");
+			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
+			Link getReview = new Link("Get Product Review", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
+			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			productRepresentation.setLinks(check,review,getReview,buy);
 			
 			return productRepresentation;
 		}

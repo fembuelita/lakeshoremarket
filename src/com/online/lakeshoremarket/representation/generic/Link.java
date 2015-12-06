@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.representation.generic;
 
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 

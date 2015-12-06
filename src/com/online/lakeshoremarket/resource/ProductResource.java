@@ -66,7 +66,14 @@ public class ProductResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			ProductActivity productActivity = new ProductActivity();
-			return productActivity.getProduct(prodName);
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+			productRepresentation = productActivity.getProduct(prodName);
+			if(productRepresentation != null && productRepresentation.getProductID() != 0){
+				return productRepresentation;
+			}else{
+				throw new GenericLSMException("Product is not found", Response.Status.NOT_FOUND);
+			}
+			
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
