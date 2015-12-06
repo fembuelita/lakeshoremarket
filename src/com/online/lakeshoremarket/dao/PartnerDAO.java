@@ -28,10 +28,11 @@ public class PartnerDAO {
 	/**
 	 * adds a partner to the database
 	 * @param partner 		the partner object to add into the db
-	 * @return 				number of rows inserted
+	 * @return 				partner id of newly added partner
 	 */
 	public int addPartner(Partner partner) {
 		conn = DatabaseConnection.getSqlConnection();
+		int partnerID = 0;
 		int rowsUpdated = 0;
 		try{
 			String insertStmt = "INSERT INTO partner "
@@ -47,6 +48,14 @@ public class PartnerDAO {
 			pstmt.setString(6, partner.getPassword());
 			pstmt.setBoolean(7, partner.isActive());
 			rowsUpdated = pstmt.executeUpdate();
+			if(0 != rowsUpdated){
+				String selectQuery = "SELECT MAX(partner_id) FROM partner";
+				pstmt = conn.prepareStatement(selectQuery);
+				ResultSet resultSet = pstmt.executeQuery();
+				if(resultSet.next()){
+					partnerID = resultSet.getInt(1);
+				}
+			}
 		}catch(SQLException sqe){
 			System.err.println("PartnerDAO.addPartner: Threw an SQLException inserting a new partner in table.");
   	      	System.err.println(sqe.getMessage());
@@ -62,7 +71,7 @@ public class PartnerDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-		return rowsUpdated;
+		return partnerID;
 	}
 
 	/**

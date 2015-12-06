@@ -34,17 +34,8 @@ public class PartnerResource {
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
-			boolean isPartnerCreated = false;
 			PartnerActivity partnerActivity = new PartnerActivity();
-			isPartnerCreated = partnerActivity.createPartner(partnerRequest);
-			if(isPartnerCreated){
-				genericResponse.setMessage("Partner is created");
-				genericResponse.setSuccess(true);
-			}else{
-				genericResponse.setMessage("Partner is not created");
-				genericResponse.setSuccess(false);
-			}
-			
+			genericResponse = partnerActivity.createPartner(partnerRequest);
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

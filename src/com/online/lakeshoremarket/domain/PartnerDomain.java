@@ -19,18 +19,18 @@ public class PartnerDomain {
 	 * adds a partner to the db
 	 * @param partner 	the partner to add
 	 * @param address	the address to set for the partner
-	 * @return			number of rows updated
+	 * @return			partner id of newly added partner
 	 */
 	public int addPartner(Partner partner, Address address) {
-		int rowsUpdated = 0;
+		int partnerID = 0;
 		int addressID = addAddress(address);
 		if(0 != addressID){
 			partner.setAddressID(addressID);
 			partnerDao = new PartnerDAO();
-			rowsUpdated = partnerDao.addPartner(partner);
+			partnerID = partnerDao.addPartner(partner);
 			
 		}
-		return rowsUpdated;
+		return partnerID;
 	}
 	
 	/**

@@ -8,15 +8,19 @@ import com.online.lakeshoremarket.model.customer.AddressImpl;
 import com.online.lakeshoremarket.model.partner.Partner;
 import com.online.lakeshoremarket.model.partner.PartnerImpl;
 import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
+import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.partner.PartnerRepresentation;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
+import com.online.lakeshoremarket.util.Constant;
 
 public class PartnerActivity {
 
-	public boolean createPartner(PartnerRequest partnerRequest) {
+	public GenericResponse createPartner(PartnerRequest partnerRequest) {
 		boolean isPartnerCreated = false;
-		int rowsUpdated = 0;
+		int partnerID = 0;
+		GenericResponse genericResponse = new GenericResponse();
 		PartnerDomain partnerDomain = new PartnerDomain();
 		Partner partner = new PartnerImpl();
 		Address partnerAddress = new AddressImpl();
@@ -36,13 +40,18 @@ public class PartnerActivity {
 		partner.setPassword(partnerRequest.getPassword());
 		partner.setPhone(partnerRequest.getPhone());
 		
-		rowsUpdated = partnerDomain.addPartner(partner, partnerAddress);
-		
-		if(rowsUpdated != 0){
-			isPartnerCreated = true;
+		partnerID = partnerDomain.addPartner(partner, partnerAddress);
+		if(partnerID != 0){
+			genericResponse.setMessage("Partner is created");
+			genericResponse.setSuccess(true);
+			Link get = new Link("Get Partner Detail", Constant.LSM_COMMON_URL + "/partner/" + partnerID, "application/xml");
+			genericResponse.setLinks(get);
+		}else{
+			genericResponse.setMessage("Partner is not created");
+			genericResponse.setSuccess(false);
 		}
 		
-		return isPartnerCreated;
+		return genericResponse;
 	}
 	
 	public boolean deletePartner(String partnerIDString) {
