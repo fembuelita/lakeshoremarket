@@ -103,7 +103,7 @@ public class ProductActivity {
 		if(isProductAvailable){
 			genericResponse.setMessage("Product is available");
 			genericResponse.setSuccess(true);
-			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
 			genericResponse.setLinks(buy);
 		}else{
 			genericResponse.setMessage("Product is not available");
