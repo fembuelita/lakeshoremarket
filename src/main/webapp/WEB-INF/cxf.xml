@@ -59,6 +59,7 @@
   	<bean id="partnerResource" class="com.online.lakeshoremarket.resource.PartnerResource" />
   	<bean id="paymentResource" class="com.online.lakeshoremarket.resource.PaymentResource" />
   	<bean id="reviewResource" class="com.online.lakeshoremarket.resource.ReviewResource" />
+  	<bean id="utilResource" class="com.online.lakeshoremarket.resource.UtilResource" />
   	
   
 </beans>
