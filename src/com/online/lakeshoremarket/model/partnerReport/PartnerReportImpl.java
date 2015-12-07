@@ -1,5 +1,10 @@
 package com.online.lakeshoremarket.model.partnerReport;
 
+/**
+ * instantiates the partner report interface to represent the partner report model
+ *
+ */
+
 public class PartnerReportImpl implements PartnerReport{
 
 	private int productId;
