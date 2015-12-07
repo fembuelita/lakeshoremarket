@@ -54,7 +54,7 @@ public class PartnerActivity {
 		if(partnerID != 0){
 			genericResponse.setMessage("Partner is created");
 			genericResponse.setSuccess(true);
-			Link get = new Link("Get Partner Detail", Constant.LSM_COMMON_URL + "/partner/" + partnerID, "application/xml");
+			Link get = new Link("Get Partner Details", Constant.LSM_COMMON_URL + "/partner/" + partnerID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Partner is not created");

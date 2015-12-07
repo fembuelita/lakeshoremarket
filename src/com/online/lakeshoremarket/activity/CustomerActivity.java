@@ -61,7 +61,7 @@ public class CustomerActivity {
 		if(0 != customerID){
 			genericResponse.setMessage("Customer is created");
 			genericResponse.setSuccess(true);
-			Link get = new Link("Get Customer Detail", Constant.LSM_COMMON_URL + "/customer/" + customerID, "application/xml");
+			Link get = new Link("Get Customer Details", Constant.LSM_COMMON_URL + "/customer/" + customerID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Customer is not created");
