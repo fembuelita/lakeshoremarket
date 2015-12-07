@@ -111,6 +111,10 @@ public class CustomerActivity {
 		customerRepresentation.setTitle(customer.getTitle());
 		customerRepresentation.setCustomerId(customer.getCustomerId());
 		
+		//future: if admin or this customer only, add this
+		Link deleteCustomer = new Link("Delete Customer", Constant.LSM_COMMON_URL + "/customer/" + customerID, "application/xml");
+		customerRepresentation.setLinks(deleteCustomer);
+		
 		return customerRepresentation;
 	}
 }
