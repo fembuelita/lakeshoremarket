@@ -28,7 +28,7 @@ public class ProductActivity {
 			productRepresentation.setProductID(prodList.get(i).getProductID());
 			productRepresentation.setProductName(prodList.get(i).getProductName());
 			productRepresentation.setTaxonomyID(prodList.get(i).getTaxonomyID());
-			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product-by-id/" + prodList.get(i).getProductID(), "application/xml");
+			Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product-by-id/" + prodList.get(i).getProductID(), "application/xml");
 			productRepresentation.setLinks(get);
 			prodRepresentationList.add(productRepresentation);
 		}
@@ -59,7 +59,7 @@ public class ProductActivity {
 		if(0 != productID){
 			genericResponse.setMessage("Product is created");
 			genericResponse.setSuccess(true);
-			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product-by-id/" + productID, "application/xml");
+			Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product-by-id/" + productID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Product is not created");
@@ -130,7 +130,7 @@ public class ProductActivity {
 			Link check = new Link("Check Product Availability", Constant.LSM_COMMON_URL + "/available/"+product.getProductID(), "application/xml");
 			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
 			Link getReview = new Link("Get Product Reviews", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
-			Link buy = new Link("Buy Products", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
 			productRepresentation.setLinks(check,review,getReview,buy);
 			
 			return productRepresentation;

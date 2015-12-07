@@ -34,7 +34,7 @@ public class ReviewActivity {
 		if(0 != partnerReviewID){
 			genericResponse.setMessage("Partner review is created");
 			genericResponse.setSuccess(true);
-			Link get = new Link("Get Partner Review Detail", Constant.LSM_COMMON_URL + "/review/partner/" + partnerReviewID, "application/xml");
+			Link get = new Link("Get Partner Review Details", Constant.LSM_COMMON_URL + "/review/partner/" + partnerReviewID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Partner review is not created");
@@ -59,7 +59,7 @@ public class ReviewActivity {
 		if(0 != productReviewID){
 			genericResponse.setMessage("Product review is created");
 			genericResponse.setSuccess(true);
-			Link get = new Link("Get Product Review Detail", Constant.LSM_COMMON_URL + "/review/product/" + productReviewID, "application/xml");
+			Link get = new Link("Get Product Review Details", Constant.LSM_COMMON_URL + "/review/product/" + productReviewID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Product review is not created");
@@ -84,15 +84,15 @@ public class ReviewActivity {
 			review = revDomain.getPartnerReviewByID( reviewID );
 			revRep.setPartnerReviewID( reviewID );
 			revRep.setPartnerID( review.getPartnerID() );
-			Link get = new Link("Get Partner Detail", Constant.LSM_COMMON_URL + "/partner/" + review.getPartnerID(), "application/xml");
+			Link get = new Link("Get Partner Details", Constant.LSM_COMMON_URL + "/partner/" + review.getPartnerID(), "application/xml");
 			revRep.setLinks(get);
 			
 		} else if( type == "product" ) {
 			review = revDomain.getProductReviewByID( reviewID );
 			revRep.setProductReviewID( reviewID );
 			revRep.setProductID( review.getProductID() );
-			Link get = new Link("Get Product Detail", Constant.LSM_COMMON_URL + "/product/" + review.getProductID(), "application/xml");
-			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product/" + review.getProductID(), "application/xml");
+			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
 			revRep.setLinks(get,buy);
 		} else {
 			throw new IllegalArgumentException( "Invalid review type (supplied " + type + ")" );
