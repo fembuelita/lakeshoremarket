@@ -84,8 +84,8 @@ public class ProductActivity {
 			productRepresentation.setTaxonomyID(product.getTaxonomyID());
 			Link check = new Link("Check Product Availability", Constant.LSM_COMMON_URL + "/available/"+product.getProductID(), "application/xml");
 			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
-			Link getReview = new Link("Get Product Review", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
-			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			Link getReview = new Link("Get Product Reviews", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
+			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
 			productRepresentation.setLinks(check,review,getReview,buy);
 			return productRepresentation;
 		}else{
@@ -129,8 +129,8 @@ public class ProductActivity {
 			productRepresentation.setTaxonomyID(product.getTaxonomyID());
 			Link check = new Link("Check Product Availability", Constant.LSM_COMMON_URL + "/available/"+product.getProductID(), "application/xml");
 			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
-			Link getReview = new Link("Get Product Review", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
-			Link buy = new Link("buy", Constant.LSM_COMMON_URL + "/order", "application/xml");
+			Link getReview = new Link("Get Product Reviews", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
+			Link buy = new Link("Buy Products", Constant.LSM_COMMON_URL + "/order", "application/xml");
 			productRepresentation.setLinks(check,review,getReview,buy);
 			
 			return productRepresentation;
