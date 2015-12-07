@@ -76,6 +76,7 @@ public class ProductActivity {
 		if(0 != productID){
 			genericResponse.setMessage("Product is created");
 			genericResponse.setSuccess(true);
+			genericResponse.setGenericReturnValue( Integer.toString( productID ) );
 			Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product-by-id/" + productID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{
