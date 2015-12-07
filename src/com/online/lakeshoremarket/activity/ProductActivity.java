@@ -11,8 +11,19 @@ import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.util.Constant;
 
+/**
+ * Interacts with product model and domain business logic to create and modify product representations
+ *
+ */
+
 public class ProductActivity {
 
+	/**
+	 * Builds a new product list representation given a product name search
+	 * @param prodName
+	 * @return prodRepresentationList if search yields results (otherwise null)
+	 */
+	
 	public ArrayList<ProductRepresentation> getProducts(String prodName){
 		
 		ArrayList<Product> prodList = new ArrayList<Product>();
@@ -38,6 +49,12 @@ public class ProductActivity {
 			return null;
 		}
 	}
+	
+	/**
+	 * Creates a new product representation
+	 * @param prodRequest
+	 * @return genericResponse	success message if product is created, failure message if not
+	 */
 	
 	public GenericResponse createProduct(ProductRequest prodRequest){
 		GenericResponse genericResponse = new GenericResponse();
@@ -69,6 +86,12 @@ public class ProductActivity {
 		return genericResponse;
 	}
 	
+	/**
+	 * Builds a product representation given the product name
+	 * @param prodName
+	 * @return productRepresentation if successful, otherwise null
+	 */
+	
 	public ProductRepresentation getProduct(String prodName){
 		ProductDomain prodDomain = new ProductDomain();
 		Product product = new ProdImpl();
@@ -94,6 +117,13 @@ public class ProductActivity {
 		
 	}
 	
+	
+	/**
+	 * Checks the availability of a specific product representation
+	 * @param productIDString
+	 * @return genericResponse	affirmative message if product is available, negative message if not
+	 */
+	
 	public GenericResponse checkProductAvailability(String productIDString) { 
 		boolean isProductAvailable = false;
 		ProductDomain prodDomain = new ProductDomain();
@@ -111,6 +141,13 @@ public class ProductActivity {
 		}		
 		return genericResponse;
 	}
+	
+	/**
+	 * Builds a product representation given the product ID
+	 * @param ProductIDString
+	 * @return productRepresentation if successful, otherwise null
+	 */
+	
 	
 	public ProductRepresentation getProductByID(String ProductIDString){
 		ProductDomain prodDomain = new ProductDomain();

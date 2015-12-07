@@ -11,14 +11,31 @@ import com.online.lakeshoremarket.domain.OrderDomain;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 
-public class OrderActivity {
+/**
+ * Interacts with order model and domain business logic to create and modify order representations
+ *
+ */
 
+public class OrderActivity {
+	
+	/**
+	 * Cancels an order representation and triggers a refund
+	 * @param orderIDString
+	 * @return isOrderRefunded	true if cancelAndRefundOrder is successful
+	 */
+	
 	public boolean cancelOrder(String orderIDString) {
 		boolean isOrderRefunded = false;
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderRefunded = orderDomain.cancelAndRefundOrder(Integer.parseInt(orderIDString));
 		return isOrderRefunded;
 	}
+	
+	/**
+	 * Gets details of an order representation, including customer, product, payment, and status information
+	 * @param orderIDString
+	 * @return orderRepresentation
+	 */
 	
 	public OrderRepresentation getOrderDetails(String orderIDString) {
 		OrderRepresentation orderRepresentation = new OrderRepresentation();
@@ -65,12 +82,25 @@ public class OrderActivity {
 		return orderRepresentation;
 	}
 	
+	/**
+	 * Updates an order representation to reflect shipping status
+	 * @param orderIDString
+	 * @param trackingNumb
+	 * @return isOrderStatusUpdated	true if order is shipped
+	 */
+	
 	public boolean shipOrder(String orderIDString, String trackingNumb) {
 		boolean isOrderStatusUpdated = false;
 		OrderDomain orderDomain = new OrderDomain();
 		isOrderStatusUpdated = orderDomain.shipOrder(Integer.parseInt(orderIDString),trackingNumb);
 		return isOrderStatusUpdated;
 	}
+	
+	/**
+	 * Updates an order representation to reflect fulfillment status
+	 * @param orderIDString
+	 * @return isOrderStatusUpdated	true if order is fulfilled
+	 */
 	
 	public boolean fulfillOrder(String orderIDString) {
 		boolean isOrderStatusUpdated = false;

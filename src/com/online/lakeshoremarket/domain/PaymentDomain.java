@@ -10,9 +10,24 @@ import com.online.lakeshoremarket.model.payment.Payment;
 import com.online.lakeshoremarket.model.payment.PaymentImpl;
 import com.online.lakeshoremarket.util.Constant;
 
+/**
+ * Represents the payment domain business logic
+ *
+ */
+
 public class PaymentDomain {
 
 	PaymentDAO pDao = null;
+	
+	/**
+	 * if product is available, creates order and payment for the product
+	 * @param prodID			the product being purchased
+	 * @param quantity			the amount of product being purchased
+	 * @param custID			the customer purchasing the product
+	 * @return					The order ID number
+	 */
+	
+	
 	public int buyProduct(int prodID, int quantity, int custID) {
 		boolean isProductAvailable = false;
 		ProductDomain prodDomain = new ProductDomain();
@@ -64,6 +79,11 @@ public class PaymentDomain {
 		updatePaymentStatus(paymentID);
 	}
 
+	/**
+	 * updates payment status if a purchase is being refunded
+	 * @param paymentID			
+	 */
+	
 	private void updatePaymentStatus(int paymentID) {
 		Date systemDate = new Date();
 		Timestamp date = new Timestamp(systemDate.getTime());

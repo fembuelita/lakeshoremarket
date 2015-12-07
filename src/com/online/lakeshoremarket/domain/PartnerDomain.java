@@ -74,6 +74,12 @@ public class PartnerDomain {
 		return true;
 	}
 
+	/**
+	 * builds a partner report
+	 * @param partnerID 	the partner to look up
+	 * @return				a report with partner information
+	 */
+	
 	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
 		ArrayList<PartnerReport> partnerReport = new ArrayList<PartnerReport>();
 		partnerDao = new PartnerDAO();
@@ -95,6 +101,12 @@ public class PartnerDomain {
 		return partnerReport;
 		
 	}
+	
+	/**
+	 * Gets partner by ID
+	 * @param partnerID 	the partner to look up
+	 * @return				the partner representation from the db
+	 */
 	
 	public Partner getPartnerByID(int partnerID){
 		partnerDao = new PartnerDAO();

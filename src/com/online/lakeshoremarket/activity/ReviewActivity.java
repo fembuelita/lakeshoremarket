@@ -17,8 +17,19 @@ import com.online.lakeshoremarket.representation.review.ProductReviewRequest;
 import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
 import com.online.lakeshoremarket.util.Constant;
 
+/**
+ * Interacts with review model and domain business logic to create and modify review representations
+ *
+ */
+
 public class ReviewActivity {
 
+	/**
+	 * Creates partner review representation
+	 * @param partnerReviewRequest
+	 * @return genericResponse	success or failure message
+	 */
+	
 	public GenericResponse createPartnerReview(PartnerReviewRequest partnerReviewRequest) {
 		int partnerReviewID = 0;
 		GenericResponse genericResponse = new GenericResponse();
@@ -44,6 +55,12 @@ public class ReviewActivity {
 		
 		return genericResponse;
 	}
+	
+	/**
+	 * Creates product review representation
+	 * @param productReviewRequest
+	 * @return genericResponse	success or failure message
+	 */
 	
 	public GenericResponse createProductReview(ProductReviewRequest productReviewRequest) {
 		int productReviewID = 0;
