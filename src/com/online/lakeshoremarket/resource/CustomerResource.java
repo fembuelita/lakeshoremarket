@@ -27,8 +27,10 @@ public class CustomerResource {
 	@Path("/customer")
 	public GenericResponse createCustomer(CustomerRequest custRequest, @HeaderParam("email") String email, @HeaderParam("password") String password) {
 		System.out.println("PUT METHOD Request for Creating a new customer .............");
-		boolean isUserAuthentic = false;
-		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
+		// If requiring authorization to create a user, uncomment the following lines
+		boolean isUserAuthentic = true;
+//		boolean isUserAuthentic = false;
+//		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			GenericResponse genericResponse = new GenericResponse();
 			CustomerActivity customerActivity = new CustomerActivity();
