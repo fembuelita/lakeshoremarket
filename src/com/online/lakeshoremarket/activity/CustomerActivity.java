@@ -1,5 +1,8 @@
 package com.online.lakeshoremarket.activity;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.AddressImpl;
@@ -50,6 +53,7 @@ public class CustomerActivity {
 		if(0 != customerID){
 			genericResponse.setMessage("Customer is created");
 			genericResponse.setSuccess(true);
+			genericResponse.setGenericReturnValue( Integer.toString( customerID ) );
 			Link get = new Link("Get Customer Details", Constant.LSM_COMMON_URL + "/customer/" + customerID, "application/xml");
 			genericResponse.setLinks(get);
 		}else{

@@ -3,6 +3,8 @@ package com.online.lakeshoremarket.representation.generic;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlElement;
 
 public abstract class AbstractRepresentation {
