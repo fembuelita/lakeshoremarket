@@ -13,8 +13,8 @@ public class ProductRequest{
 	
 	
 	private boolean isActive;
-	private float cost;
-	private float price;
+	private String cost;
+	private String price;
 	private int partnerID;
 	private int taxonomyID;
 	private int qoh;
@@ -28,15 +28,15 @@ public class ProductRequest{
 		this.isActive = isActive;
 	}
 	public float getCost() {
-		return cost;
+		return Float.parseFloat( cost );
 	}
-	public void setCost(float cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 	public float getPrice() {
-		return price;
+		return Float.parseFloat( price );
 	}
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public int getPartnerID() {
