@@ -192,6 +192,12 @@ public class PartnerDAO {
 		return isPartnerActive;
 	}
 
+	/**
+	 * Builds a partner report
+	 * @param partnerID 		the partner ID to look up
+	 * @return 					a report with partner data
+	 */
+	
 	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
 		conn = DatabaseConnection.getSqlConnection();
 		ArrayList<PartnerReport> paReports = null;
@@ -241,6 +247,12 @@ public class PartnerDAO {
 		}
 		return paReports;
 	}
+	
+	/**
+	 * Finds a partner by ID
+	 * @param partnerID 		the partner ID to look up
+	 * @return 					a representation of the partner
+	 */
 	
 	public Partner getPartnerByID(int partnerID){
 		Partner partner = null;

@@ -15,7 +15,18 @@ import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
 import com.online.lakeshoremarket.util.Constant;
 
+/**
+ * Interacts with partner model and domain business logic to create and modify partner representations
+ *
+ */
+
 public class PartnerActivity {
+	
+	/**
+	 * Creates a partner representation for a specific partner, including details like address, name, email, etc. 
+	 * @param partnerRequest 	imported from the ProductRepresentation class
+	 * @return genericResponse 	success or failure message
+	 */
 
 	public GenericResponse createPartner(PartnerRequest partnerRequest) {
 		int partnerID = 0;
@@ -53,6 +64,12 @@ public class PartnerActivity {
 		return genericResponse;
 	}
 	
+	/**
+	 * Deletes a partner representation for a specific partner
+	 * @param partnerIDString
+	 * @return isPartnerDeleted 	bool that is true if deletePartner is successful
+	 */
+	
 	public boolean deletePartner(String partnerIDString) {
 		boolean isPartnerDeleted = false;
 		PartnerDomain partnerDomain = new PartnerDomain();
@@ -60,6 +77,12 @@ public class PartnerActivity {
 		
 		return isPartnerDeleted;
 	}
+	
+	/**
+	 * Builds a partner representation for a specific partner
+	 * @param partnerIDString
+	 * @return partnerRepresentation
+	 */
 	
 	public PartnerRepresentation getPartnerDetails(String partnerIDString){
 		PartnerDomain partnerDomain = new PartnerDomain();
@@ -78,9 +101,9 @@ public class PartnerActivity {
 	}
 	
 	/**
-	 * gets a report representation for a specific partner
+	 * Builds a report representation for a specific partner
 	 * @param partnerID
-	 * @return
+	 * @return reports
 	 */
 	public ArrayList<PartnerReportRepresentation> getPartnerReport( int partnerID ) {
 		PartnerDomain partnerDomain = new PartnerDomain();

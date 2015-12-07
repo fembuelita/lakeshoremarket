@@ -289,6 +289,12 @@ public class CustomerDAO {
 		return isCustomerActive;
 	}
 	
+	/**
+	 * searches for a customer given the customer ID
+	 * @param custID 	the customer ID to lookup
+	 * @return cust		a representation of the customer
+	 */
+	
 	public Customer getCustomerByID(int custID){
 		Customer cust = null;
 		conn = DatabaseConnection.getSqlConnection();

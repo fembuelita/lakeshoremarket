@@ -11,8 +11,19 @@ import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.util.Constant;
 
+/**
+ * Interacts with customer model and domain business logic to create and modify customer representations
+ *
+ */
+
 public class CustomerActivity {
 
+	/**
+	 * Creates a customer representation for a specific customer, including details like address, name, email, etc. 
+	 * @param custRequest 	imported from the CustomerRepresentation class
+	 * @return genericResponse 	success or failure message
+	 */
+	
 	public GenericResponse createCustomer(CustomerRequest custRequest) {
 		int customerID = 0;
 		GenericResponse genericResponse = new GenericResponse();
@@ -60,6 +71,12 @@ public class CustomerActivity {
 		return genericResponse;
 	}
 	
+	/**
+	 * Deletes a customer representation for a specific customer
+	 * @param customerIDString
+	 * @return isCustomerDeleted 	bool that is true if deleteCustomer is successful
+	 */
+	
 	public boolean deleteCustomer(String customerIDString) {
 		boolean isCustomerDeleted = false;
 		CustomerDomain custDomain = new CustomerDomain();
@@ -67,6 +84,12 @@ public class CustomerActivity {
 		
 		return isCustomerDeleted;
 	}
+	
+	/**
+	 * Gets details of a customer representation for a specific customer (e.g., name, address, email, etc.)
+	 * @param customerIDString
+	 * @return customerRepresentation
+	 */
 	
 	public CustomerRepresentation getCustomerDetails(String customerIDString){
 		CustomerDomain custDomain = new CustomerDomain();
