@@ -123,7 +123,7 @@ public class ReviewActivity {
 				revRep.setRating( reviewList.get(i).getRating() );
 				revRep.setReview( reviewList.get(i).getReview() );
 				revRep.setReviewDate( reviewList.get(i).getReviewDate() );
-				Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product/" + revRep.getProductID(), "application/xml");
+				Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product-by-id/" + revRep.getProductID(), "application/xml");
 				Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
 				revRep.setLinks(get,buy);
 				revRepList.add(revRep);
