@@ -1,5 +1,6 @@
 package com.online.lakeshoremarket.resource;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -109,6 +110,7 @@ public class OrderResource {
 	 */
 	
 	@POST
+	@Consumes({"application/xml" , "application/json"})
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/ship/{orderIDString}")
 	public GenericResponse shipOrder(@PathParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
