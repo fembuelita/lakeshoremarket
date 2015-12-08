@@ -16,6 +16,9 @@ public class UtilResource {
 
 	/**
 	 * Authenticates a user
+	 * @param email 	the user email
+	 * @param password 	the user password hash
+	 * @return 	generic response value
 	 */
 	@GET
 	@Produces({"application/xml" , "application/json"})
@@ -37,9 +40,9 @@ public class UtilResource {
 	
 	/**
 	 * Authenticates a customer and returns the customer ID as part of the detail
-	 * @param email
-	 * @param password
-	 * @return
+	 * @param email 	the user email
+	 * @param password	the user password
+	 * @return generic response value
 	 */
 	@GET
 	@Produces({"application/xml" , "application/json"})
