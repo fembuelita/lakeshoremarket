@@ -1,6 +1,7 @@
 package com.online.lakeshoremarket.domain;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 import com.online.lakeshoremarket.dao.ReviewDAO;
 import com.online.lakeshoremarket.model.review.Review;
@@ -40,13 +41,13 @@ public class ReviewDomain {
 	}
 	
 	/**
-	 * Gets a partner review by the review ID
-	 * @param partnerReviewID
+	 * Gets partner reviews by the partner ID
+	 * @param partnerID
 	 * @return Review
 	 */
-	public Review getPartnerReviewByID( int partnerReviewID ) {
+	public ArrayList<Review> getPartnerReviewsByID( int partnerID ) {
 		reviewDAO = new ReviewDAO();
-		return reviewDAO.getPartnerReviewByID( partnerReviewID );
+		return reviewDAO.getPartnerReviewsByID( partnerID );
 	}
 	
 	/**
@@ -54,9 +55,9 @@ public class ReviewDomain {
 	 * @param productReviewID
 	 * @return Review
 	 */
-	public Review getProductReviewByID( int productReviewID ) {
+	public ArrayList<Review> getProductReviewsByID( int productReviewID ) {
 		reviewDAO = new ReviewDAO();
-		return reviewDAO.getProductReviewByID( productReviewID );
+		return reviewDAO.getProductReviewsByID( productReviewID );
 	}
 
 }

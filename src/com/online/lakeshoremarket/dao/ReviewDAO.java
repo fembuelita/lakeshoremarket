@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.core.Response;
 
@@ -116,29 +117,31 @@ public class ReviewDAO {
 	}
 	
 	/**
-	 * gets a partner review
-	 * @param reviewID
+	 * gets all partner reviews
+	 * @param partnerID
 	 * @return
 	 */
-	public Review getPartnerReviewByID( int reviewID ) {
+	public ArrayList<Review> getPartnerReviewsByID( int partnerID ) {
+		Review rev = null;
+		ArrayList<Review> reviewList = new ArrayList<>();
 		conn = DatabaseConnection.getSqlConnection();
-		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
-			pstmt = conn.prepareStatement(insertStmt);
-			pstmt.setInt( 1, reviewID );
-			
-			//iterate over the results
+			String searchQuery = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM partner_review WHERE `partner_id`=" + "(?)";
+			pstmt = conn.prepareStatement(searchQuery);
+			pstmt.setInt(1, partnerID );
 			ResultSet resultSet = pstmt.executeQuery();
 			while(resultSet.next()){
+				rev = new ReviewImpl();
 				rev.setCustomerID( resultSet.getInt( "customer_id" ) );
 				rev.setPartnerID( resultSet.getInt( "partner_id" ) );
 				rev.setPartnerReviewID( resultSet.getInt( "partner_review_id" ) );
 				rev.setRating( resultSet.getInt( "rating" ) );
 				rev.setReview( resultSet.getString( "review" ) );
 				rev.setReviewDate( resultSet.getLong( "date_reviewed" ) );
-			}
-			
+				
+				reviewList.add(rev);
+			}		
+		
 		}catch(SQLException sqe){
 			System.err.println("ReviewDAO.getPartnerReviewByID: Threw an SQLException getting partner review from table.");
   	      	System.err.println(sqe.getMessage());
@@ -155,34 +158,36 @@ public class ReviewDAO {
 			}
 		}
 		
-		return rev;
+		return reviewList;
 	}
 
 	
 	/**
-	 * gets a product review 
-	 * @param reviewID
+	 * gets all product reviews
+	 * @param productID
 	 * @return
 	 */
-	public Review getProductReviewByID( int reviewID ) {
+	public ArrayList<Review> getProductReviewsByID( int partnerID ) {
+		Review rev = null;
+		ArrayList<Review> reviewList = new ArrayList<>();
 		conn = DatabaseConnection.getSqlConnection();
-		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
-			pstmt = conn.prepareStatement(insertStmt);
-			pstmt.setInt( 1, reviewID );
-			
-			//iterate over the results
+			String searchQuery = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM product_review WHERE `product_id`=" + "(?)";
+			pstmt = conn.prepareStatement(searchQuery);
+			pstmt.setInt(1, partnerID );
 			ResultSet resultSet = pstmt.executeQuery();
 			while(resultSet.next()){
+				rev = new ReviewImpl();
 				rev.setCustomerID( resultSet.getInt( "customer_id" ) );
 				rev.setProductID( resultSet.getInt( "product_id" ) );
 				rev.setProductReviewID( resultSet.getInt( "product_review_id" ) );
 				rev.setRating( resultSet.getInt( "rating" ) );
 				rev.setReview( resultSet.getString( "review" ) );
 				rev.setReviewDate( resultSet.getLong( "date_reviewed" ) );
-			}
-			
+				
+				reviewList.add(rev);
+			}		
+		
 		}catch(SQLException sqe){
 			System.err.println("ReviewDAO.getPartnerReviewByID: Threw an SQLException getting product review from table.");
   	      	System.err.println(sqe.getMessage());
@@ -199,6 +204,6 @@ public class ReviewDAO {
 			}
 		}
 		
-		return rev;
+		return reviewList;
 	}
 }

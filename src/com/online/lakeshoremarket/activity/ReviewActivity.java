@@ -1,5 +1,7 @@
 package com.online.lakeshoremarket.activity;
 
+import java.util.ArrayList;
+
 import com.online.lakeshoremarket.domain.ReviewDomain;
 import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
@@ -82,40 +84,55 @@ public class ReviewActivity {
 	}
 	
 	/**
-	 * Builds a review representation
+	 * Builds an array list of review representations
 	 * @param type 		partner or product (lowercase)
-	 * @param reviewID 	the partner ID or product ID, depending on type
+	 * @param partnerOrProductID 	the partner ID or product ID, depending on type
 	 * @return ReviewRepresentation
 	 */
-	public ReviewRepresentation getReview( String type, int reviewID ) {
+	public ArrayList<ReviewRepresentation> getReviews( String type, int partnerOrProductID ) {
 		ReviewDomain revDomain = new ReviewDomain();
-		Review review;
-		ReviewRepresentation revRep = new ReviewRepresentation();
-		
+		ArrayList<Review> reviewList;
+		ArrayList<ReviewRepresentation> revRepList = new ArrayList<>();
+
 		if( type == "partner" ) {
-			review = revDomain.getPartnerReviewByID( reviewID );
-			revRep.setPartnerReviewID( reviewID );
-			revRep.setPartnerID( review.getPartnerID() );
-			Link get = new Link("Get Partner Details", Constant.LSM_COMMON_URL + "/partner/" + review.getPartnerID(), "application/xml");
-			revRep.setLinks(get);
+			reviewList = revDomain.getPartnerReviewsByID( partnerOrProductID );
+			
+			for(int i=0; i< reviewList.size() ; i++){
+				ReviewRepresentation revRep = new ReviewRepresentation();
+				revRep.setCustomerID( reviewList.get(i).getCustomerID() );
+				revRep.setPartnerID( reviewList.get(i).getPartnerID() );
+				revRep.setPartnerReviewID( reviewList.get(i).getPartnerReviewID() );
+				revRep.setRating( reviewList.get(i).getRating() );
+				revRep.setReview( reviewList.get(i).getReview() );
+				revRep.setReviewDate( reviewList.get(i).getReviewDate() );
+				Link get = new Link("Get Partner Details", Constant.LSM_COMMON_URL + "/partner/" + revRep.getPartnerID(), "application/xml");
+				revRep.setLinks(get);
+				revRepList.add(revRep);
+			}
+			
+			return revRepList;
 			
 		} else if( type == "product" ) {
-			review = revDomain.getProductReviewByID( reviewID );
-			revRep.setProductReviewID( reviewID );
-			revRep.setProductID( review.getProductID() );
-			Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product/" + review.getProductID(), "application/xml");
-			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
-			revRep.setLinks(get,buy);
-		} else {
-			throw new IllegalArgumentException( "Invalid review type (supplied " + type + ")" );
-		}
+			reviewList = revDomain.getProductReviewsByID( partnerOrProductID );
+			
+			for(int i=0; i< reviewList.size() ; i++){
+				ReviewRepresentation revRep = new ReviewRepresentation();
+				revRep.setCustomerID( reviewList.get(i).getCustomerID() );
+				revRep.setPartnerID( reviewList.get(i).getPartnerID() );
+				revRep.setPartnerReviewID( reviewList.get(i).getPartnerReviewID() );
+				revRep.setRating( reviewList.get(i).getRating() );
+				revRep.setReview( reviewList.get(i).getReview() );
+				revRep.setReviewDate( reviewList.get(i).getReviewDate() );
+				Link get = new Link("Get Product Details", Constant.LSM_COMMON_URL + "/product/" + revRep.getProductID(), "application/xml");
+				Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
+				revRep.setLinks(get,buy);
+				revRepList.add(revRep);
+			}
+			
+			return revRepList;
+			
+		} 
+		throw new IllegalArgumentException( "Invalid review type (supplied " + type + ")" );
 		
-		revRep.setCustomerID( review.getCustomerID() );
-		revRep.setRating( review.getRating() );
-		revRep.setReview( review.getReview() );
-		revRep.setReviewDate( review.getReviewDate() );
-		
-		
-		return revRep;
 	}
 }

@@ -1,5 +1,7 @@
 package com.online.lakeshoremarket.resource;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -89,13 +91,13 @@ public class ReviewResource {
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/review/partner/{partnerID}")
-	public ReviewRepresentation getPartnerReview(@PathParam("partnerID") int partnerID, @HeaderParam("email") String email, @HeaderParam("password") String password) {
+	public ArrayList<ReviewRepresentation> getPartnerReviews(@PathParam("partnerID") int partnerID, @HeaderParam("email") String email, @HeaderParam("password") String password) {
 		System.out.println("GET METHOD Request for partner review............" + partnerID);
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			ReviewActivity reviewActivity = new ReviewActivity();
-			return reviewActivity.getReview( "partner", partnerID );
+			return reviewActivity.getReviews( "partner", partnerID );
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
@@ -112,13 +114,13 @@ public class ReviewResource {
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/review/product/{productID}")
-	public ReviewRepresentation getProductReview(@PathParam("productID") int productID, @HeaderParam("email") String email, @HeaderParam("password") String password) {
+	public ArrayList<ReviewRepresentation> getProductReviews(@PathParam("productID") int productID, @HeaderParam("email") String email, @HeaderParam("password") String password) {
 		System.out.println("GET METHOD Request for product review............" + productID);
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
 			ReviewActivity reviewActivity = new ReviewActivity();
-			return reviewActivity.getReview( "product", productID );
+			return reviewActivity.getReviews( "product", productID );
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
