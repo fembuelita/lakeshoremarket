@@ -6,15 +6,15 @@ package com.online.lakeshoremarket.model.cart;
  */
 public class CartImpl implements Cart {
 
-	private int customerId;
+	private int customerID;
 
 	
-	public int getCustomerId() {
-		return customerId;
+	public int getCustomerID() {
+		return customerID;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 	
 	

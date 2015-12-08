@@ -9,7 +9,7 @@ public class CustomerImpl implements Customer{
 	private boolean isActive;
 	private int billingAddress;
 	private int shippingAddress;
-	private int customerId;
+	private int customerID;
 	private String email;
 	private String firstName;
 	private String lastName;
@@ -38,11 +38,11 @@ public class CustomerImpl implements Customer{
 		this.shippingAddress = shippingAddress;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getCustomerID() {
+		return customerID;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 	public String getEmail() {
 		return email;

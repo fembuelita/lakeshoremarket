@@ -1,7 +1,5 @@
 package com.online.lakeshoremarket.activity;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.model.customer.Address;
@@ -102,14 +100,14 @@ public class CustomerActivity {
 		CustomerRepresentation customerRepresentation = new CustomerRepresentation();
 		customerRepresentation.setActive(customer.isActive()); //is this correct
 		customerRepresentation.setBillingAddress(customer.getBillingAddress());
-		customerRepresentation.setCustomerId(customer.getCustomerId());
+		customerRepresentation.setCustomerID(customer.getCustomerID());
 		customerRepresentation.setEmail(customer.getEmail());
 		customerRepresentation.setFirstName(customer.getFirstName());
 		customerRepresentation.setLastName(customer.getLastName()); 
 		customerRepresentation.setPhone(customer.getPhone());
 		customerRepresentation.setShippingAddress(customer.getShippingAddress());
 		customerRepresentation.setTitle(customer.getTitle());
-		customerRepresentation.setCustomerId(customer.getCustomerId());
+		customerRepresentation.setCustomerID(customer.getCustomerID());
 		
 		//future: if administrator or this customer only, add this
 		Link deleteCustomer = new Link("Delete Customer", Constant.LSM_COMMON_URL + "/customer/" + customerIDString, "application/xml");

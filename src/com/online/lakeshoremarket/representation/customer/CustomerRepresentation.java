@@ -22,7 +22,7 @@ public class CustomerRepresentation  extends AbstractRepresentation {
 	private boolean isActive;
 	private int billingAddress;
 	private int shippingAddress;
-	private int customerId;
+	private int customerID;
 	private String email;
 	private String firstName;
 	private String lastName;
@@ -90,17 +90,17 @@ public class CustomerRepresentation  extends AbstractRepresentation {
 	 * @return 	the ID
 	 */
 	
-	public int getCustomerId() {
-		return customerId;
+	public int getCustomerID() {
+		return customerID;
 	}
 	
 	/**
 	 * sets a customer ID for the customer representation
-	 * @param customerId	the ID
+	 * @param customerID	the ID
 	 */
 	
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 	
 	/**

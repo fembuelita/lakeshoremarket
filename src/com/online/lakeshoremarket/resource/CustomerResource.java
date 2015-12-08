@@ -52,7 +52,7 @@ public class CustomerResource {
 			CustomerActivity customerActivity = new CustomerActivity();
 			CustomerRepresentation customerRepresentation = new CustomerRepresentation();
 			customerRepresentation = customerActivity.getCustomerDetails(customerIDString);
-			if(customerRepresentation.getCustomerId() == 0){
+			if(customerRepresentation.getCustomerID() == 0){
 				throw new GenericLSMException("Customer is not found", Response.Status.NOT_FOUND);
 			}else{
 				return customerRepresentation;

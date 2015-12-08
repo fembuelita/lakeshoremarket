@@ -46,12 +46,12 @@ public interface Customer {
 	 * gets a customer ID
 	 * @return 	the ID
 	 */
-	public int getCustomerId();
+	public int getCustomerID();
 	/**
 	 * sets a customer ID
-	 * @param customerId	the ID
+	 * @param customerID	the ID
 	 */
-	public void setCustomerId(int customerId);
+	public void setCustomerID(int customerID);
 	
 	/**
 	 * gets a customer email

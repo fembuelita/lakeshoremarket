@@ -10,13 +10,13 @@ public interface Cart {
 	 * gets the customer id
 	 * @return 	the customer id
 	 */
-	public int getCustomerId();
+	public int getCustomerID();
 	
 	/**
 	 * sets teh customer ID
-	 * @param customerId 	the customer ID
+	 * @param customerID 	the customer ID
 	 */
-	public void setCustomerId(int customerId);
+	public void setCustomerID(int customerID);
 	
 	
 }
