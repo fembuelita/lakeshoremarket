@@ -26,7 +26,7 @@ public interface Review {
 	public int getPartnerID();
 	
 	/**
-	 * gets the ID of the partner this review is for, do not use if for product
+	 * sets the ID of the partner this review is for, do not use if for product
 	 * @param partnerID the id 
 	 */
 	public void setPartnerID(int partnerID);
