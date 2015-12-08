@@ -167,14 +167,14 @@ public class ReviewDAO {
 	 * @param productID
 	 * @return
 	 */
-	public ArrayList<Review> getProductReviewsByID( int partnerID ) {
+	public ArrayList<Review> getProductReviewsByID( int productID ) {
 		Review rev = null;
 		ArrayList<Review> reviewList = new ArrayList<>();
 		conn = DatabaseConnection.getSqlConnection();
 		try{
 			String searchQuery = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM product_review WHERE `product_id`=" + "(?)";
 			pstmt = conn.prepareStatement(searchQuery);
-			pstmt.setInt(1, partnerID );
+			pstmt.setInt(1, productID );
 			ResultSet resultSet = pstmt.executeQuery();
 			while(resultSet.next()){
 				rev = new ReviewImpl();

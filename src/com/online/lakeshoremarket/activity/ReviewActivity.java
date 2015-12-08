@@ -118,8 +118,8 @@ public class ReviewActivity {
 			for(int i=0; i< reviewList.size() ; i++){
 				ReviewRepresentation revRep = new ReviewRepresentation();
 				revRep.setCustomerID( reviewList.get(i).getCustomerID() );
-				revRep.setPartnerID( reviewList.get(i).getPartnerID() );
-				revRep.setPartnerReviewID( reviewList.get(i).getPartnerReviewID() );
+				revRep.setProductID( reviewList.get(i).getProductID() );
+				revRep.setProductReviewID( reviewList.get(i).getProductReviewID() );
 				revRep.setRating( reviewList.get(i).getRating() );
 				revRep.setReview( reviewList.get(i).getReview() );
 				revRep.setReviewDate( reviewList.get(i).getReviewDate() );
