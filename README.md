@@ -23,7 +23,7 @@ The Database Access Object Layer or the DAO layer is responsible for connection 
 Service layer contains the services for the API.
 
 ## External Apps
-Our app is powered by Heroku, and we are also paying a small sum for a Digital Ocean VPS setup to use MySQL without the limitations imposed by Heroku. We may eventually migrate to PostGRES, but not at this point.  
+Our app is powered by Heroku, and we are also paying a small sum for a Digital Ocean VPS setup to use MySQL without the limitations imposed by Heroku.  
 
   1. [Heroku](http://lsm1.herokuapp.com/services/lsm)  
   2. [Digital Ocean](http://162.243.94.35/) 
