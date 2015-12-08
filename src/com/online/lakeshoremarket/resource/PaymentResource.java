@@ -52,7 +52,7 @@ public class PaymentResource {
 				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderID, "application/xml");
 				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderID, "application/xml");
 				Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
-				genericResponse.setLinks(get,cancel,ship);
+				genericResponse.setLinks(get, ship, cancel);
 				
 			}else{
 				genericResponse.setMessage("Order is not created");
