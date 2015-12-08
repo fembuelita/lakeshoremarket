@@ -83,7 +83,7 @@ public class OrderResource {
 			orderRepresentation = orderActivity.getOrderDetails(orderIDString);
 			
 			Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderRepresentation.getOrderID(), "application/xml");
-			Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
+			Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship/" + orderRepresentation.getOrderID(), "application/xml");
 			Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderRepresentation.getOrderID() , "application/xml");
 			// If order is shipped, we can further proceed for fulfilling the order
 			if( orderRepresentation.getOrderStatusCode() == Constant.SHIPPED )
