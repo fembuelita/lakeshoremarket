@@ -32,11 +32,9 @@ public class ProductResource {
 		if(isUserAuthentic){
 			ProductActivity productActivity = new ProductActivity();
 			ArrayList<ProductRepresentation> prodRepresentationSet = productActivity.getProducts(prodName);
-			if(prodRepresentationSet != null && prodRepresentationSet.size() != 0){
-				return prodRepresentationSet;
-			}else{
-				throw new GenericLSMException("No products found by such a name", Response.Status.NOT_FOUND);
-			}
+			
+			return prodRepresentationSet;
+			
 			
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

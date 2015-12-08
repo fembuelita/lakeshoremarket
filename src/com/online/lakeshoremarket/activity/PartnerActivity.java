@@ -116,7 +116,7 @@ public class PartnerActivity {
 		ArrayList<PartnerReportRepresentation> reports = new ArrayList<PartnerReportRepresentation>();
 		
 		int size = report.size();
-		for(int i=0; i< size; i++){
+		for(int i=0; i < size; i++){
 			PartnerReportRepresentation partnerReport = new PartnerReportRepresentation();
 			partnerReport.setProductId( report.get(i).getProductId() );
 			partnerReport.setQuantity( report.get(i).getQuantity() );
