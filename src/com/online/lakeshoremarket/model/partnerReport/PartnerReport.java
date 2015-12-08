@@ -78,7 +78,7 @@ public interface PartnerReport {
 	public void setTotalCost(int totalCost);
 	
 	/**
-	 * sets the total price for the report
+	 * gets the total price for the report
 	 * @return 	the total price
 	 */
 	
@@ -92,7 +92,7 @@ public interface PartnerReport {
 	public void setTotalPrice(int totalPrice);
 	
 	/**
-	 * sets the total profit for the report
+	 * gets the total profit for the report
 	 * @return 	the total profit
 	 */
 	
