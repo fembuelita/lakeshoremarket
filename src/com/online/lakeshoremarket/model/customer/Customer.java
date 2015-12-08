@@ -90,7 +90,7 @@ public interface Customer {
 	public void setLastName(String lastName);
 	
 	/**
-	 * gets a (hashed eventually) customer password
+	 * gets a hashed customer password
 	 * @return 	the password
 	 */
 	

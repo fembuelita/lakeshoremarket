@@ -11,6 +11,12 @@ import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
+/**
+ * This class builds the representation of orders that interact with and are manipulated by the user in the service layer.
+ *
+ */
+
 public class OrderRepresentation extends AbstractRepresentation{
 
 	private XMLGregorianCalendar datePurchased;

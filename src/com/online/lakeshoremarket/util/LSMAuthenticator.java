@@ -9,6 +9,13 @@ import javax.ws.rs.core.Response;
 
 import com.online.lakeshoremarket.exception.GenericLSMException;
 
+/**
+ * Checks users and partner database tables for matching credentials (does not authorize)
+ * @param 	customer/partner email
+ * @param	customer/partner password
+ * @return	bool (affirmative if the user is authentic)
+ *
+ */
 
 public class LSMAuthenticator {
 

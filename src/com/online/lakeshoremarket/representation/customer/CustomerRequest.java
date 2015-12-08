@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Customer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
+/**
+ * This class builds a request for fields related to the customer representation.
+ *
+ */
+
 public class CustomerRequest {
 
 	//For customer details
