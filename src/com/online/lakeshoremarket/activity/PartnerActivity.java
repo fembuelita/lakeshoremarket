@@ -98,10 +98,6 @@ public class PartnerActivity {
 		partnerRepresentation.setEmail(partner.getEmail());
 		partnerRepresentation.setPhone(partner.getPhone());
 		
-		Link deletePartner = new Link("Delete Partner", Constant.LSM_COMMON_URL + "/partner/" + partnerIDString, "application/xml");
-		Link generateReport = new Link("Generate Report", Constant.LSM_COMMON_URL + "/report/" + partnerIDString, "application/xml");
-		partnerRepresentation.setLinks(deletePartner, generateReport);
-		
 		return partnerRepresentation;
 	}
 	

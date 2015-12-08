@@ -18,7 +18,9 @@ import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
@@ -76,6 +78,12 @@ public class CustomerResource {
 			CustomerActivity customerActivity = new CustomerActivity();
 			CustomerRepresentation customerRepresentation = new CustomerRepresentation();
 			customerRepresentation = customerActivity.getCustomerDetails(customerIDString);
+
+			//future: if administrator or this customer only, add this
+			Link orderHistory = new Link("Get Order History", Constant.LSM_COMMON_URL + "/customer/orders/" + customerIDString, "application/xml");
+			Link deleteCustomer = new Link("Delete Customer", Constant.LSM_COMMON_URL + "/customer/" + customerIDString, "application/xml");
+			customerRepresentation.setLinks(orderHistory, deleteCustomer);
+						
 			if(customerRepresentation.getCustomerID() == 0){
 				throw new GenericLSMException("Customer is not found", Response.Status.NOT_FOUND);
 			}else{

@@ -16,9 +16,11 @@ import javax.ws.rs.core.Response;
 import com.online.lakeshoremarket.activity.PartnerActivity;
 import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.partner.PartnerRepresentation;
 import com.online.lakeshoremarket.representation.partner.PartnerRequest;
 import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
+import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
@@ -76,6 +78,11 @@ public class PartnerResource {
 			PartnerActivity partnerActivity = new PartnerActivity();
 			PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 			partnerRepresentation = partnerActivity.getPartnerDetails(partnerIDString);
+			
+			Link deletePartner = new Link("Delete Partner", Constant.LSM_COMMON_URL + "/partner/" + partnerIDString, "application/xml");
+			Link generateReport = new Link("Generate Report", Constant.LSM_COMMON_URL + "/report/" + partnerIDString, "application/xml");
+			partnerRepresentation.setLinks(deletePartner, generateReport);
+			
 			return partnerRepresentation;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);

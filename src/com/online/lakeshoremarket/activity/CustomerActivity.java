@@ -4,22 +4,16 @@ package com.online.lakeshoremarket.activity;
 import java.util.ArrayList;
 
 import com.online.lakeshoremarket.domain.CustomerDomain;
-import com.online.lakeshoremarket.domain.PartnerDomain;
-import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.AddressImpl;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
 import com.online.lakeshoremarket.model.order.Order;
-import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
-import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
-import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
-import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.util.Constant;
 
 /**
@@ -118,10 +112,6 @@ public class CustomerActivity {
 		customerRepresentation.setShippingAddress(customer.getShippingAddress());
 		customerRepresentation.setTitle(customer.getTitle());
 		customerRepresentation.setCustomerID(customer.getCustomerID());
-		
-		//future: if administrator or this customer only, add this
-		Link deleteCustomer = new Link("Delete Customer", Constant.LSM_COMMON_URL + "/customer/" + customerIDString, "application/xml");
-		customerRepresentation.setLinks(deleteCustomer);
 		
 		return customerRepresentation;
 	}

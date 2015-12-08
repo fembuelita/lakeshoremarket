@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
 
@@ -66,7 +65,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	}
 	
 	/**
-	 * gets a customer ID for this order
+	 * gets a customer ID for this ordersetOrderID
 	 * @return the customer ID
 	 */
 	
@@ -121,7 +120,9 @@ public class OrderRepresentation extends AbstractRepresentation{
 	
 	/**
 	 * gets the payment ID
-	 * @return the payment ID
+	 * @return the pa
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;yment ID
 	 */
 	
 	public int getPaymentID() {

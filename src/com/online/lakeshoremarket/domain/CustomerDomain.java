@@ -6,7 +6,6 @@ import com.online.lakeshoremarket.dao.CustomerDAO;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.order.Order;
-import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
 
 /**
  * Represents the customer domain business logic
