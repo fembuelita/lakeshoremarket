@@ -19,6 +19,11 @@ import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class CustomerResource {
 
 	@PUT

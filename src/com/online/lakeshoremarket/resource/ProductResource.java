@@ -20,6 +20,11 @@ import com.online.lakeshoremarket.representation.product.ProductRequest;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class ProductResource {
 
 	@GET

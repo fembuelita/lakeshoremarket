@@ -19,6 +19,11 @@ import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class ReviewResource {
 
 	@PUT

@@ -22,8 +22,21 @@ import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepr
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class PartnerResource {
 
+	/**
+	 * PUT method request for creating a new partner
+	 * @param partnerRequest
+	 * @param email
+	 * @param password
+	 * @return genericReponse (if successful); else, exception message
+	 */
+	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -44,6 +57,14 @@ public class PartnerResource {
 		}
 	}
 	
+	/**
+	 * GET method request for partner details
+	 * @param partnerIDString
+	 * @param email
+	 * @param password
+	 * @return partnerRepresentation (if successful); else, exception message
+	 */
+	
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/partner/{partnerID}")
@@ -60,6 +81,14 @@ public class PartnerResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * DELETE method request for deleting a partner
+	 * @param partnerIDString
+	 * @param email
+	 * @param password
+	 * @return genericResponse (if successful); else, exception message
+	 */
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
@@ -86,6 +115,14 @@ public class PartnerResource {
 		}
 		
 	}
+	
+	/**
+	 * GET method request for partner report
+	 * @param partnerID
+	 * @param email
+	 * @param password
+	 * @return partner report (if successful); else, return exception message
+	 */
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
