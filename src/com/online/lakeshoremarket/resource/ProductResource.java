@@ -27,6 +27,14 @@ import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 public class ProductResource {
 
+	/**
+	 * GET method request for all products (search products)
+	 * @param prodName
+	 * @param email
+	 * @param password
+	 * @return a set of product representations (if successful); else, exception message
+	 */
+	
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products/{searchString}")
@@ -48,6 +56,14 @@ public class ProductResource {
 		}
 	}
 	
+	/**
+	 * PUT method request for creating a new product
+	 * @param prodRequest
+	 * @param email
+	 * @param password
+	 * @return generic response if user is authenticated; else, exception message
+	 */
+	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -66,6 +82,14 @@ public class ProductResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * GET method request for an individual product
+	 * @param prodName
+	 * @param email
+	 * @param password
+	 * @return productRepresentation, if successful; else, exception message
+	 */
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
@@ -89,6 +113,14 @@ public class ProductResource {
 		}
 	}
 	
+	/**
+	 * GET method request for availability of product
+	 * @param prodID
+	 * @param email
+	 * @param password
+	 * @return genericResponse (if user is authenticated); else, exception message
+	 */
+	
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/available/{productID}")
@@ -106,6 +138,14 @@ public class ProductResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * GET method request for individual product using product ID
+	 * @param ProductIDString
+	 * @param email
+	 * @param password
+	 * @return productRepresentation (if user is authentic and the product exists)
+	 */
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
