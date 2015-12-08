@@ -270,6 +270,7 @@ public class PartnerDAO {
 				partner.setAddressID(resultSet.getInt("address_id"));
 				partner.setEmail(resultSet.getString("email"));
 				partner.setPhone(resultSet.getString("tel"));
+				partner.setPartnerID(resultSet.getInt(partnerID));
 			}
 		}catch(SQLException sqe){
 			System.err.println("PartnerDAO.getPartnerByID: Threw an SQLException while getting Partner information.");
