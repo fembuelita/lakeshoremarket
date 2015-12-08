@@ -1,8 +1,12 @@
 package com.online.lakeshoremarket.domain;
 
+import java.util.ArrayList;
+
 import com.online.lakeshoremarket.dao.CustomerDAO;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.Customer;
+import com.online.lakeshoremarket.model.order.Order;
+import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
 
 /**
  * Represents the customer domain business logic
@@ -100,6 +104,16 @@ public class CustomerDomain {
 		custDao = new CustomerDAO();
 		return custDao.getCustomerByID(custID);
 		
+	}
+
+	/**
+	 * Gets order history for a customer
+	 * @param customerID
+	 * @return
+	 */
+	public ArrayList<Order> getOrderHistory(int customerID) {
+		custDao = new CustomerDAO();
+		return custDao.getOrderHistory(customerID);
 	}
 
 }

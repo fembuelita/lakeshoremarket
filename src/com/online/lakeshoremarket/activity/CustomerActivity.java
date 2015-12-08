@@ -4,15 +4,22 @@ package com.online.lakeshoremarket.activity;
 import java.util.ArrayList;
 
 import com.online.lakeshoremarket.domain.CustomerDomain;
+import com.online.lakeshoremarket.domain.PartnerDomain;
+import com.online.lakeshoremarket.domain.ProductDomain;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.AddressImpl;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
+import com.online.lakeshoremarket.model.order.Order;
+import com.online.lakeshoremarket.model.partnerReport.PartnerReport;
+import com.online.lakeshoremarket.model.product.Product;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.generic.Link;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
+import com.online.lakeshoremarket.representation.partnerReport.PartnerReportRepresentation;
+import com.online.lakeshoremarket.representation.product.ProductRepresentation;
 import com.online.lakeshoremarket.util.Constant;
 
 /**
@@ -119,8 +126,39 @@ public class CustomerActivity {
 		return customerRepresentation;
 	}
 
-	public ArrayList<OrderRepresentation> getOrderHistory(int parseInt) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * gets the order history
+	 * @param customerID
+	 * @return the order history
+	 */
+	public ArrayList<OrderRepresentation> getOrderHistory(int customerID) {
+		CustomerDomain custDomain = new CustomerDomain();
+
+
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		ArrayList<OrderRepresentation> orderRepresentationList = new ArrayList<OrderRepresentation>();
+		orderList = custDomain.getOrderHistory( customerID );
+		
+		for(int i=0; i< orderList.size() ; i++){
+			OrderRepresentation orderRepresentation = new OrderRepresentation();
+			orderRepresentation.setDatePurchased(orderList.get(i).getDatePurchased());
+			orderRepresentation.setDateRefunded(orderList.get(i).getDateRefunded());
+			orderRepresentation.setCustomerID(orderList.get(i).getCustomerID());
+			orderRepresentation.setOrderID(orderList.get(i).getOrderID());
+			orderRepresentation.setOrderStatusCode(orderList.get(i).getOrderStatusCode());
+			orderRepresentation.setPaymentID(orderList.get(i).getPaymentID());
+			orderRepresentation.setProductID(orderList.get(i).getProductID());
+			orderRepresentation.setQty(orderList.get(i).getQty());
+			orderRepresentation.setTrackingNumber(orderList.get(i).getTrackingNumber());
+			
+			Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderList.get(i).getOrderID(), "application/xml");
+			orderRepresentation.setLinks(get);
+			orderRepresentationList.add(orderRepresentation);
+		}
+		if(orderRepresentationList != null && orderRepresentationList.size() != 0){
+			return orderRepresentationList;
+		}else{
+			return null;
+		}		
 	}
 }
