@@ -1,15 +1,13 @@
 package com.online.lakeshoremarket.model.payment;
 
-import java.sql.Timestamp;
-
 /**
  * instantiates the payment interface to represent the payment model
  *
  */
 public class PaymentImpl implements Payment{
 
-	private Timestamp datePaid;
-	private Timestamp dateReturned;
+	private long datePaid;
+	private long dateReturned;
 	private float totalPaid;
 	private int paymentID;
 	private int paymentStatusCode;
@@ -17,16 +15,16 @@ public class PaymentImpl implements Payment{
 	private int methodTransactionID;
 	
 	
-	public Timestamp getDatePaid() {
+	public long getDatePaid() {
 		return datePaid;
 	}
-	public void setDatePaid(Timestamp datePaid) {
+	public void setDatePaid(long datePaid) {
 		this.datePaid = datePaid;
 	}
-	public Timestamp getDateReturned() {
+	public long getDateReturned() {
 		return dateReturned;
 	}
-	public void setDateReturned(Timestamp dateReturned) {
+	public void setDateReturned(long dateReturned) {
 		this.dateReturned = dateReturned;
 	}
 	public float getTotalPaid() {

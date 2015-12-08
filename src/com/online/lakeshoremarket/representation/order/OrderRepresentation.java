@@ -19,8 +19,8 @@ import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
 
 public class OrderRepresentation extends AbstractRepresentation{
 
-	private XMLGregorianCalendar datePurchased;
-	private XMLGregorianCalendar dateRefunded;
+	private long datePurchased;
+	private long dateRefunded;
 	private int customerID;
 	private int orderID;
 	private int orderStatusCode;
@@ -34,7 +34,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	 * @return the timestamp
 	 */
 	
-	public XMLGregorianCalendar getDatePurchased() {
+	public long getDatePurchased() {
 		return datePurchased;
 	}
 	
@@ -43,7 +43,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	 * @param datePurchased the timestamp
 	 */
 	
-	public void setDatePurchased(XMLGregorianCalendar datePurchased) {
+	public void setDatePurchased(long datePurchased) {
 		this.datePurchased = datePurchased;
 	}
 	
@@ -52,7 +52,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	 * @return the timestamp
 	 */
 	
-	public XMLGregorianCalendar getDateRefunded() {
+	public long getDateRefunded() {
 		return dateRefunded;
 	}
 	
@@ -61,7 +61,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	 * @param dateRefunded the refund date
 	 */
 	
-	public void setDateRefunded(XMLGregorianCalendar dateRefunded) {
+	public void setDateRefunded(long dateRefunded) {
 		this.dateRefunded = dateRefunded;
 	}
 	

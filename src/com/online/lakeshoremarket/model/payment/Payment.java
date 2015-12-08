@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.model.payment;
 
-import java.sql.Timestamp;
 
 /**
  * represents a payment in the database
@@ -10,27 +9,27 @@ public interface Payment {
 
 	/**
 	 * gets the date and time this payment was marked as paid
-	 * @return timestamp
+	 * @return long
 	 */
-	public Timestamp getDatePaid();
+	public long getDatePaid();
 	
 	/**
 	 * sets the date and time this payment was paid
 	 * @param datePaid the timestamp
 	 */
-	public void setDatePaid(Timestamp datePaid);
+	public void setDatePaid(long datePaid);
 	
 	/**
 	 * gets the date and time this order was returned
 	 * @return the timestamp
 	 */
-	public Timestamp getDateReturned();
+	public long getDateReturned();
 	
 	/**
 	 * sets the date and time this order was returned
 	 * @param dateReturned the timestamp
 	 */
-	public void setDateReturned(Timestamp dateReturned);
+	public void setDateReturned(long dateReturned);
 	
 	/**
 	 * gets the total amount this order was paid for

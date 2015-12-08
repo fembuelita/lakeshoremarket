@@ -1,7 +1,6 @@
 package com.online.lakeshoremarket.domain;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.Instant;
 
 import com.online.lakeshoremarket.dao.ReviewDAO;
 import com.online.lakeshoremarket.model.review.Review;
@@ -22,9 +21,7 @@ public class ReviewDomain {
 	public int addPartnerReview(Review review) {
 		int partnerReviewID = 0;
 		reviewDAO = new ReviewDAO();
-		Date systemDate = new Date();
-		Timestamp date = new Timestamp(systemDate.getTime());
-		review.setReviewDate(date);
+		review.setReviewDate(Instant.now().getEpochSecond());
 		partnerReviewID = reviewDAO.addPartnerReview(review);
 		return partnerReviewID;
 	}
@@ -37,9 +34,7 @@ public class ReviewDomain {
 	public int addProductReview(Review review) {
 		int productReviewID = 0;
 		reviewDAO = new ReviewDAO();
-		Date systemDate = new Date();
-		Timestamp date = new Timestamp(systemDate.getTime());
-		review.setReviewDate(date);
+		review.setReviewDate(Instant.now().getEpochSecond());
 		productReviewID = reviewDAO.addProductReview(review);
 		return productReviewID;
 	}

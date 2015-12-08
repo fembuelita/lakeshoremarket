@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.ws.rs.core.Response;
 
@@ -38,14 +37,13 @@ public class OrderDAO {
 			String insertStmt = "INSERT INTO `order` "
 											+ "(customer_id, payment_id, status_id, date_purchased, date_refunded, tracking_number, product_id, qty ) "
 								+ "VALUES "
-											+ "(?,?,?,?,?,?,?,?)";
-			
+											+ "(?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?),?,?,?)";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, custOrder.getCustomerID());
 			pstmt.setInt(2, custOrder.getPaymentID());
 			pstmt.setInt(3, custOrder.getOrderStatusCode());
-			pstmt.setTimestamp(4, custOrder.getDatePurchased());
-			pstmt.setTimestamp(5, custOrder.getDateRefunded());
+			pstmt.setLong(4, custOrder.getDatePurchased());
+			pstmt.setLong(5, custOrder.getDateRefunded());
 			pstmt.setString(6, custOrder.getTrackingNumber());
 			pstmt.setInt(7, custOrder.getProductID());
 			pstmt.setInt(8, custOrder.getQty());
@@ -186,7 +184,7 @@ public class OrderDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
 			custOrder = new OrderImpl();
-			String getQuery = "SELECT * FROM `order` WHERE order_id = ?";
+			String getQuery = "SELECT *, UNIX_TIMESTAMP(date_purchased) AS `purchase_date`, UNIX_TIMESTAMP(date_refunded) as `refund_date` FROM `order` WHERE order_id = ?";
 			pstmt = conn.prepareStatement(getQuery);
 			pstmt.setInt(1, orderID);
 			ResultSet resultSet = pstmt.executeQuery();
@@ -194,9 +192,9 @@ public class OrderDAO {
 				custOrder.setCustomerID(resultSet.getInt("customer_id"));
 				custOrder.setPaymentID(resultSet.getInt("payment_id"));
 				custOrder.setOrderStatusCode(resultSet.getInt("status_id"));
-				custOrder.setDatePurchased(resultSet.getTimestamp("date_purchased"));
+				custOrder.setDatePurchased(resultSet.getLong("purchaseDate"));
 				if(null != resultSet.getTimestamp("date_refunded")){
-					custOrder.setDateRefunded(resultSet.getTimestamp("date_refunded"));
+					custOrder.setDateRefunded(resultSet.getLong("refund_date"));
 				}
 				custOrder.setTrackingNumber(resultSet.getString("tracking_number"));
 				custOrder.setProductID(resultSet.getInt("product_id"));
@@ -223,16 +221,16 @@ public class OrderDAO {
 	/**
 	 * sets the order status to refunded 
 	 * @param orderID 		the order ID to update
-	 * @param date 			the date/time the change occurred
+	 * @param unixtimestamp the date/time the change occurred
 	 * @return void 
 	 */
-	public void updateOrderStatusForRefund(int orderID, Timestamp date) {
+	public void updateOrderStatusForRefund(int orderID, long unixtimestamp) {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
-			String updateStmt = "UPDATE `order` SET status_id = ?, date_refunded = ? WHERE order_id = ?";
+			String updateStmt = "UPDATE `order` SET status_id = ?, date_refunded = FROM_UNIXTIME(?) WHERE order_id = ?";
 			pstmt = conn.prepareStatement(updateStmt);
 			pstmt.setInt(1, Constant.CANCELLED);
-			pstmt.setTimestamp(2, date);
+			pstmt.setLong(2, unixtimestamp);
 			pstmt.setInt(3, orderID);
 			pstmt.executeUpdate();
 		}catch(SQLException sqe){

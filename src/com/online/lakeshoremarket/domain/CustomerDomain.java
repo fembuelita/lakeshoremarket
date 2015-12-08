@@ -18,7 +18,7 @@ public class CustomerDomain {
 	 * @param cust				the customer to insert
 	 * @param billingAddress	the address for the customer's billing
 	 * @param shippingAddress 	the address for the customer's shipping
-	 * @return					cutomer id of newly added customer
+	 * @return					customer id of newly added customer
 	 */
 	public int addCustomer(Customer cust, Address billingAddress, Address shippingAddress) {
 		int customerID = 0;
@@ -57,24 +57,6 @@ public class CustomerDomain {
 		custDao = new CustomerDAO();
 		isCustomerDeleted = custDao.deleteCustomer(custID);
 		
-		//This code section is commented because we don't actually have to delete the customer instead make the customer inactive
-		/*int billingAddressID = 0;
-		int shippingAddressID = 0;
-		int funcReturn = 0;
-		billingAddressID = getCustomerBillingAddress(custID);
-		shippingAddressID = getCustomerShippingAddress(custID);
-		if(0 != billingAddressID && 0 != shippingAddressID){
-			funcReturn = custDao.deleteCustomer(custID);
-			if(0 != funcReturn){
-				int billingAddressDeleted = 0;
-				int shippingAddressDeleted = 0;
-				billingAddressDeleted = custDao.deleteCustomerAddress(billingAddressID);
-				shippingAddressDeleted = custDao.deleteCustomerAddress(shippingAddressID);
-				if(0 != billingAddressDeleted && 0 != shippingAddressDeleted){
-					isCustomerDeleted = true;
-				}
-			}
-		}*/
 		return isCustomerDeleted;
 	}
 	

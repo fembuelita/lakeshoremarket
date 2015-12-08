@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.ws.rs.core.Response;
 
@@ -35,13 +34,13 @@ public class PaymentDAO {
 			String insertStmt = "INSERT INTO payment "
 											+ "(status_id, method, method_transaction_id, date_paid, date_refunded, total_paid ) "
 								+ "VALUES "
-											+ "(?,?,?,?,?,?)";
+											+ "(?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?),?)";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, custPayment.getPaymentStatusCode());
 			pstmt.setString(2, String.valueOf(custPayment.getMethodOfPayment()));
 			pstmt.setInt(3, custPayment.getMethodTransactionID());
-			pstmt.setTimestamp(4, custPayment.getDatePaid());
-			pstmt.setTimestamp(5, custPayment.getDateReturned());
+			pstmt.setLong(4, custPayment.getDatePaid());
+			pstmt.setLong(5, custPayment.getDateReturned());
 			pstmt.setFloat(6, custPayment.getTotalPaid());
 			pstmt.executeUpdate();
 			
@@ -73,15 +72,15 @@ public class PaymentDAO {
 	/**
 	 * marks a payment status as refunded
 	 * @param paymentStatusID		the payment ID to update
-	 * @param date 					the date/time the update occurred
+	 * @param refund 				the Unix time stamp the update occurred
 	 */
-	public void updatePaymentStatusForRefund(int paymentStatusID, Timestamp date) {
+	public void updatePaymentStatusForRefund(int paymentStatusID, long refund) {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
-			String updateStmt = "UPDATE payment SET status_id = ?, date_refunded = ? WHERE payment_id = ?";
+			String updateStmt = "UPDATE payment SET status_id = ?, date_refunded = FROM_UNIXTIME(?) WHERE payment_id = ?";
 			pstmt = conn.prepareStatement(updateStmt);
 			pstmt.setInt(1, Constant.RETURNED);
-			pstmt.setTimestamp(2, date);
+			pstmt.setLong(2, refund);
 			pstmt.setInt(3, paymentStatusID);
 			pstmt.executeUpdate();
 		}catch(SQLException sqe){

@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.model.review;
 
-import java.sql.Timestamp;
 
 /**
  * instantiates the review interface to represent the review model
@@ -15,7 +14,7 @@ public class ReviewImpl implements Review{
 	private int productReviewID;
 	private int rating;
 	private String review;
-	private Timestamp reviewDate;
+	private long reviewDate;
 	
 
 	public int getCustomerID() {
@@ -60,10 +59,10 @@ public class ReviewImpl implements Review{
 	public void setReview(String review) {
 		this.review = review;
 	}
-	public Timestamp getReviewDate() {
+	public long getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Timestamp reviewDate) {
+	public void setReviewDate(long reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	

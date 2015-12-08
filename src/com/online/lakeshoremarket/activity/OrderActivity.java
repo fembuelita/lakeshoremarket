@@ -1,12 +1,5 @@
 package com.online.lakeshoremarket.activity;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import com.online.lakeshoremarket.domain.OrderDomain;
 import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.representation.order.OrderRepresentation;
@@ -50,34 +43,14 @@ public class OrderActivity {
 		orderRepresentation.setQty(custOrder.getQty());
 		orderRepresentation.setTrackingNumber(custOrder.getTrackingNumber());
 		
-		if(null != custOrder.getDatePurchased()){
-			GregorianCalendar gregCalDatePurchased = new GregorianCalendar();
-			long longDatePurchased = custOrder.getDatePurchased().getTime();
-			Date utilDatePurchased = new Date(longDatePurchased);
-			gregCalDatePurchased.setTime(utilDatePurchased);
-			XMLGregorianCalendar xmlDatePurchased;
-			try {
-				xmlDatePurchased = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregCalDatePurchased);
-				orderRepresentation.setDatePurchased((xmlDatePurchased));
-			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
-			}
+		if(custOrder.getDatePurchased() > 0 ){
+			orderRepresentation.setDatePurchased( custOrder.getDatePurchased() );
 		}
 		
-		if(null != custOrder.getDateRefunded()){
-			GregorianCalendar gregCalDateRefunded = new GregorianCalendar();
-			long longDateRefunded = custOrder.getDateRefunded().getTime();
-			Date utilDateRefunded = new Date(longDateRefunded);
-			gregCalDateRefunded.setTime(utilDateRefunded);
-			XMLGregorianCalendar xmlDateRefunded;
-			try {
-				xmlDateRefunded = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregCalDateRefunded);
-				orderRepresentation.setDateRefunded(xmlDateRefunded);
-			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		if( custOrder.getDateRefunded() > 0){
+			orderRepresentation.setDateRefunded( custOrder.getDateRefunded() );
+		}		
+		
 		
 		return orderRepresentation;
 	}

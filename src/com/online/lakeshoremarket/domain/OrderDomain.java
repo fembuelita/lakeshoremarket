@@ -1,7 +1,6 @@
 package com.online.lakeshoremarket.domain;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.Instant;
 
 import com.online.lakeshoremarket.dao.OrderDAO;
 import com.online.lakeshoremarket.model.order.Order;
@@ -97,10 +96,8 @@ public class OrderDomain {
 	 * @param orderID 		the order ID to update
 	 */
 	private void updateOrderStatusForRefund(int orderID) {
-		Date systemDate = new Date();
-		Timestamp date = new Timestamp(systemDate.getTime());
 		orderDao = new OrderDAO();
-		orderDao.updateOrderStatusForRefund(orderID,date);
+		orderDao.updateOrderStatusForRefund(orderID, Instant.now().getEpochSecond() );
 	}
 	
 	/**

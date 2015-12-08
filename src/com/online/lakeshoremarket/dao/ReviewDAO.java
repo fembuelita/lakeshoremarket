@@ -34,13 +34,13 @@ public class ReviewDAO {
 			String insertStmt = "INSERT INTO partner_review "
 											+ "(partner_id, customer_id, rating, review, review_date) "
 								+ "VALUES "
-											+ "(?,?,?,?,?)";
+											+ "(?,?,?,?,FROM_UNIXTIME(?))";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, review.getPartnerID());
 			pstmt.setInt(2, review.getCustomerID());
 			pstmt.setInt(3, review.getRating());
 			pstmt.setString(4, review.getReview());
-			pstmt.setTimestamp(5, review.getReviewDate());
+			pstmt.setLong(5, review.getReviewDate());
 			rowsUpdated = pstmt.executeUpdate();
 			if(0 != rowsUpdated){
 				String selectQuery = "SELECT MAX(partner_review_id) FROM partner_review";
@@ -81,13 +81,13 @@ public class ReviewDAO {
 			String insertStmt = "INSERT INTO product_review "
 											+ "(product_id, customer_id, rating, review, review_date) "
 								+ "VALUES "
-											+ "(?,?,?,?,?)";
+											+ "(?,?,?,?,FROM_UNIXTIME(?))";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, review.getProductID());
 			pstmt.setInt(2, review.getCustomerID());
 			pstmt.setInt(3, review.getRating());
 			pstmt.setString(4, review.getReview());
-			pstmt.setTimestamp(5, review.getReviewDate());
+			pstmt.setLong(5, review.getReviewDate());
 			rowsUpdated = pstmt.executeUpdate();
 			if(0 != rowsUpdated){
 				String selectQuery = "SELECT MAX(product_review_id) FROM product_review";
@@ -124,7 +124,7 @@ public class ReviewDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT * FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
+			String insertStmt = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM partner_review WHERE `partner_review_id`=" + "(?) LIMIT 1";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt( 1, reviewID );
 			
@@ -136,7 +136,7 @@ public class ReviewDAO {
 				rev.setPartnerReviewID( resultSet.getInt( "partner_review_id" ) );
 				rev.setRating( resultSet.getInt( "rating" ) );
 				rev.setReview( resultSet.getString( "review" ) );
-				rev.setReviewDate( resultSet.getTimestamp( "review_date" ) );
+				rev.setReviewDate( resultSet.getLong( "date_reviewed" ) );
 			}
 			
 		}catch(SQLException sqe){
@@ -168,7 +168,7 @@ public class ReviewDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		Review rev = new ReviewImpl();
 		try{
-			String insertStmt = "SELECT *FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
+			String insertStmt = "SELECT *, UNIX_TIMESTAMP(`review_date`) as `date_reviewed` FROM product_review WHERE `product_review_id`=" + "(?) LIMIT 1";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt( 1, reviewID );
 			
@@ -180,7 +180,7 @@ public class ReviewDAO {
 				rev.setProductReviewID( resultSet.getInt( "product_review_id" ) );
 				rev.setRating( resultSet.getInt( "rating" ) );
 				rev.setReview( resultSet.getString( "review" ) );
-				rev.setReviewDate( resultSet.getTimestamp( "review_date" ) );
+				rev.setReviewDate( resultSet.getLong( "date_reviewed" ) );
 			}
 			
 		}catch(SQLException sqe){

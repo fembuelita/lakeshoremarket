@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.model.order;
 
-import java.sql.Timestamp;
 
 /**
  * instantiates the order interface to represent the order model
@@ -8,8 +7,8 @@ import java.sql.Timestamp;
  */
 public class OrderImpl implements Order{
 
-	private Timestamp datePurchased;
-	private Timestamp dateRefunded;
+	private long datePurchased;
+	private long dateRefunded;
 	private int customerID;
 	private int orderID;
 	private int orderStatusCode;
@@ -34,16 +33,16 @@ public class OrderImpl implements Order{
 	//We might remove the above two attributes later on
 	
 	
-	public Timestamp getDatePurchased() {
+	public long getDatePurchased() {
 		return datePurchased;
 	}
-	public void setDatePurchased(Timestamp datePurchased) {
+	public void setDatePurchased(long datePurchased) {
 		this.datePurchased = datePurchased;
 	}
-	public Timestamp getDateRefunded() {
+	public long getDateRefunded() {
 		return dateRefunded;
 	}
-	public void setDateRefunded(Timestamp dateRefunded) {
+	public void setDateRefunded(long dateRefunded) {
 		this.dateRefunded = dateRefunded;
 	}
 	public int getCustomerID() {

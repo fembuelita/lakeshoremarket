@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.model.review;
 
-import java.sql.Timestamp;
 /**
  * represents a review in the database
  *
@@ -95,13 +94,13 @@ public interface Review {
 	 * gets the date the review was created
 	 * @return the timestamp
 	 */
-	public Timestamp getReviewDate();
+	public long getReviewDate();
 	
 	/**
 	 * sets the creation date of the review
 	 * @param reviewDate the timestamp
 	 */
-	public void setReviewDate(Timestamp reviewDate);
+	public void setReviewDate(long reviewDate);
 	
 	
 }

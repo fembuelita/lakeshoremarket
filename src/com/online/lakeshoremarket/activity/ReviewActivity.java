@@ -1,12 +1,5 @@
 package com.online.lakeshoremarket.activity;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import com.online.lakeshoremarket.domain.ReviewDomain;
 import com.online.lakeshoremarket.model.review.Review;
 import com.online.lakeshoremarket.model.review.ReviewImpl;
@@ -120,19 +113,8 @@ public class ReviewActivity {
 		revRep.setCustomerID( review.getCustomerID() );
 		revRep.setRating( review.getRating() );
 		revRep.setReview( review.getReview() );
-		if(null != review.getReviewDate()){
-			GregorianCalendar gregCalReviewDate = new GregorianCalendar();
-			long longReviewDate = review.getReviewDate().getTime();
-			Date utilReviewDate = new Date(longReviewDate);
-			gregCalReviewDate.setTime(utilReviewDate);
-			XMLGregorianCalendar xmlReviewDate;
-			try {
-				xmlReviewDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregCalReviewDate);
-				revRep.setReviewDate(xmlReviewDate);
-			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
-			}
-		}
+		revRep.setReviewDate( review.getReviewDate() );
+		
 		
 		return revRep;
 	}

@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
 
@@ -26,7 +25,7 @@ public class ReviewRepresentation extends AbstractRepresentation{
 	private int productReviewID;
 	private int rating;
 	private String review;
-	private XMLGregorianCalendar reviewDate;
+	private long reviewDate = 0;
 	
 	/**
 	 * gets the customer ID of the reviewer
@@ -158,7 +157,7 @@ public class ReviewRepresentation extends AbstractRepresentation{
 	 * @return the timestamp
 	 */
 	
-	public XMLGregorianCalendar getReviewDate() {
+	public long getReviewDate() {
 		return reviewDate;
 	}
 	
@@ -167,7 +166,7 @@ public class ReviewRepresentation extends AbstractRepresentation{
 	 * @param reviewDate the timestamp
 	 */
 	
-	public void setReviewDate(XMLGregorianCalendar reviewDate) {
+	public void setReviewDate(long reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	

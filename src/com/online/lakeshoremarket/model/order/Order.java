@@ -1,7 +1,5 @@
 package com.online.lakeshoremarket.model.order;
 
-import java.sql.Timestamp;
-
 /**
  * represents an order in the database
  *
@@ -12,24 +10,24 @@ public interface Order {
 	 * gets the date and time an item was purchased
 	 * @return the timestamp
 	 */
-	public Timestamp getDatePurchased();
+	public long getDatePurchased();
 	
 	/**
 	 * sets the date and time an item was purchased
 	 * @param datePurchased the timestamp
 	 */
-	public void setDatePurchased(Timestamp datePurchased);
+	public void setDatePurchased(long datePurchased);
 	
 	/**
 	 * gets the date an item was refunded
 	 * @return the timestamp
 	 */
-	public Timestamp getDateRefunded();
+	public long getDateRefunded();
 	/**
 	 * sets the date an item was refunded
 	 * @param dateRefunded the refund date
 	 */
-	public void setDateRefunded(Timestamp dateRefunded);
+	public void setDateRefunded(long dateRefunded);
 	/**
 	 * gets a customer ID for this order
 	 * @return the customer ID
