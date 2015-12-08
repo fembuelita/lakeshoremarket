@@ -35,7 +35,7 @@ public class OrderDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
 			String insertStmt = "INSERT INTO `order` "
-											+ "(customer_id, payment_id, status_id, date_purchased, date_refunded, tracking_number, product_id, qty ) "
+											+ "(customer_id, payment_id, status_id, date_purchased, tracking_number, product_id, qty ) "
 								+ "VALUES "
 											+ "(?,?,?,FROM_UNIXTIME(?),?,?,?)";
 			pstmt = conn.prepareStatement(insertStmt);
