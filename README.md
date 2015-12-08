@@ -20,7 +20,7 @@ The Domain component comprises of the Business Logic. This is where all the mani
 
 The Database Access Object Layer or the DAO layer is responsible for connection to the Lakeshore Market database. This layer uses the JDBC for interacting with the database.  
 
-Service layer contains the services for the API as well as several test classes for testing primary site features.
+Service layer contains the services for the API.
 
 ## External Apps
 Our app is powered by Heroku, and we are also paying a small sum for a Digital Ocean VPS setup to use MySQL without the limitations imposed by Heroku. We may eventually migrate to PostGRES, but not at this point.  
