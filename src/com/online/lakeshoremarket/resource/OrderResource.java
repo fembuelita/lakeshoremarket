@@ -1,6 +1,5 @@
 package com.online.lakeshoremarket.resource;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -39,7 +38,10 @@ public class OrderResource {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/ship")
-	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
+//	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
+	public GenericResponse shipOrder(@HeaderParam("email") String email, @HeaderParam("password") String password){
+		String orderIDString = new String( "25" );
+		String trackingNumb = "1z555";
 		System.out.println("POST METHOD to ship order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
