@@ -17,8 +17,21 @@ import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class PaymentResource {
 
+	/**
+	 * PUT method request for placing an order
+	 * @param orderRequest
+	 * @param email
+	 * @param password
+	 * @return generic message (affirmative if successful)
+	 */
+	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

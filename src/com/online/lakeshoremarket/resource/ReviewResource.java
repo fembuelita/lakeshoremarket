@@ -19,8 +19,21 @@ import com.online.lakeshoremarket.representation.review.ReviewRepresentation;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class ReviewResource {
 
+	/**
+	 * PUT method request for creating a new partner review
+	 * @param partnerReviewRequest
+	 * @param email
+	 * @param password
+	 * @return generic response (affirmation, if successful); else, exception message if not authorized
+	 */
+	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -38,6 +51,14 @@ public class ReviewResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * PUT method request for creating a new product review
+	 * @param productReviewRequest
+	 * @param email
+	 * @param password
+	 * @return generic response (affirmation, if successful); else, exception message if not authorized
+	 */
 	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -57,6 +78,14 @@ public class ReviewResource {
 		}
 	}
 	
+	/**
+	 * GET method request for partner review
+	 * @param partnerID
+	 * @param email
+	 * @param password
+	 * @return partner review (if user is authorized); else, exception message
+	 */
+	
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/review/partner/{partnerID}")
@@ -71,6 +100,14 @@ public class ReviewResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * GET method request for the product review
+	 * @param productID
+	 * @param email
+	 * @param password
+	 * @return product review (if user is authorized); else, exception message
+	 */
 	
 	@GET
 	@Produces({"application/xml", "application/json"})

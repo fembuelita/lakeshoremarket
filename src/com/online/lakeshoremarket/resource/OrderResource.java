@@ -19,8 +19,21 @@ import com.online.lakeshoremarket.util.Constant;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
+
+/**
+ * Provides a medium for communications between view and controller/model
+ */
+
 public class OrderResource {
 
+	/**
+	 * DELETE method for canceling an order
+	 * @param orderIDString
+	 * @param email
+	 * @param password
+	 * @return generic response (if user is able to cancel)-- either affirmative or negative depending on status; else, exception message
+	 */
+	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
@@ -48,6 +61,14 @@ public class OrderResource {
 		}
 		
 	}
+	
+	/**
+	 * GET method request for order details
+	 * @param orderIDString
+	 * @param email
+	 * @param password
+	 * @return orderRepresentation (if user is authorized to do so)
+	 */
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
@@ -84,6 +105,15 @@ public class OrderResource {
 		}
 	}
 	
+	/**
+	 * POST method to ship order
+	 * @param orderIDString
+	 * @param trackingNumb
+	 * @param email
+	 * @param password
+	 * @return genericResponse (affirmative if successful; negative if not)
+	 */
+	
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/ship")
@@ -111,6 +141,14 @@ public class OrderResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * POST method to ship order
+	 * @param orderIDString
+	 * @param email
+	 * @param password
+	 * @return (affirmative if successful; negative if not)
+	 */
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
