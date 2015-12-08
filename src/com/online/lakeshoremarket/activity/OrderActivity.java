@@ -62,10 +62,10 @@ public class OrderActivity {
 	 * @return isOrderStatusUpdated	true if order is shipped
 	 */
 	
-	public boolean shipOrder(String orderIDString, String trackingNumb) {
+	public boolean shipOrder(int orderID, String trackingNumb) {
 		boolean isOrderStatusUpdated = false;
 		OrderDomain orderDomain = new OrderDomain();
-		isOrderStatusUpdated = orderDomain.shipOrder(Integer.parseInt(orderIDString),trackingNumb);
+		isOrderStatusUpdated = orderDomain.shipOrder(orderID,trackingNumb);
 		return isOrderStatusUpdated;
 	}
 	

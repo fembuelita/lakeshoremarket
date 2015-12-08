@@ -38,10 +38,7 @@ public class OrderResource {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/ship")
-//	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
-	public GenericResponse shipOrder(@HeaderParam("email") String email, @HeaderParam("password") String password){
-		String orderIDString = new String( "25" );
-		String trackingNumb = "1z555";
+	public GenericResponse shipOrder(OrderRepresentation custOrder, @HeaderParam("email") String email, @HeaderParam("password") String password){
 		System.out.println("POST METHOD to ship order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
@@ -49,13 +46,13 @@ public class OrderResource {
 			GenericResponse genericResponse = new GenericResponse();
 			boolean isOrderShipped = false;
 			OrderActivity orderActivity = new OrderActivity();
-			isOrderShipped = orderActivity.shipOrder(orderIDString,trackingNumb);
+			isOrderShipped = orderActivity.shipOrder(custOrder.getOrderID(), custOrder.getTrackingNumber());
 			if(isOrderShipped){
 				genericResponse.setMessage("Order is shipped");
 				genericResponse.setSuccess(true);
-				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/"+orderIDString, "application/xml");
-				Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderIDString , "application/xml");
-				Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/"+custOrder.getOrderID(), "application/xml");
+				Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+custOrder.getOrderID() , "application/xml");
+				Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + custOrder.getOrderID(), "application/xml");
 				genericResponse.setLinks(fulfill, get, cancel);
 			}else{
 				genericResponse.setMessage("Order is not shipped");
