@@ -199,7 +199,7 @@ public class PartnerDAO {
 	 * @throws Exception 
 	 */
 	
-	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) throws Exception {
+	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
 		conn = DatabaseConnection.getSqlConnection();		
 		
 		PartnerReport partnerReport = null;
@@ -218,8 +218,8 @@ public class PartnerDAO {
 									+ "	WHERE status_id NOT IN(0) ";			
 			pstmt = conn.prepareStatement(getQuery);
 			pstmt.setInt(1, partnerID);
-			throw new Exception( pstmt.toString() );
-			/*ResultSet resultSet = pstmt.executeQuery();
+			System.err.println( pstmt.toString() );
+			ResultSet resultSet = pstmt.executeQuery();
 			while(resultSet.next()){
 				partnerReport = new PartnerReportImpl();
 				partnerReport.setProductId(resultSet.getInt("product_id"));
@@ -231,7 +231,7 @@ public class PartnerDAO {
 				partnerReport.setTotalProfit(resultSet.getInt("total_profit"));
 				
 				paReports.add(partnerReport);
-			}*/
+			}
 		}catch(SQLException sqe){
 			System.err.println("PartnerDAO.generatePartnerReport: Threw an SQLException while generating partner sales report.");
   	      	System.err.println(sqe.getMessage());
@@ -248,7 +248,7 @@ public class PartnerDAO {
 			}
 		}
 	
-//		return paReports;
+		return paReports;
 	}
 	
 	/**
