@@ -102,7 +102,7 @@ public class OrderResource {
 	/**
 	 * POST method to ship order
 	 * @param orderIDString
-	 * @param trackingNumber
+	 * @param trackingNumb
 	 * @param email
 	 * @param password
 	 * @return genericResponse (affirmative if successful; negative if not)
