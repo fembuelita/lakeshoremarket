@@ -192,10 +192,8 @@ public class OrderDAO {
 				custOrder.setCustomerID(resultSet.getInt("customer_id"));
 				custOrder.setPaymentID(resultSet.getInt("payment_id"));
 				custOrder.setOrderStatusCode(resultSet.getInt("status_id"));
-				custOrder.setDatePurchased(resultSet.getLong("purchaseDate"));
-				if(null != resultSet.getTimestamp("date_refunded")){
-					custOrder.setDateRefunded(resultSet.getLong("refund_date"));
-				}
+				custOrder.setDatePurchased(resultSet.getLong("purchase_date"));
+				custOrder.setDateRefunded(resultSet.getLong("refund_date"));
 				custOrder.setTrackingNumber(resultSet.getString("tracking_number"));
 				custOrder.setProductID(resultSet.getInt("product_id"));
 				custOrder.setQty(resultSet.getInt("qty"));
