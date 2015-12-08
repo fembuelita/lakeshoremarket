@@ -79,9 +79,11 @@ public class PartnerResource {
 			PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 			partnerRepresentation = partnerActivity.getPartnerDetails(partnerIDString);
 			
+			Link getReviews = new Link("Get Partner Details", Constant.LSM_COMMON_URL + "/partner/" + partnerIDString, "application/xml");
+			Link createReview = new Link("Create Partner Review", Constant.LSM_COMMON_URL + "/review/partner", "application/xml");
 			Link deletePartner = new Link("Delete Partner", Constant.LSM_COMMON_URL + "/partner/" + partnerIDString, "application/xml");
 			Link generateReport = new Link("Generate Report", Constant.LSM_COMMON_URL + "/report/" + partnerIDString, "application/xml");
-			partnerRepresentation.setLinks(deletePartner, generateReport);
+			partnerRepresentation.setLinks(getReviews, createReview, generateReport, deletePartner);
 			
 			return partnerRepresentation;
 		}else{

@@ -110,7 +110,8 @@ public class ProductActivity {
 			Link review = new Link("Create Product Review", Constant.LSM_COMMON_URL + "/review/product", "application/xml");
 			Link getReview = new Link("Get Product Reviews", Constant.LSM_COMMON_URL + "/review/product/"+product.getProductID(), "application/xml");
 			Link buy = new Link("Buy Product", Constant.LSM_COMMON_URL + "/order", "application/xml");
-			productRepresentation.setLinks(check,review,getReview,buy);
+			Link getPartnerDetail = new Link("Get Seller Details", Constant.LSM_COMMON_URL + "/partner/" + product.getPartnerID(), "application/xml");
+			productRepresentation.setLinks(check,review,getReview,buy, getPartnerDetail);
 			return productRepresentation;
 		}else{
 			return null;
