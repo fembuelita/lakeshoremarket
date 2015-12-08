@@ -196,9 +196,10 @@ public class PartnerDAO {
 	 * Builds a partner report
 	 * @param partnerID 		the partner ID to look up
 	 * @return 					a report with partner data
+	 * @throws Exception 
 	 */
 	
-	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
+	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) throws Exception {
 		conn = DatabaseConnection.getSqlConnection();		
 		
 		PartnerReport partnerReport = null;
@@ -214,10 +215,11 @@ public class PartnerDAO {
 									+ "	FROM `order` "
 									+ "	INNER JOIN product "
 									+ "	ON `order`.product_id=product.product_id  AND product.partner_id = ? "
-									+ "	WHERE status_id NOT IN(0) ";
+									+ "	WHERE status_id NOT IN(0) ";			
 			pstmt = conn.prepareStatement(getQuery);
 			pstmt.setInt(1, partnerID);
-			ResultSet resultSet = pstmt.executeQuery();
+			throw new Exception( pstmt.toString() );
+			/*ResultSet resultSet = pstmt.executeQuery();
 			while(resultSet.next()){
 				partnerReport = new PartnerReportImpl();
 				partnerReport.setProductId(resultSet.getInt("product_id"));
@@ -229,7 +231,7 @@ public class PartnerDAO {
 				partnerReport.setTotalProfit(resultSet.getInt("total_profit"));
 				
 				paReports.add(partnerReport);
-			}
+			}*/
 		}catch(SQLException sqe){
 			System.err.println("PartnerDAO.generatePartnerReport: Threw an SQLException while generating partner sales report.");
   	      	System.err.println(sqe.getMessage());
@@ -245,8 +247,7 @@ public class PartnerDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-System.err.println("PartnerDAO.generatePartnerReport: Threw an Exception while generating partner sales report.");
-throw new GenericLSMException("Testing sales report query. Query: " +  pstmt.toString(), Response.Status.INTERNAL_SERVER_ERROR );		
+	
 //		return paReports;
 	}
 	
