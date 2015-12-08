@@ -41,7 +41,7 @@ public class ReviewActivity {
 			genericResponse.setMessage("Partner review is created");
 			genericResponse.setSuccess(true);
 			genericResponse.setGenericReturnValue( Integer.toString( partnerReviewID ) );
-			Link get = new Link("Get Partner Review Details", Constant.LSM_COMMON_URL + "/review/partner/" + partnerReviewID, "application/xml");
+			Link get = new Link("Get Partner Reviews", Constant.LSM_COMMON_URL + "/review/partner/" + partnerReviewRequest.getPartnerID(), "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Partner review is not created");
@@ -73,7 +73,7 @@ public class ReviewActivity {
 			genericResponse.setMessage("Product review is created");
 			genericResponse.setSuccess(true);
 			genericResponse.setGenericReturnValue( Integer.toString( productReviewID ) );
-			Link get = new Link("Get Product Review Details", Constant.LSM_COMMON_URL + "/review/product/" + productReviewID, "application/xml");
+			Link get = new Link("Get Product Reviews", Constant.LSM_COMMON_URL + "/review/product/" + productReviewRequest.getProductID(), "application/xml");
 			genericResponse.setLinks(get);
 		}else{
 			genericResponse.setMessage("Product review is not created");
