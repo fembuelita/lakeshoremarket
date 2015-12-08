@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
+
 @XmlRootElement(name = "Partner")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
@@ -14,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  */
 
-public class PartnerRepresentation {
+public class PartnerRepresentation extends AbstractRepresentation {
 
 	private boolean isActive;
 	private int addressID;
