@@ -199,11 +199,11 @@ public class PartnerDAO {
 	 */
 	
 	public ArrayList<PartnerReport> generatePartnerReport(int partnerID) {
-		conn = DatabaseConnection.getSqlConnection();
-		ArrayList<PartnerReport> paReports = null;
+		conn = DatabaseConnection.getSqlConnection();		
+		
+		PartnerReport partnerReport = null;
+		ArrayList<PartnerReport> paReports = new ArrayList<PartnerReport>();;
 		try{
-			PartnerReport partnerReport = null;
-			paReports = new ArrayList<PartnerReport>();
 			String getQuery = 		"SELECT"
 										+ " `order`.product_id, "
 										+ " `order`.qty, product.cost, "
@@ -245,7 +245,9 @@ public class PartnerDAO {
 						+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
 			}
 		}
-		return paReports;
+System.err.println("PartnerDAO.generatePartnerReport: Threw an Exception while generating partner sales report.");
+throw new GenericLSMException("Testing sales report query. Query: " +  pstmt.toString(), Response.Status.INTERNAL_SERVER_ERROR );		
+//		return paReports;
 	}
 	
 	/**
