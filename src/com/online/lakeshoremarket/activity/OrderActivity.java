@@ -75,10 +75,10 @@ public class OrderActivity {
 	 * @return isOrderStatusUpdated	true if order is fulfilled
 	 */
 	
-	public boolean fulfillOrder(String orderIDString) {
+	public boolean fulfillOrder(int orderID) {
 		boolean isOrderStatusUpdated = false;
 		OrderDomain orderDomain = new OrderDomain();
-		isOrderStatusUpdated = orderDomain.fulfillOrder(Integer.parseInt(orderIDString));
+		isOrderStatusUpdated = orderDomain.fulfillOrder(orderID);
 		return isOrderStatusUpdated;
 	}
 	

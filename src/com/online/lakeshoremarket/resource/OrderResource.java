@@ -51,7 +51,7 @@ public class OrderResource {
 				genericResponse.setMessage("Order is shipped");
 				genericResponse.setSuccess(true);
 				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/"+custOrder.getOrderID(), "application/xml");
-				Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+custOrder.getOrderID() , "application/xml");
+				Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill", "application/xml");
 				Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + custOrder.getOrderID(), "application/xml");
 				genericResponse.setLinks(fulfill, get, cancel);
 			}else{
@@ -74,8 +74,8 @@ public class OrderResource {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/fulfill/{orderIDString}")
-	public GenericResponse fulfillOrder(@PathParam("orderIDString") String orderIDString, @HeaderParam("email") String email, @HeaderParam("password") String password){
+	@Path("/order/fulfill")
+	public GenericResponse fulfillOrder(OrderRepresentation custOrder, @HeaderParam("email") String email, @HeaderParam("password") String password){
 		System.out.println("POST METHOD to ship order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
@@ -83,7 +83,7 @@ public class OrderResource {
 			GenericResponse genericResponse = new GenericResponse();
 			boolean isOrderFulfilled = false;
 			OrderActivity orderActivity = new OrderActivity();
-			isOrderFulfilled = orderActivity.fulfillOrder(orderIDString);
+			isOrderFulfilled = orderActivity.fulfillOrder(custOrder.getOrderID());
 			if(isOrderFulfilled){
 				genericResponse.setMessage("Order is fulfilled");
 				genericResponse.setSuccess(true);
@@ -91,7 +91,7 @@ public class OrderResource {
 				genericResponse.setMessage("Order is not fulfilled");
 				genericResponse.setSuccess(false);
 			}
-			Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+			Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + custOrder.getOrderID(), "application/xml");
 			genericResponse.setLinks(get);	
 			return genericResponse;
 		}else{
@@ -156,8 +156,8 @@ public class OrderResource {
 			orderRepresentation = orderActivity.getOrderDetails(orderIDString);
 			
 			Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderRepresentation.getOrderID(), "application/xml");
-			Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship/" + orderRepresentation.getOrderID(), "application/xml");
-			Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderRepresentation.getOrderID() , "application/xml");
+			Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
+			Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill" , "application/xml");
 			// If order is shipped, we can further proceed for fulfilling the order
 			if( orderRepresentation.getOrderStatusCode() == Constant.SHIPPED )
 				orderRepresentation.setLinks( cancel, fulfill );
