@@ -26,6 +26,14 @@ import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 public class CustomerResource {
 
+	/**
+	 * PUT method request for creating a new customer
+	 * @param custRequest
+	 * @param email
+	 * @param password
+	 * @return genericResponse (affirmative if successful)
+	 */
+	
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -45,6 +53,14 @@ public class CustomerResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * GET method request for customer details
+	 * @param customerIDString
+	 * @param email
+	 * @param password
+	 * @return customerRepresentation if user is authorized and customer exists; else, exception message
+	 */
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
@@ -66,6 +82,14 @@ public class CustomerResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * DELETE method request for deleting a customer
+	 * @param customerIDString
+	 * @param email
+	 * @param password
+	 * @return genericResponse (affirmative if successful, negative if not)
+	 */
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
