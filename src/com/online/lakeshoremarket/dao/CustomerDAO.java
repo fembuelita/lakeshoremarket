@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.core.Response;
 
@@ -11,6 +12,8 @@ import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.Customer;
 import com.online.lakeshoremarket.model.customer.CustomerImpl;
+import com.online.lakeshoremarket.model.order.Order;
+import com.online.lakeshoremarket.model.order.OrderImpl;
 import com.online.lakeshoremarket.util.DatabaseConnection;
 
 /**
@@ -334,5 +337,50 @@ public class CustomerDAO {
 		}
 		
 		return cust;
+	}
+	
+
+	/**
+	 * Queries the DB for orders placed by a  specific customer
+	 * @param customerID
+	 * @return order history
+	 */
+	public ArrayList<Order> getOrderHistory(int customerID) {
+		Order custOrder = null;
+		ArrayList<Order> orderList = new ArrayList<>();
+		conn = DatabaseConnection.getSqlConnection();
+		try{
+			String getQuery = "SELECT *, UNIX_TIMESTAMP(date_purchased) AS `purchase_date`, UNIX_TIMESTAMP(date_refunded) as `refund_date` FROM `order` WHERE customer_id = ?";
+			pstmt = conn.prepareStatement(getQuery);
+			pstmt.setInt(1, customerID);
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()){
+				custOrder = new OrderImpl();
+				custOrder.setCustomerID(resultSet.getInt("customer_id"));
+				custOrder.setPaymentID(resultSet.getInt("payment_id"));
+				custOrder.setOrderStatusCode(resultSet.getInt("status_id"));
+				custOrder.setDatePurchased(resultSet.getLong("purchase_date"));
+				custOrder.setDateRefunded(resultSet.getLong("refund_date"));
+				custOrder.setTrackingNumber(resultSet.getString("tracking_number"));
+				custOrder.setProductID(resultSet.getInt("product_id"));
+				custOrder.setQty(resultSet.getInt("qty"));
+				orderList.add( custOrder );
+			}			
+		}catch(SQLException sqe){
+			System.err.println("CustomerDAO.getOrderHistory: Threw an SQLException while searching for orders by customer ID.");
+  	      	System.err.println(sqe.getMessage());
+  	      	throw new GenericLSMException("Threw an SQLException while searching for orders in table.		" 
+  	      									+ sqe.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("CustomerDAO.getOrderHistory: Threw an SQLException while searching for orders by customer ID.");
+	  	      	throw new GenericLSMException("Threw an SQLException while searching for orders in table.		" 
+							+ e.getMessage() , Response.Status.INTERNAL_SERVER_ERROR );
+			}
+		}
+		return orderList;
 	}
 }

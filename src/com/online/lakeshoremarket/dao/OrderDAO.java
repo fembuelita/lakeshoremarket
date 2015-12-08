@@ -37,16 +37,15 @@ public class OrderDAO {
 			String insertStmt = "INSERT INTO `order` "
 											+ "(customer_id, payment_id, status_id, date_purchased, date_refunded, tracking_number, product_id, qty ) "
 								+ "VALUES "
-											+ "(?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?),?,?,?)";
+											+ "(?,?,?,FROM_UNIXTIME(?),?,?,?)";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, custOrder.getCustomerID());
 			pstmt.setInt(2, custOrder.getPaymentID());
 			pstmt.setInt(3, custOrder.getOrderStatusCode());
 			pstmt.setLong(4, custOrder.getDatePurchased());
-			pstmt.setLong(5, custOrder.getDateRefunded());
-			pstmt.setString(6, custOrder.getTrackingNumber());
-			pstmt.setInt(7, custOrder.getProductID());
-			pstmt.setInt(8, custOrder.getQty());
+			pstmt.setString(5, custOrder.getTrackingNumber());
+			pstmt.setInt(6, custOrder.getProductID());
+			pstmt.setInt(7, custOrder.getQty());
 			rowsUpdated = pstmt.executeUpdate();
 			if(0 != rowsUpdated){
 				String selectQuery = "SELECT MAX(order_id) FROM `order`";

@@ -32,16 +32,15 @@ public class PaymentDAO {
 		conn = DatabaseConnection.getSqlConnection();
 		try{
 			String insertStmt = "INSERT INTO payment "
-											+ "(status_id, method, method_transaction_id, date_paid, date_refunded, total_paid ) "
+											+ "(status_id, method, method_transaction_id, date_paid, total_paid ) "
 								+ "VALUES "
-											+ "(?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?),?)";
+											+ "(?,?,?,FROM_UNIXTIME(?),?)";
 			pstmt = conn.prepareStatement(insertStmt);
 			pstmt.setInt(1, custPayment.getPaymentStatusCode());
 			pstmt.setString(2, String.valueOf(custPayment.getMethodOfPayment()));
 			pstmt.setInt(3, custPayment.getMethodTransactionID());
 			pstmt.setLong(4, custPayment.getDatePaid());
-			pstmt.setLong(5, custPayment.getDateReturned());
-			pstmt.setFloat(6, custPayment.getTotalPaid());
+			pstmt.setFloat(5, custPayment.getTotalPaid());
 			pstmt.executeUpdate();
 			
 			

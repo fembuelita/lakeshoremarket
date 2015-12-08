@@ -1,5 +1,7 @@
 package com.online.lakeshoremarket.resource;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,6 +18,7 @@ import com.online.lakeshoremarket.exception.GenericLSMException;
 import com.online.lakeshoremarket.representation.customer.CustomerRepresentation;
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
+import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.util.LSMAuthenticator;
 
 @Path("/")
@@ -115,4 +118,33 @@ public class CustomerResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 	}
+	
+	/**
+	 * GET method request for customer order history
+	 * @param customerIDString
+	 * @param email
+	 * @param password
+	 * @return ArrayList<OrderRepresentation> The order history
+	 */
+	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/customer/orders/{customerID}")
+	public ArrayList<OrderRepresentation> getCustomerOrderHistory(@PathParam("customerID") String customerIDString, @HeaderParam("email") String email, @HeaderParam("password") String password){
+		System.out.println("GET METHOD Request for Customer details............." + customerIDString);
+		boolean isUserAuthentic = false;
+		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
+		if(!isUserAuthentic) {
+			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
+		}
+		
+		CustomerActivity customerActivity = new CustomerActivity();
+		return customerActivity.getOrderHistory( Integer.parseInt( customerIDString ) );
+	}	
 }
+
+
+
+
+
+

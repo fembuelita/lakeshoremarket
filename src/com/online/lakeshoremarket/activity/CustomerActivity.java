@@ -1,6 +1,8 @@
 package com.online.lakeshoremarket.activity;
 
 
+import java.util.ArrayList;
+
 import com.online.lakeshoremarket.domain.CustomerDomain;
 import com.online.lakeshoremarket.model.customer.Address;
 import com.online.lakeshoremarket.model.customer.AddressImpl;
@@ -10,6 +12,7 @@ import com.online.lakeshoremarket.representation.customer.CustomerRepresentation
 import com.online.lakeshoremarket.representation.customer.CustomerRequest;
 import com.online.lakeshoremarket.representation.generic.GenericResponse;
 import com.online.lakeshoremarket.representation.generic.Link;
+import com.online.lakeshoremarket.representation.order.OrderRepresentation;
 import com.online.lakeshoremarket.util.Constant;
 
 /**
@@ -114,5 +117,10 @@ public class CustomerActivity {
 		customerRepresentation.setLinks(deleteCustomer);
 		
 		return customerRepresentation;
+	}
+
+	public ArrayList<OrderRepresentation> getOrderHistory(int parseInt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
