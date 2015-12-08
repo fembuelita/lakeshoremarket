@@ -127,9 +127,10 @@ public class OrderResource {
 			if(isOrderShipped){
 				genericResponse.setMessage("Order is shipped");
 				genericResponse.setSuccess(true);
+				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/"+orderIDString, "application/xml");
 				Link fulfill = new Link("Fulfill order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderIDString , "application/xml");
 				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
-				genericResponse.setLinks(fulfill,get);
+				genericResponse.setLinks(fulfill, get, cancel);
 			}else{
 				genericResponse.setMessage("Order is not shipped");
 				genericResponse.setSuccess(false);
@@ -167,6 +168,8 @@ public class OrderResource {
 				genericResponse.setMessage("Order is not fulfilled");
 				genericResponse.setSuccess(false);
 			}
+			Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+			genericResponse.setLinks(get);	
 			return genericResponse;
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
