@@ -363,6 +363,7 @@ public class CustomerDAO {
 				custOrder.setDateRefunded(resultSet.getLong("refund_date"));
 				custOrder.setTrackingNumber(resultSet.getString("tracking_number"));
 				custOrder.setProductID(resultSet.getInt("product_id"));
+				custOrder.setOrderID(resultSet.getInt("order_id"));
 				custOrder.setQty(resultSet.getInt("qty"));
 				orderList.add( custOrder );
 			}			
