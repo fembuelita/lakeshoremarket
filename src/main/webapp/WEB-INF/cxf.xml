@@ -24,6 +24,7 @@
 			<ref bean="partnerResource" />
 			<ref bean="paymentResource" />
 			<ref bean="reviewResource" />
+			<ref bean="utilResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />

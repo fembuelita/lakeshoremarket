@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.online.lakeshoremarket.representation.generic.AbstractRepresentation;
+
 @XmlRootElement(name = "Customer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 
+<<<<<<< HEAD
 /**
  * This class builds the representation of customers that interact with and are manipulated by the user in the service layer.
  *
@@ -16,6 +19,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 public class CustomerRepresentation {
+=======
+public class CustomerRepresentation extends AbstractRepresentation {
+>>>>>>> c507773775a3fdf2c474b3d61fcf41b9f3ac7c8c
 		
 	private boolean isActive;
 	private int billingAddress;
