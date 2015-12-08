@@ -9,6 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Partner")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
+/**
+ * Client request for partner representation.
+ *
+ */
+
 public class PartnerRequest {
 	
 	private String line1;

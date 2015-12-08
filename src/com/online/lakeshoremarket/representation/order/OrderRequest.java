@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
+/**
+ * Client request for order representation.
+ *
+ */
+
 public class OrderRequest {
 
 	private int productID;

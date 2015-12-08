@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 
 /**
- * This class builds a request for fields related to the customer representation.
+ * Client request for customer representation.
  *
  */
 

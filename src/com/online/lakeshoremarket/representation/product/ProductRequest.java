@@ -9,6 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
+
+/**
+ * Client request for customer representation.
+ *
+ */
+
 public class ProductRequest{
 	
 	
