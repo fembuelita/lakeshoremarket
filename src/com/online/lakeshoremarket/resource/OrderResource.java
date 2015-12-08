@@ -37,10 +37,9 @@ public class OrderResource {
 	 */
 	
 	@POST
-	@Consumes({"application/xml" , "application/json"})
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/ship/{orderIDString}")
-	public GenericResponse shipOrder(@PathParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
+	@Path("/order/ship")
+	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
 		System.out.println("POST METHOD to ship order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
@@ -109,7 +108,7 @@ public class OrderResource {
 	 * @return generic response (if user is able to cancel)-- either affirmative or negative depending on status; else, exception message
 	 */
 	
-	/*@DELETE
+	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
 	public GenericResponse cancelOrder(@PathParam("orderIDString") String orderIDString, @HeaderParam("email") String email, @HeaderParam("password") String password){
@@ -135,7 +134,7 @@ public class OrderResource {
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
 		
-	}*/
+	}
 	
 	/**
 	 * GET method request for order details
@@ -144,7 +143,7 @@ public class OrderResource {
 	 * @param password
 	 * @return orderRepresentation (if user is authorized to do so)
 	 */
-	/*
+	
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderIDString}")
@@ -172,5 +171,5 @@ public class OrderResource {
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
-	}*/	
+	}
 }
