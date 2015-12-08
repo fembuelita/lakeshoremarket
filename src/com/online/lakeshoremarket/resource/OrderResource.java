@@ -53,7 +53,7 @@ public class OrderResource {
 			if(isOrderRefunded){
 				genericResponse.setMessage("Order is cancelled");
 				genericResponse.setSuccess(true);
-				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+				Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
 				genericResponse.setLinks(get);
 			}else{
 				genericResponse.setMessage("Order is not cancelled");
@@ -87,8 +87,8 @@ public class OrderResource {
 			orderRepresentation = orderActivity.getOrderDetails(orderIDString);
 			
 			Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/" + orderRepresentation.getOrderID(), "application/xml");
-			Link ship = new Link("Ship order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
-			Link fulfill = new Link("Fulfill order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderRepresentation.getOrderID() , "application/xml");
+			Link ship = new Link("Ship Order", Constant.LSM_COMMON_URL + "/order/ship", "application/xml");
+			Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderRepresentation.getOrderID() , "application/xml");
 			// If order is shipped, we can further proceed for fulfilling the order
 			if( orderRepresentation.getOrderStatusCode() == Constant.SHIPPED )
 				orderRepresentation.setLinks( cancel, fulfill );
@@ -128,8 +128,8 @@ public class OrderResource {
 				genericResponse.setMessage("Order is shipped");
 				genericResponse.setSuccess(true);
 				Link cancel = new Link("Cancel Order", Constant.LSM_COMMON_URL + "/order/"+orderIDString, "application/xml");
-				Link fulfill = new Link("Fulfill order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderIDString , "application/xml");
-				Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+				Link fulfill = new Link("Fulfill Order", Constant.LSM_COMMON_URL + "/order/fulfill/"+orderIDString , "application/xml");
+				Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
 				genericResponse.setLinks(fulfill, get, cancel);
 			}else{
 				genericResponse.setMessage("Order is not shipped");
@@ -168,7 +168,7 @@ public class OrderResource {
 				genericResponse.setMessage("Order is not fulfilled");
 				genericResponse.setSuccess(false);
 			}
-			Link get = new Link("Get Order Detail", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
+			Link get = new Link("Get Order Details", Constant.LSM_COMMON_URL + "/order/" + orderIDString, "application/xml");
 			genericResponse.setLinks(get);	
 			return genericResponse;
 		}else{
