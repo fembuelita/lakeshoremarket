@@ -29,7 +29,7 @@ Our app is powered by Heroku, and we are also paying a small sum for a Digital O
   2. [Digital Ocean](http://162.243.94.35/) 
 
 ## How to use the API
-For code samples, endpoints, and sample data, please visit our data and URI mapping spreadsheet. The latest stable version can be found on [Google Docs](https://docs.google.com/spreadsheets/d/1KBOr2eQydpayd_6rlP5mEk_oogGoUVmisSFxV7XJE3w/edit?usp=sharing). For a full list of classes and methods implemented in this project, please consult our Javadoc (accessible in the "doc" folder of this repository). The entrypoint URL for Lakeshore Market is [http://lsm1.herokuapp.com/services](http://lsm1.herokuapp.com/services).
+For code samples, endpoints, and sample data, please visit our data and URI mapping spreadsheet. The latest stable version can be found on [Google Docs](https://docs.google.com/spreadsheets/d/1npm2CYr63gfPM2FyWcdhKqa8QMi1JPfQk2Z5VKjELGk/edit?usp=sharing). For a full list of classes and methods implemented in this project, please consult our Javadoc (accessible in the "doc" folder of this repository). The entrypoint URL for Lakeshore Market is [http://lsm1.herokuapp.com/services](http://lsm1.herokuapp.com/services).
 
 ## Additional Information
 The front-end repository for Lakeshore Market can be accessed [here] (https://github.com/elliottpost/lsm-front-end).
