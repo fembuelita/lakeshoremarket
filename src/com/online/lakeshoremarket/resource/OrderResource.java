@@ -76,7 +76,7 @@ public class OrderResource {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/fulfill")
 	public GenericResponse fulfillOrder(OrderRepresentation custOrder, @HeaderParam("email") String email, @HeaderParam("password") String password){
-		System.out.println("POST METHOD to ship order.............");
+		System.out.println("POST METHOD to fulfill order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
 		if(isUserAuthentic){
