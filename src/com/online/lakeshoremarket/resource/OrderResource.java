@@ -134,8 +134,8 @@ public class OrderResource {
 		}else{
 			throw new GenericLSMException("User is not authorized", Response.Status.UNAUTHORIZED);
 		}
-		*/
-	}
+		
+	}*/
 	
 	/**
 	 * GET method request for order details
