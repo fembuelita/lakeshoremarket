@@ -102,7 +102,7 @@ public class OrderResource {
 	/**
 	 * POST method to ship order
 	 * @param orderIDString
-	 * @param trackingNumb
+	 * @param trackingNumber
 	 * @param email
 	 * @param password
 	 * @return genericResponse (affirmative if successful; negative if not)
@@ -110,8 +110,8 @@ public class OrderResource {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/ship")
-	public GenericResponse shipOrder(@FormParam("orderIDString") String orderIDString, @FormParam("trackingNumb") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
+	@Path("/order/ship/{orderIDString}")
+	public GenericResponse shipOrder(@PathParam("orderIDString") String orderIDString, @FormParam("trackingNumber") String trackingNumb, @HeaderParam("email") String email, @HeaderParam("password") String password){
 		System.out.println("POST METHOD to ship order.............");
 		boolean isUserAuthentic = false;
 		isUserAuthentic = LSMAuthenticator.authenticateUser(email, password);
@@ -138,7 +138,7 @@ public class OrderResource {
 	}
 	
 	/**
-	 * POST method to ship order
+	 * POST method to fulfill order
 	 * @param orderIDString
 	 * @param email
 	 * @param password
